@@ -20,6 +20,8 @@ function UvPie() {
 
   useLayoutEffect(() => {
 
+    let activeSliceIndex: number;
+
     function getSectorTotal(category:any) {
       let total = 0;
       for (const item of category.items) {
@@ -55,13 +57,15 @@ function UvPie() {
 
       series.slices.template.events.on('hit', ((ev) => {
 
-        uvStore.dispatch(selectSlice(ev.target.id));
-
-        series.slices.each(((item) => {
-          if (item.isActive && item !== ev.target) {
-            item.isActive = false;
-          }
-        }));
+        if(activeSliceIndex !== parseInt(ev.target.id)) {
+          activeSliceIndex = parseInt(ev.target.id);
+          uvStore.dispatch(selectSlice(activeSliceIndex));
+          series.slices.each(((item) => {
+            if (item.isActive && item !== ev.target) {
+              item.isActive = false;
+            }
+          }));
+        }
       }));
 
       if (uvDevice.isMobileDevice()) {

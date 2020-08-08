@@ -9,12 +9,13 @@ import * as appData from './../uv-app-data.json';
 import './uv-bar-chart.css';
 import { useSelector } from 'react-redux';
 import uvString from '@uv-tech/util/lib/uv-string';
+import UvAppState from './../uv-app-state';
 
 am4core.useTheme(am4themes_animated);
 
 function UvBarChart() {
 
-  let parentIndex = useSelector((state:any) => {
+  let parentIndex = useSelector((state: UvAppState) => {
     return state.barChart.parentIndex
   });
 

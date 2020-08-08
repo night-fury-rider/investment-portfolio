@@ -8,7 +8,7 @@ This is a website to analyze our mutual fund portfolio.
 * [TypeScript](https://www.typescriptlang.org/)
 * [React Bootstrap](https://react-bootstrap.github.io/)
 * [amCharts](https://www.amcharts.com/)
-* [uvUtil](https://github.com/yuvi1422/npm-uv-util)
+* [uvUtil](https://www.npmjs.com/package/@uv-tech/util)
 
 ## Available Scripts
 

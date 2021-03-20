@@ -55,6 +55,11 @@
 /* Color clases for themes started */
 
 
+@media only screen and (min-width : 1200px) {
+  #uv-app .container {
+    max-width: 1600px;
+  }
+}
 
 .uv-font-medium {
   font-family: 'IBM Plex Serif', serif;

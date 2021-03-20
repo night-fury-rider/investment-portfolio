@@ -13,7 +13,7 @@ import * as headerData from './components/uv_header/uv_header.json';
 function App() {
 
   return (
-    <div className={'App uv-font-' + (appData.config.font ? appData.config.font: 'medium')}>
+    <div id="uv-app" className={'App uv-font-' + (appData.config.font ? appData.config.font: 'medium')}>
       <Container>
         <Row className="uv-row">
          <UVHeader data={headerData.config}></UVHeader>

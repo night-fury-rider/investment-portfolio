@@ -7,6 +7,7 @@ import { UVCategory, UVNumberProps } from '../../shared/Types';
 import { mapNumberComponents } from "./uv_dashboard.saga";
 
 const initialState = {
+  totalValue: 0,
   categoryData: {
     selectionIndex: 0,
     categories: [] as UVCategory[]
@@ -44,6 +45,7 @@ const UVDashboardReducer = (state = initialState, action: UVAction)=> {
     case UV_DASHBOARD.UPDATE:
       return {
         ...state,
+        totalValue: action.data.totalValue,
         categoryData: action.data.categoryData,
         pieCharts: action.data.pieCharts,
         barCharts: action.data.barCharts,

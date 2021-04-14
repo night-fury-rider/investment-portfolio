@@ -27,6 +27,7 @@ function* initDashboardSaga() {
 
   let response = yield call(UVDashboardApi.getDashboardData);
 
+  let totalValue = 0;
   let largestCategoryIndex = 0;
   let largestItemIndexes: number[] = [];
 
@@ -51,6 +52,8 @@ function* initDashboardSaga() {
       return itemAccumulator + currentItem.current.amount;
     }, 0);
 
+    totalValue += categoryTotal;
+
     if(categoryTotal > categoryTotalAccumulator) {
       largestCategoryIndex = categoryIndex;
       return categoryTotal;
@@ -66,6 +69,7 @@ function* initDashboardSaga() {
   const uvNumbers: UVNumberProps[] = mapNumberComponents(selectedCategory, selectedInstrument);
 
   let dashboardData = {
+    totalValue: totalValue,
     categoryData: categoryData,
     pieCharts: [{
       config: response.data.pieConfig,

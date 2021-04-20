@@ -42,7 +42,7 @@ function UVDashboard() {
           </Col>
         </Row>
         <Row className="uv-row">
-          { uvAngularGauageData[0].data.score > 1 &&
+          { uvAngularGauageData[0].data.score > 0 &&
             <Col md={4} xs={12}>
               <UVAngularGauge componentId={0}
                               config={uvAngularGauageData[0].config}

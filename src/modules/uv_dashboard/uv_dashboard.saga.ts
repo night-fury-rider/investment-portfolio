@@ -45,11 +45,11 @@ function* initDashboardSaga() {
       selectionIndex: 0,
       items: getProcessedBarChartData(currentCategory.items, 'current', true) as UVItem[]
     }
-    let categoryTotal = currentCategory.items.reduce((itemAccumulator: number, currentItem: UVItem, itemIndex: number, items: UVItem[])=> {
-      if(itemIndex > 0 && currentItem.current.amount > items[itemIndex-1].current.amount) {
+    let categoryTotal = categoryData.categories[categoryIndex].items.reduce((itemAccumulator: number, currentItem: UVItem, itemIndex: number, items: UVItem[])=> {
+      if(itemIndex > 0 && currentItem.value > items[itemIndex-1].value) {
         largestItemIndexes[categoryIndex] = itemIndex;
       }
-      return itemAccumulator + currentItem.current.amount;
+      return itemAccumulator + currentItem.value;
     }, 0);
 
     totalValue += categoryTotal;
@@ -166,10 +166,16 @@ function getProcessedBarChartData(items: UVItem[], valueType: string, isAmountOn
       console.error('Data format is incorrect for bar chart');
       return;
     }
-    if(isAmountOnly) {
+    if(amountObj && isAmountOnly) {
       item.value = amountObj.amount;
-    } else {
+    } else if(amountObj){
       item.value = amountObj.price * amountObj.quantity;
+    }
+
+    if(item.subItems) {
+      item.value = item.subItems.reduce((accumulator, obj)=> {
+        return accumulator + obj.investedValue;
+      }, 0)
     }
   }
   return items;

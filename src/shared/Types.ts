@@ -22,9 +22,16 @@ export type UVAmount = {
   quantity: number;
 };
 
+export type UVSubItem = {
+  name: string;
+  shortName: string;
+  investedValue: number;
+  currentValue: number;
+}
+
 export type UVItem = {
     // Key will be string and value will be anything of mentioned types.
-    [key: string]:  UVAmount | string | number| object;
+    [key: string]:  UVAmount | string | number| object | UVSubItem[];
 
     name: string;
     shortName: string;
@@ -35,13 +42,15 @@ export type UVItem = {
     expenseRatio:  number;
     exitLoad: number;
     fundManager: string;
-    inceptionSince: string;
+    launchDate: string;
     returns: object;
     rating: number;
     firstInvestmentDate: string;
     tentetiveEndDate: string;
     AUM: number;
     fundHouse: object;
+    value: number;
+    subItems: UVSubItem[];
 };
 
 export type UVAction = {

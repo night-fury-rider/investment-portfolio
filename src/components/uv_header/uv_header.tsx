@@ -4,6 +4,8 @@ import './uv_header.css';
 import { UVHeaderProps } from './UVHeaderTypes';
 import { Container, Row } from 'react-bootstrap';
 
+import uvNumber from '@uv-tech/util/lib/uv-number';
+
 function UVHeader(props: UVHeaderProps) {
 
   return (
@@ -18,7 +20,13 @@ function UVHeader(props: UVHeaderProps) {
                   src={props.logoFile ? props.logoFile : 'logo192.png'} />
               </a>
               <span>{props.title}</span>
-              <div className="uv-central-title col-8">{props.centralTitle}</div>
+
+              { props.centralTitle && 
+                <div className="uv-central-title col-8">
+                  {uvNumber.changeFormat(props.centralTitle)}
+                </div>
+              }
+
               <div className="spacer"></div>
               {
                 props.repositoryUrl &&

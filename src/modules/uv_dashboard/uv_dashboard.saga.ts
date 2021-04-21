@@ -35,13 +35,10 @@ function* initDashboardSaga() {
   response.data.categories.reduce((categoryTotalAccumulator: number, currentCategory: any, categoryIndex: number) => {
 
     categoryData.categories[categoryIndex] = {
-      config: {
-        id: currentCategory.id,
-        name: currentCategory.name,
-        value: currentCategory.value,
-        color: currentCategory.color,
-        expenseRatio: currentCategory.expenseRatio
-      },
+      id: currentCategory.id,
+      name: currentCategory.name,
+      color: currentCategory.color,
+      expenseRatio: currentCategory.expenseRatio,
       selectionIndex: 0,
       items: getProcessedBarChartData(currentCategory.items, 'current', true) as UVItem[]
     }
@@ -51,6 +48,9 @@ function* initDashboardSaga() {
       }
       return itemAccumulator + currentItem.value;
     }, 0);
+
+    // Add `value` property in category which will hold total of category.
+    categoryData.categories[categoryIndex].value = categoryTotal;
 
     totalValue += categoryTotal;
 
@@ -75,7 +75,7 @@ function* initDashboardSaga() {
       config: response.data.pieConfig,
       data: {
         selectionIndex: 0,
-       categories: getProcessedPieData(response.data.categories, 'current')
+        categories: categoryData.categories
       }
     }],
     barCharts: [{
@@ -105,7 +105,7 @@ const mapNumberComponents = (selectedCategory: UVCategory, selectedInstrument: U
   let instrumentValue: number;
 
   return appData.data.numbers.map((numberObj) => {
-    categoryValue = (selectedCategory && selectedCategory.config && selectedCategory.config[numberObj.keyName] as number) || -1;
+    categoryValue = selectedCategory && selectedCategory.value as number || -1;
     instrumentValue = (selectedInstrument && selectedInstrument[numberObj.keyName] as number) || -1;
     return new UVNumberPojo({
       config: {
@@ -134,23 +134,6 @@ function getCategoryTotal(category: UVCategory, valueType: string) {
     }
   }
   return total;
-}
-
-/**
- * @description Function to get processed pie chart data.
- *  - Only Categories with positive data will be displayed.
- * @param categories - Categories of Pie Chart
- * @param valueType - Value Type (current or initial)
- */
-const getProcessedPieData = (categories: UVCategory[], valueType: string) => {
-  const processedCategories = [];
-  for (const category of categories) {
-    category.value = getCategoryTotal(category, valueType);
-    if (category.value > 0) {
-      processedCategories.push(category);
-    }
-  }
-  return processedCategories;
 }
 
 /**

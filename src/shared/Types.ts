@@ -1,17 +1,11 @@
-export type UVCategoryConfig = {
-  [key: string]: number | string;
-  id: number;
-  name: string;
-  value: string;
-  color: string;
-  expenseRatio: number;
-};
-
 export type UVCategory = {
   // Key will be string and value will be anything of mentioned types.
-  [key: string]:  number | undefined | UVItem[] | UVCategoryConfig;
+  [key: string]:  number | string | undefined | UVItem[];
 
-  config: UVCategoryConfig;
+  id: number;
+  name: string;
+  color: string;
+  expenseRatio: number;
   selectionIndex: number
   items: UVItem[];
 };

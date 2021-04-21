@@ -12,11 +12,14 @@
         "isSingleColor": false
       },
       {
-        "keyName": "AUM",
-        "title": "AUM",
+        "keyName": "fundSize",
+        "title": "Fund Size",
         "subTitlePrefix": "Crore",
         "isSingleColor": true
       }
-    ]
+    ],
+    "tables": {
+      "headers": ["No of Years", "Returns (%)"]
+    }
   }
 }

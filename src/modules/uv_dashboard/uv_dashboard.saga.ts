@@ -27,6 +27,7 @@ function* initDashboardSaga() {
 
   let response = yield call(UVDashboardApi.getDashboardData);
 
+  let totalValue = 0;
   let largestCategoryIndex = 0;
   let largestItemIndexes: number[] = [];
 
@@ -34,22 +35,23 @@ function* initDashboardSaga() {
   response.data.categories.reduce((categoryTotalAccumulator: number, currentCategory: any, categoryIndex: number) => {
 
     categoryData.categories[categoryIndex] = {
-      config: {
-        id: currentCategory.id,
-        name: currentCategory.name,
-        value: currentCategory.value,
-        color: currentCategory.color,
-        expenseRatio: currentCategory.expenseRatio
-      },
+      id: currentCategory.id,
+      name: currentCategory.name,
+      color: currentCategory.color,
       selectionIndex: 0,
       items: getProcessedBarChartData(currentCategory.items, 'current', true) as UVItem[]
     }
-    let categoryTotal = currentCategory.items.reduce((itemAccumulator: number, currentItem: UVItem, itemIndex: number, items: UVItem[])=> {
-      if(itemIndex > 0 && currentItem.current.amount > items[itemIndex-1].current.amount) {
+    let categoryTotal = categoryData.categories[categoryIndex].items.reduce((itemAccumulator: number, currentItem: UVItem, itemIndex: number, items: UVItem[])=> {
+      if(itemIndex > 0 && currentItem.value > items[itemIndex-1].value) {
         largestItemIndexes[categoryIndex] = itemIndex;
       }
-      return itemAccumulator + currentItem.current.amount;
+      return itemAccumulator + currentItem.value;
     }, 0);
+
+    // Add `value` property in category which will hold total of category.
+    categoryData.categories[categoryIndex].value = categoryTotal;
+
+    totalValue += categoryTotal;
 
     if(categoryTotal > categoryTotalAccumulator) {
       largestCategoryIndex = categoryIndex;
@@ -66,12 +68,13 @@ function* initDashboardSaga() {
   const uvNumbers: UVNumberProps[] = mapNumberComponents(selectedCategory, selectedInstrument);
 
   let dashboardData = {
+    totalValue: totalValue,
     categoryData: categoryData,
     pieCharts: [{
       config: response.data.pieConfig,
       data: {
         selectionIndex: 0,
-       categories: getProcessedPieData(response.data.categories, 'current')
+        categories: categoryData.categories
       }
     }],
     barCharts: [{
@@ -97,19 +100,20 @@ function* initDashboardSaga() {
  */
 const mapNumberComponents = (selectedCategory: UVCategory, selectedInstrument: UVItem) => {
 
-  let categoryValue: number;
+  const AVERAGE = 'average_';
+  let averageValue: number;
   let instrumentValue: number;
 
   return appData.data.numbers.map((numberObj) => {
-    categoryValue = (selectedCategory && selectedCategory.config && selectedCategory.config[numberObj.keyName] as number) || -1;
+    averageValue = (selectedInstrument && selectedInstrument[AVERAGE + numberObj.keyName] as number) || -1;
     instrumentValue = (selectedInstrument && selectedInstrument[numberObj.keyName] as number) || -1;
     return new UVNumberPojo({
       config: {
-        class: numberObj.isSingleColor ? '' : ((instrumentValue < categoryValue) ? 'uv-color-success' : 'uv-color-danger')
+        class: numberObj.isSingleColor ? '' : ((instrumentValue < averageValue) ? 'uv-color-success' : 'uv-color-danger')
       },
       title: instrumentValue,
       label: numberObj.title,
-      subtitle: numberObj.subTitlePrefix + (categoryValue !== -1 ? categoryValue : '')
+      subtitle: numberObj.subTitlePrefix + (averageValue !== -1 ? averageValue : '')
     }).numberData
   });
 }
@@ -133,23 +137,6 @@ function getCategoryTotal(category: UVCategory, valueType: string) {
 }
 
 /**
- * @description Function to get processed pie chart data.
- *  - Only Categories with positive data will be displayed.
- * @param categories - Categories of Pie Chart
- * @param valueType - Value Type (current or initial)
- */
-const getProcessedPieData = (categories: UVCategory[], valueType: string) => {
-  const processedCategories = [];
-  for (const category of categories) {
-    category.value = getCategoryTotal(category, valueType);
-    if (category.value > 0) {
-      processedCategories.push(category);
-    }
-  }
-  return processedCategories;
-}
-
-/**
  * @description Function to get processed bar chart data.
  * @param items - Items of Bar Chart
  * @param valueType - Value Type (current or initial)
@@ -162,10 +149,16 @@ function getProcessedBarChartData(items: UVItem[], valueType: string, isAmountOn
       console.error('Data format is incorrect for bar chart');
       return;
     }
-    if(isAmountOnly) {
+    if(amountObj && isAmountOnly) {
       item.value = amountObj.amount;
-    } else {
+    } else if(amountObj){
       item.value = amountObj.price * amountObj.quantity;
+    }
+
+    if(item.subItems) {
+      item.value = item.subItems.reduce((accumulator, obj)=> {
+        return accumulator + obj.investedValue;
+      }, 0)
     }
   }
   return items;

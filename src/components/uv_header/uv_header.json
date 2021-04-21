@@ -8,11 +8,7 @@
       "logo": "logo192.png",
       "width": "40px"
     },
-    "repository": {
-      "name": "Github",
-      "logo": "github.png",
-      "url": "https://github.com/yuvi1422/uv-investment-portfolio",
-      "height": "40px"
-    }
+    "repositoryUrl": "https://github.com/yuvi1422/uv-investment-portfolio",
+    "repositoryLogo": "github.png"
   }
 }

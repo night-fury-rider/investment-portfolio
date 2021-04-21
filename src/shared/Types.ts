@@ -1,17 +1,10 @@
-export type UVCategoryConfig = {
-  [key: string]: number | string;
-  id: number;
-  name: string;
-  value: string;
-  color: string;
-  expenseRatio: number;
-};
-
 export type UVCategory = {
   // Key will be string and value will be anything of mentioned types.
-  [key: string]:  number | undefined | UVItem[] | UVCategoryConfig;
+  [key: string]:  number | string | undefined | UVItem[];
 
-  config: UVCategoryConfig;
+  id: number;
+  name: string;
+  color: string;
   selectionIndex: number
   items: UVItem[];
 };
@@ -22,9 +15,16 @@ export type UVAmount = {
   quantity: number;
 };
 
+export type UVSubItem = {
+  name: string;
+  shortName: string;
+  investedValue: number;
+  currentValue: number;
+}
+
 export type UVItem = {
     // Key will be string and value will be anything of mentioned types.
-    [key: string]:  UVAmount | string | number| object;
+    [key: string]:  UVAmount | string | number| object | UVSubItem[];
 
     name: string;
     shortName: string;
@@ -35,40 +35,21 @@ export type UVItem = {
     expenseRatio:  number;
     exitLoad: number;
     fundManager: string;
-    inceptionSince: string;
+    launchDate: string;
     returns: object;
     rating: number;
     firstInvestmentDate: string;
     tentetiveEndDate: string;
     AUM: number;
     fundHouse: object;
+    value: number;
+    subItems: UVSubItem[];
 };
 
 export type UVAction = {
   type: string;
   config ?: any;
   data ?: any;
-};
-
-export type UVHeaderConfig = {
-  title: string;
-  theme ?: string;
-  alt ?: string;
-  primaryWebsite ?: string;
-  logo ?: {
-    logo : string;
-    width ?: string;
-  }
-  repository ?: {
-    name ?: string;
-    logo: string;
-    url: string;
-    height ?: string;
-  }
-}
-
-export type UVHeaderProps = {
-  data : UVHeaderConfig
 };
 
 export type UVDashboardType = {

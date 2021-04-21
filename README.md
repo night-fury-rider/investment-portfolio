@@ -35,3 +35,8 @@ Launches the test runner in the interactive watch mode.<br />
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
+
+
+### Notes
+1. Objects of `items` array represents an investment plan.
+2. Objects of `subItems` array represents an instance of investment plan. It's values will be considered in all calculations.

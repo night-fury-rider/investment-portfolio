@@ -5,7 +5,6 @@ export type UVCategory = {
   id: number;
   name: string;
   color: string;
-  expenseRatio: number;
   selectionIndex: number
   items: UVItem[];
 };

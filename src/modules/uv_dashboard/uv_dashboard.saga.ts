@@ -38,7 +38,6 @@ function* initDashboardSaga() {
       id: currentCategory.id,
       name: currentCategory.name,
       color: currentCategory.color,
-      expenseRatio: currentCategory.expenseRatio,
       selectionIndex: 0,
       items: getProcessedBarChartData(currentCategory.items, 'current', true) as UVItem[]
     }
@@ -101,19 +100,20 @@ function* initDashboardSaga() {
  */
 const mapNumberComponents = (selectedCategory: UVCategory, selectedInstrument: UVItem) => {
 
-  let categoryValue: number;
+  const AVERAGE = 'average_';
+  let averageValue: number;
   let instrumentValue: number;
 
   return appData.data.numbers.map((numberObj) => {
-    categoryValue = selectedCategory && selectedCategory.value as number || -1;
+    averageValue = (selectedInstrument && selectedInstrument[AVERAGE + numberObj.keyName] as number) || -1;
     instrumentValue = (selectedInstrument && selectedInstrument[numberObj.keyName] as number) || -1;
     return new UVNumberPojo({
       config: {
-        class: numberObj.isSingleColor ? '' : ((instrumentValue < categoryValue) ? 'uv-color-success' : 'uv-color-danger')
+        class: numberObj.isSingleColor ? '' : ((instrumentValue < averageValue) ? 'uv-color-success' : 'uv-color-danger')
       },
       title: instrumentValue,
       label: numberObj.title,
-      subtitle: numberObj.subTitlePrefix + (categoryValue !== -1 ? categoryValue : '')
+      subtitle: numberObj.subTitlePrefix + (averageValue !== -1 ? averageValue : '')
     }).numberData
   });
 }

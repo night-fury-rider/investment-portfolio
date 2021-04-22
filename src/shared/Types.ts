@@ -31,7 +31,6 @@ export type UVItem = {
     initial: UVAmount;
     current: UVAmount;
     goal: string;
-    minimumInvestment: object;
     expenseRatio:  number;
     exitLoad: number;
     fundManager: string;

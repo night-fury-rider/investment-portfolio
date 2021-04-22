@@ -1,7 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import UVNumberPojo from '../../components/uv_number/uv_number.pojo';
-import { UVAmount, UVCategory, UVItem, UVNumberProps } from '../../shared/Types';
+import { UVAmount, UVCategory, UVItem } from '../../shared/Types';
+import { UVNumberProps } from '../../components/uv_number/uv_number.types';
 import { updateDashboard } from './uv_dashboard.actions';
 
 import UVDashboardApi from './uv_dashboard.api';
@@ -119,21 +120,14 @@ const mapNumberComponents = (selectedCategory: UVCategory, selectedInstrument: U
 }
 
 /**
- * @description Function to get category total.
- * @param category Category for the Pie chart
- * @param valueType Value type.
+ * @description Function to compose and return table components.
+ * @param selectedInstrument - Selected Investment Instrument or plan
  */
-function getCategoryTotal(category: UVCategory, valueType: string) {
-  let total = 0;
-  for (const item of category.items) {
-    let itemValue = item[valueType] as UVAmount;
-    if(category.isAmountOnly && itemValue && itemValue.amount) {
-      total += itemValue.amount;
-    } else if(itemValue && itemValue.price && itemValue.quantity){
-      total += itemValue.price * itemValue.quantity;
-    }
-  }
-  return total;
+const mapTableComponents = (selectedInstrument: UVItem) => {
+  return [{
+    headers: appData.data.tables.headers,
+    rows: selectedInstrument.returns as any[]
+  }]
 }
 
 /**
@@ -165,5 +159,6 @@ function getProcessedBarChartData(items: UVItem[], valueType: string, isAmountOn
 }
 
 export {
-  mapNumberComponents
+  mapNumberComponents,
+  mapTableComponents
 }

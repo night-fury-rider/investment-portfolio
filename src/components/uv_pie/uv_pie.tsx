@@ -11,7 +11,7 @@ import am4themes_material from "@amcharts/amcharts4/themes/material";
 import './uv_pie.css';
 import { useDispatch } from 'react-redux';
 import { selectedPieSlice } from './uv_pie.actions';
-import { UVPieProps } from '../../shared/Types';
+import { UVPieProps } from './uv_pie.types';
 
 am4core.useTheme(am4themes_material);
 am4core.useTheme(am4themes_animated);

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import { useSelector } from 'react-redux';
+import { UVRootState } from '../../root.reducer';
+
 import UVPie from '../../components/uv_pie/uv_pie';
 import UVBarChart from '../../components/uv_bar-chart/uv_bar-chart';
 import UVAngularGauge from '../../components/uv_angular-gauge/uv_angular-gauge';
 import UVNumber from '../../components/uv_number/uv_number';
-import { useSelector } from 'react-redux';
-import { UVRootState } from '../../root.reducer';
+import UVTable from '../../components/uv_table/uv_table.component';
 
 function UVDashboard() {
 
@@ -24,6 +26,10 @@ function UVDashboard() {
 
   let uvAngularGauageData = useSelector((state: UVRootState) => {
     return state.dashboard.angularGauages;
+  });
+
+  let uvTableData = useSelector((state: UVRootState) => {
+    return state.dashboard.tables;
   });
 
   return (
@@ -66,6 +72,17 @@ function UVDashboard() {
             ))
           }
         </Row>
+
+        <Row className="uv-row">
+          {
+            uvTableData[0] && uvTableData[0].rows &&
+              <Col md={4} xs={12}>
+                <UVTable headers={uvTableData[0].headers}
+                        rows={uvTableData[0].rows}></UVTable>
+              </Col>
+          }
+        </Row>
+
       </Container>
     </div>
   );

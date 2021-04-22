@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import './uv_number.css';
-import { UVNumberProps } from '../../shared/Types';
+import { UVNumberProps } from './uv_number.types';
 
 function UVNumber(props: UVNumberProps) {
   return (

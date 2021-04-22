@@ -5,7 +5,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 import './uv_angular-gauge.css';
-import { UVAngularGaugeConfig, UVAngularGaugeData } from './../../shared/Types';
+import { UVAngularGaugeConfig, UVAngularGaugeData } from './uv_angular-gauge.types';
 
 am4core.useTheme(am4themes_animated);
 

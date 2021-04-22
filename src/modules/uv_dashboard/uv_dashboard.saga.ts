@@ -1,7 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import UVNumberPojo from '../../components/uv_number/uv_number.pojo';
-import { UVAmount, UVCategory, UVItem, UVNumberProps } from '../../shared/Types';
+import { UVAmount, UVCategory, UVItem } from '../../shared/Types';
+import { UVNumberProps } from '../../components/uv_number/uv_number.types';
 import { updateDashboard } from './uv_dashboard.actions';
 
 import UVDashboardApi from './uv_dashboard.api';

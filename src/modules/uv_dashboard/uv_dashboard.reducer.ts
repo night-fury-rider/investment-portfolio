@@ -3,7 +3,8 @@ import UV_PIE from "../../components/uv_pie/uv_pie.constants";
 import { UVAction } from '../../shared/Types';
 import { UVItem } from '../../shared/Types';
 import UV_DASHBOARD from "./uv_dashboard.constants";
-import { UVCategory, UVNumberProps } from '../../shared/Types';
+import { UVCategory } from '../../shared/Types';
+import { UVNumberProps } from '../../components/uv_number/uv_number.types';
 import { mapNumberComponents, mapTableComponents } from "./uv_dashboard.saga";
 import { UVTableProps } from "../../components/uv_table/uv_table.types";
 

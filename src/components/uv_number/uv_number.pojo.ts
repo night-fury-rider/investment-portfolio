@@ -1,4 +1,4 @@
-import { UVNumberProps } from "../../shared/Types";
+import { UVNumberProps } from "./uv_number.types";
 
 export default class UVNumberPojo {
 

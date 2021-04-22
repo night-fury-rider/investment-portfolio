@@ -1,5 +1,5 @@
 import UV_DASHBOARD from "./uv_dashboard.constants";
-import { UVDashboardType } from '../../shared/Types';
+import { UVDashboardType } from './uv_dashboard.types';
 
 const initDashboard = () => {
   return {

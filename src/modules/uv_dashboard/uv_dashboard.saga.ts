@@ -104,17 +104,29 @@ const mapNumberComponents = (selectedCategory: UVCategory, selectedInstrument: U
   const AVERAGE = 'average_';
   let averageValue: number;
   let instrumentValue: number;
+  let instrumentClass: string;
 
   return appData.data.numbers.map((numberObj) => {
-    averageValue = (selectedInstrument && selectedInstrument[AVERAGE + numberObj.keyName] as number) || -1;
-    instrumentValue = (selectedInstrument && selectedInstrument[numberObj.keyName] as number) || -1;
+    averageValue = (selectedInstrument && selectedInstrument[AVERAGE + numberObj.keyName] as number);
+    instrumentValue = (selectedInstrument && selectedInstrument[numberObj.keyName] as number);
+
+    if(numberObj.isSingleColor) {
+      instrumentClass = '';
+    } else {
+      if(numberObj.shouldBeMore) {
+        instrumentClass = (instrumentValue >= averageValue) ? 'uv-color-success' : 'uv-color-danger';
+      } else {
+        instrumentClass = (instrumentValue <= averageValue) ? 'uv-color-success' : 'uv-color-danger';
+      }
+    }
+
     return new UVNumberPojo({
       config: {
-        class: numberObj.isSingleColor ? '' : ((instrumentValue < averageValue) ? 'uv-color-success' : 'uv-color-danger')
+        class: instrumentClass
       },
       title: instrumentValue,
       label: numberObj.title,
-      subtitle: numberObj.subTitlePrefix + (averageValue !== -1 ? averageValue : '')
+      subtitle: numberObj.subTitlePrefix + (averageValue ? averageValue : '')
     }).numberData
   });
 }

@@ -58,7 +58,7 @@ function UVDashboard() {
           }
           {
             uvNumberData && uvNumberData.map((obj: any, index: any) => (
-              obj.title !== -1 &&
+              typeof(obj.title) !=='undefined' &&
                 <Col md={4} xs={12} key={index}>
                   <Row>
                     <Col md={{ span: 12, offset: 1 }} xs={12}>

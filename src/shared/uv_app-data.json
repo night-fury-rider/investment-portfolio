@@ -16,6 +16,25 @@
         "title": "Fund Size",
         "subTitlePrefix": "Crore",
         "isSingleColor": true
+      },
+      {
+        "keyName": "marketCap",
+        "title": "Market Cap",
+        "subTitlePrefix": "Crore",
+        "isSingleColor": true
+      },
+      {
+        "keyName": "totalDebt",
+        "title": "Total Debt",
+        "subTitlePrefix": "Crore",
+        "isSingleColor": false
+      },
+      {
+        "keyName": "promoterOwnership",
+        "title": "Promoter Ownership",
+        "subTitlePrefix": "Average %: ",
+        "isSingleColor": false,
+        "shouldBeMore": true
       }
     ],
     "tables": {

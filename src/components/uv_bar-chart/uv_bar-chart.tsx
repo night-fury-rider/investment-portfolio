@@ -79,7 +79,6 @@ function UVBarChart(props: UVBarChartProps) {
       return uvChart.colors.getIndex(dataItem.index);
     });
 
-    let barchartHeaderElement;
     series.columns.template.events.on("hit", function(ev) {
       dispatch(barChartColumnSelected(props.componentId, parseInt(ev.target.id)));
       uvDevice.scrollSmoothly('uv-barchart-heading');

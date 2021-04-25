@@ -2,7 +2,11 @@
   "config": {
     "apis": {
       "dashboard": {
-        "url": "https://demo1926272.mockable.io/getInvestments"
+        "urls": [
+          "https://demo1926272.mockable.io/getInvestments",
+          "http://localhost:8888/api/getInvestments.json",
+          "http://localhost:8888/api/sensoredGetInvestments.json"
+        ]
       }
     }
   }

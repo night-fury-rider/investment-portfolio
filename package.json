@@ -14,7 +14,7 @@
     "@types/node": "^12.12.53",
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
-    "@uv-tech/util": "^1.0.8",
+    "@uv-tech/util": "^1.0.9",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.1",
     "react": "^16.13.1",

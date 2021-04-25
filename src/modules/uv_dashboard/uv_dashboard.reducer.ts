@@ -26,7 +26,8 @@ const initialState = {
   barCharts: [
     {
       config: null,
-      data:  [] as UVItem[]
+      data:  [] as UVItem[],
+      selectionIndex: 0
     }
   ],
   angularGauages: [
@@ -74,6 +75,9 @@ const UVDashboardReducer = (state = initialState, action: UVAction)=> {
 
       state.numbers = mapNumberComponents(selectedCategory, selectedBarChart);
       state.tables = mapTableComponents(selectedBarChart);
+
+      tmpBarCharts = state.barCharts;
+      tmpBarCharts[action.config.componentId].selectionIndex = selectedBarChart.id as number;
 
       return {
         ...state,

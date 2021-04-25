@@ -56,7 +56,6 @@
 
 body {overflow-x: hidden;}
 
-
 @media only screen and (min-width : 1200px) {
   #uv-app .container {
     max-width: 1600px;
@@ -75,3 +74,25 @@ body {overflow-x: hidden;}
   font-size: 2.5rem;
   text-align: center;
 }
+
+
+.uv-row {
+  margin-top: 5rem;
+  justify-content: center;
+}
+
+.uv-row h1{
+  font-size: 5rem;
+}
+
+.uv-container {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+
+  .uv-container {
+    margin-top: 0;
+  }
+}
+

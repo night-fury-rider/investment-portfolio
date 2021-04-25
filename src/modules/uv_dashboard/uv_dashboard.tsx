@@ -47,6 +47,14 @@ function UVDashboard() {
                           items={UVBarChartData[0].data}></UVBarChart>
           </Col>
         </Row>
+        <Row id="uv-barchart-heading" className="uv-row">
+          {
+            typeof(UVBarChartData[0].selectionIndex) !== 'undefined' &&
+              UVBarChartData[0].data[0] &&
+              UVBarChartData[0].data[UVBarChartData[0].selectionIndex] &&
+            <h1>{UVBarChartData[0].data[0] && UVBarChartData[0].data[UVBarChartData[0].selectionIndex].name}</h1>
+          }
+        </Row>
         <Row className="uv-row">
           { uvAngularGauageData[0].data.score > 0 &&
             <Col md={4} xs={12}>

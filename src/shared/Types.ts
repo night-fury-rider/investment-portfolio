@@ -24,8 +24,9 @@ export type UVSubItem = {
 
 export type UVItem = {
     // Key will be string and value will be anything of mentioned types.
-    [key: string]:  UVAmount | string | number| object | UVSubItem[];
+    [key: string]:  UVAmount | string | number| object | UVSubItem[] | undefined;
 
+    id ?: number;
     name: string;
     shortName: string;
     initial: UVAmount;

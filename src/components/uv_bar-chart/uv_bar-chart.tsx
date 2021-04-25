@@ -5,12 +5,12 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 
 import { useDispatch } from 'react-redux';
 import uvDevice from '@uv-tech/util/lib/uv-device';
+import uvObject from '@uv-tech/util/lib/uv-object';
 
 import './uv_bar-chart.css';
 import { UVItem } from '../../shared/Types';
 import { UVBarChartProps } from './uv_bar-chart.types';
 import { barChartColumnSelected } from './uv_bar-chart.actions';
-import uvObject from '@uv-tech/util/lib/uv-object';
 
 function UVBarChart(props: UVBarChartProps) {
   const dispatch = useDispatch();
@@ -79,8 +79,10 @@ function UVBarChart(props: UVBarChartProps) {
       return uvChart.colors.getIndex(dataItem.index);
     });
 
+    let barchartHeaderElement;
     series.columns.template.events.on("hit", function(ev) {
       dispatch(barChartColumnSelected(props.componentId, parseInt(ev.target.id)));
+      uvDevice.scrollSmoothly('uv-barchart-heading');
     });
 
     categoryAxis.sortBySeries = series;

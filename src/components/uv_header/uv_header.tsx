@@ -24,7 +24,7 @@ function UVHeader(props: UVHeaderProps) {
               <Col xs={7} md={3}>
                 <span>{props.title}</span>
               </Col>
-              <Col xs={3} md={6}>
+              <Col xs={2} md={6}>
                 { props.centralTitle &&
                   <div className="uv-central-title">
                     {uvNumber.changeFormat(props.centralTitle)}

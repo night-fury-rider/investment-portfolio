@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import './uv_header.css';
 import { UVHeaderProps } from './UVHeaderTypes';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import uvNumber from '@uv-tech/util/lib/uv-number';
 
@@ -14,34 +14,40 @@ function UVHeader(props: UVHeaderProps) {
         <div className="uv-header-container">
           <div id="headerDiv">
             <div className={'toolbar ' + (props.theme ? props.theme : 'primary')} role="banner">
-              <a href={props.primaryWebsite} target="_blank" rel="noopener noreferrer">
-                <img width={props.logoWidth ? props.logoWidth : '40px'}
-                  alt={props.logoAlt ? props.logoAlt : 'Yuvraj Patil'}
-                  src={props.logoFile ? props.logoFile : 'logo192.png'} />
-              </a>
-              <span>{props.title}</span>
-
-              { props.centralTitle && 
-                <div className="uv-central-title col-8">
-                  {uvNumber.changeFormat(props.centralTitle)}
-                </div>
-              }
-
-              <div className="spacer"></div>
-              {
-                props.repositoryUrl &&
-                <a href={props.repositoryUrl} target="_blank" rel="noopener noreferrer">
-                  <img className="logo" alt={props.alt}
-                    height={props.repositoryHeight ? props.repositoryHeight : '40px'}
-                    src={props.repositoryLogo ? props.repositoryLogo : 'logo192.png'} />
+              <Col xs={2} md={1}>
+                <a href={props.primaryWebsite} target="_blank" rel="noopener noreferrer">
+                  <img width={props.logoWidth ? props.logoWidth : '40px'}
+                    alt={props.logoAlt ? props.logoAlt : 'Yuvraj Patil'}
+                    src={props.logoFile ? props.logoFile : 'logo192.png'} />
                 </a>
-              }
+              </Col>
+              <Col xs={7} md={3}>
+                <span>{props.title}</span>
+              </Col>
+              <Col xs={3} md={6}>
+                { props.centralTitle &&
+                  <div className="uv-central-title">
+                    {uvNumber.changeFormat(props.centralTitle)}
+                  </div>
+                }
 
+              </Col>
+              <Col md={{span:1, offset:1}} className="d-none d-md-block d-lg-block">
+                <div className="spacer"></div>
+                {
+                  props.repositoryUrl &&
+                  <a href={props.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                    <img className="logo" alt={props.alt}
+                      height={props.repositoryHeight ? props.repositoryHeight : '40px'}
+                      src={props.repositoryLogo ? props.repositoryLogo : 'logo192.png'} />
+                  </a>
+                }
+              </Col>
             </div>
           </div>
         </div>
       </Row>
-    </Container> 
+    </Container>
   );
 }
 

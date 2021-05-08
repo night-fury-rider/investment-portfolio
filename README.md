@@ -10,6 +10,7 @@ This is a website to analyze our investment portfolio.
 * [amCharts 4.10.11](https://www.amcharts.com/)
 * [Axios 0.21.0](https://github.com/axios/axios)
 * [uvUtil 1.0.9](https://github.com/yuvi1422/npm-uv-util)
+* [bit Harmony](https://bit.dev/)
 
 # File Naming convension
 

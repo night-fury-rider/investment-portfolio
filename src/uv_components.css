@@ -1,0 +1,95 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --color-primary: #1976d2;
+  --color-success: #5cb85c;
+  --color-info: #5bc0de;
+  --color-warning: #f0ad4e;
+  --color-danger: #d9534f;
+  --color-inverse: #292b2c;
+  --color-faded: #f7f7f7;
+}
+
+/* Color clases for themes started */
+.uv-background-color-primary {
+  background-color: var(--color-primary);
+}
+.uv-background-color-success {
+  background-color: var(--color-success);
+}
+.uv-background-color-info {
+  background-color: var(--color-info);
+}
+.uv-background-color-warning {
+  background-color: var(--color-warning);
+}
+.uv-background-color-danger {
+  background-color: var(--color-danger);
+}
+.uv-background-color-inverse {
+  background-color: var(--color-inverse);
+}
+.uv-background-color-faded {
+  background-color: var(--color-faded);
+}
+
+.uv-color-primary {
+  color: var(--color-primary);
+}
+.uv-color-success {
+  color: var(--color-success);
+}
+.uv-color-info {
+  color: var(--color-info);
+}
+.uv-color-warning {
+  color: var(--color-warning);
+}
+.uv-color-danger {
+  color: var(--color-danger);
+}
+.uv-color-inverse {
+  color: var(--color-inverse);
+}
+.uv-color-faded {
+  color: var(--color-faded);
+}
+/* Color clases for themes ended */
+
+.uv-font-medium {
+  font-family: 'IBM Plex Serif', serif;
+}
+
+.uv-text-center {
+  text-align: center;
+}
+
+.uv-component-label {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.uv-row {
+  margin-top: 5rem;
+  justify-content: center;
+}
+
+.uv-row h1{
+  font-size: 5rem;
+}
+
+.uv-container {
+  margin-top: 0;
+}
+
+@media only screen and (min-width : 1200px) {
+  #uv-app .container {
+    max-width: 1600px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .uv-container {
+    margin-top: 0;
+  }
+}

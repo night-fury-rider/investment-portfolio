@@ -23,21 +23,30 @@ This is a website to analyze our investment portfolio.
 
 # Available Scripts
 
-### `npm start`
+## Start Application
 
+```
+npm start
+```
 Runs the app in the development mode which can be browsed at [http://localhost:3000](http://localhost:3000)
 
 
-### `npm test`
+## Run Unit Tests
 
+```
+npm test
+```
 Launches the test runner in the interactive watch mode.<br />
 
 
-### `npm run build`
+## Make Build of Application
 
+```
+npm run build
+```
 Builds the app for production to the `build` folder.<br />
 
 
-### Notes
+## Notes
 1. Objects of `items` array represents an investment plan.
 2. Objects of `subItems` array represents an instance of investment plan. It's values will be considered in all calculations.

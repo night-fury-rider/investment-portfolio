@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# bit Harmony
+/public/bit
+
 # testing
 /coverage
 

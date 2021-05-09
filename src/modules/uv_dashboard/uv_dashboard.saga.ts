@@ -19,7 +19,7 @@ export function* UVDashboardSaga() {
   yield takeEvery(UV_DASHBOARD.INIT, initDashboardSaga);
 }
 
-function* initDashboardSaga() {
+function* initDashboardSaga(): any {
 
   let categoryData = {
     selectionIndex: 0,

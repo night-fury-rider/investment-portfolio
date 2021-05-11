@@ -12,7 +12,7 @@ describe('UVNumber Component Suite', ()=> {
   });
 
   test('has correct snapshot', ()=> {
-    expect(shallowComponent.find('.uv-number-container').length).toEqual(1);
+    expect(UVNumber).toMatchSnapshot();
   });
 
   test('renders title and label', ()=> {

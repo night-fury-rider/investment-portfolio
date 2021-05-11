@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 
 import UVNumber from './uv_number';
-import { numberTitle, numberLabel, numberConfig } from './uv_number.mocks';
+import { numberTitle, numberLabel, numberConfig } from './uv_number.mock';
 
 let shallowComponent: any;
 

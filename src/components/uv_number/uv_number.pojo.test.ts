@@ -1,7 +1,7 @@
 import { UVNumberProps } from './uv_number.types';
 import UVNumberPojo from './uv_number.pojo';
 
-import { numberTitle, numberLabel, numberSubtitle, numberConfig } from './uv_number.mocks';
+import { numberTitle, numberLabel, numberSubtitle, numberConfig } from './uv_number.mock';
 
 describe('UVNumber Pojo Suite', ()=> {
 

@@ -8,7 +8,7 @@ import { UVNumberProps } from '../../components/uv_number/uv_number.types';
 import { mapNumberComponents, mapTableComponents } from "./uv_dashboard.saga";
 import { UVTableProps } from "../../components/uv_table/uv_table.types";
 
-const initialState = {
+export const initialState = {
   totalValue: 0,
   categoryData: {
     selectionIndex: 0,

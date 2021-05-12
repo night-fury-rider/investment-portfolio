@@ -41,7 +41,7 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.{d.ts,mock.ts}",
+      "!src/**/*.{d.ts,mock.ts,constants.ts}",
       "!src/index.tsx",
       "!src/globalMocks.ts",
       "!src/reportWebVitals.ts"

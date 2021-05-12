@@ -5,7 +5,7 @@ import UVTable from './uv_table.component';
 
 describe('Table Component Suite', ()=> {
 
-  let tableHeaders = ['Test1', 'Test2'],
+  const tableHeaders = ['Test1', 'Test2'],
       tableRows = [
                   [1, 5],
                   [2, 7],

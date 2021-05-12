@@ -6,7 +6,7 @@ describe('Root Reducer Suite', () => {
 
   let store = createStore(rootReducer)
 
-  test('loaded correctly', () => {
+  test('loads correctly', () => {
     expect(store.getState().dashboard).toEqual(dashboardState);
   });
 });

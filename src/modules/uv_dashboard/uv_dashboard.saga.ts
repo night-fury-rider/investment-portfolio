@@ -42,6 +42,7 @@ function* initDashboardSaga(): any {
       selectionIndex: 0,
       items: getProcessedBarChartData(currentCategory.items, 'current', true) as UVItem[]
     }
+    largestItemIndexes[categoryIndex] = 0; // As default, set largest item which is at index 0
     let categoryTotal = categoryData.categories[categoryIndex].items.reduce((itemAccumulator: number, currentItem: UVItem, itemIndex: number, items: UVItem[])=> {
       if(itemIndex > 0 && currentItem.value > items[itemIndex-1].value) {
         largestItemIndexes[categoryIndex] = itemIndex;

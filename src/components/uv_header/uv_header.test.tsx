@@ -1,9 +1,15 @@
+import React from 'react';
 import { shallow } from 'enzyme';
+
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import UVHeader from './uv_header';
 
 
-describe('UVNumber Component Suite', ()=> {
+Enzyme.configure({ adapter: new Adapter() });
+
+describe('UVHeader Component Suite', ()=> {
 
   const headerTitle = 'Test Title',
         centralTitle = 12345678,

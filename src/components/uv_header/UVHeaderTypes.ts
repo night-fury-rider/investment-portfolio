@@ -1,6 +1,6 @@
 export type UVHeaderProps = {
   title: string;
-  centralTitle ?: number;
+  centralTitle ?: number | string;
   theme ?: string;
   alt ?: string;
   primaryWebsite ?: string;

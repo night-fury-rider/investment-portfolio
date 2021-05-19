@@ -1,4 +1,4 @@
-import { UVNumberProps } from "./uv_number.types";
+import { UVNumberProps } from './uv_number.types';
 
 export default class UVNumberPojo {
 
@@ -19,7 +19,7 @@ export default class UVNumberPojo {
       },
       title: numberData.title,
       subtitle: numberData.subtitle ? numberData.subtitle : '',
-      label: numberData.label ? numberData.label : ''
+      label: numberData.label
     }
   }
 

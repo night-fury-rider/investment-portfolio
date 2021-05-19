@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component Suite has correct snapshot 1`] = `
+<Memo(UVHeader)
+  alt="Yuvi"
+  centralTitle={12345678}
+  logoAlt="Yuvraj"
+  logoFile="test.png"
+  logoWidth="100px"
+  primaryWebsite="www.test.com"
+  repositoryHeight="100px"
+  repositoryLogo="test.png"
+  repositoryUrl="test20.com"
+  theme="success"
+  title="Test Title"
+/>
+`;

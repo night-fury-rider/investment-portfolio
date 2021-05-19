@@ -4,6 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { UVRootState } from '../../root.reducer';
 
+import { initialState } from './uv_dashboard.reducer';
+
 import UVPie from '../../components/uv_pie/uv_pie';
 import UVBarChart from '../../components/uv_bar-chart/uv_bar-chart';
 import UVAngularGauge from '../../components/uv_angular-gauge/uv_angular-gauge';
@@ -14,23 +16,24 @@ function UVDashboard() {
 
   let uvNumberData = useSelector((state: UVRootState) => {
     return state.dashboard.numbers;
-  });
+  }) || initialState.numbers;
 
+  debugger;
   let uvPieData = useSelector((state: UVRootState) => {
     return state.dashboard.pieCharts;
-  });
+  }) || initialState.pieCharts;
 
   let UVBarChartData = useSelector((state: UVRootState) => {
     return state.dashboard.barCharts;
-  });
+  }) || initialState.barCharts;
 
   let uvAngularGauageData = useSelector((state: UVRootState) => {
     return state.dashboard.angularGauages;
-  });
+  }) || initialState.angularGauages;
 
   let uvTableData = useSelector((state: UVRootState) => {
     return state.dashboard.tables;
-  });
+  }) || initialState.tables;
 
   return (
     <div className="uv-dashboard" id="uv-dashboard">

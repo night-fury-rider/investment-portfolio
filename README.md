@@ -3,9 +3,9 @@ This is a website to analyze our investment portfolio.
 
 # Technologies and Libraries Used
 
-* [React 16.13.1](https://reactjs.org/)
+* [React 17.0.2](https://reactjs.org/)
 * [Redux Saga 1.1.3](https://redux-saga.js.org/)
-* [TypeScript 3.9.7](https://www.typescriptlang.org/)
+* [TypeScript 4.1.2](https://www.typescriptlang.org/)
 * [React Bootstrap 1.3.0](https://react-bootstrap.github.io/)
 * [amCharts 4.10.11](https://www.amcharts.com/)
 * [Axios 0.21.0](https://github.com/axios/axios)
@@ -26,7 +26,7 @@ This is a website to analyze our investment portfolio.
 ## Start Application
 
 ```
-npm start
+yarn start
 ```
 Runs the app in the development mode which can be browsed at [http://localhost:3000](http://localhost:3000)
 
@@ -34,15 +34,23 @@ Runs the app in the development mode which can be browsed at [http://localhost:3
 ## Run Unit Tests
 
 ```
-npm test
+yarn test
 ```
 Launches the test runner in the interactive watch mode.<br />
+
+
+## Generate Coverage Report
+
+```
+yarn test:coverageAll
+```
+Create coverage report and stores it inside coverage folder.<br />
 
 
 ## Make Build of Application
 
 ```
-npm run build
+yarn run build
 ```
 Builds the app for production to the `build` folder.<br />
 

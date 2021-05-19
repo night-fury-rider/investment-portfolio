@@ -11,7 +11,7 @@ jest.mock('react-redux');
 let shallowComponent: any;
 
 
-describe('App Component', ()=> {
+describe('App Component Suite', ()=> {
 
   beforeEach( () => {
     shallowComponent = shallow(<App />);

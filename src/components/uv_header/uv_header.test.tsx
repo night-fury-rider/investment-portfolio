@@ -9,7 +9,7 @@ import UVHeader from './uv_header';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('UVHeader Component Suite', ()=> {
+describe('Header Component Suite', ()=> {
 
   const headerTitle = 'Test Title',
         centralTitle = 12345678,

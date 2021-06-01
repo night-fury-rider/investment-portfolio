@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import UVNumberPojo from '../../components/uv_number/uv_number.pojo';
-import { UVAmount, UVCategory, UVItem } from '../../shared/Types';
+import { UVCategory, UVItem } from '../../shared/Types';
 import { UVNumberProps } from '../../components/uv_number/uv_number.types';
 import { updateDashboard } from './uv_dashboard.actions';
 
@@ -151,15 +151,9 @@ const mapTableComponents = (selectedInstrument: UVItem) => {
  */
 function getProcessedBarChartData(items: UVItem[], valueType: string, isAmountOnly: boolean) {
   for (const item of items) {
-    const amountObj = item[valueType] as UVAmount;
     if(!item) {
       console.error('Data format is incorrect for bar chart');
       return;
-    }
-    if(amountObj && isAmountOnly) {
-      item.value = amountObj.amount;
-    } else if(amountObj){
-      item.value = amountObj.price * amountObj.quantity;
     }
 
     if(item.subItems) {

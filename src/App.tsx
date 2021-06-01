@@ -10,7 +10,7 @@ import * as headerData from './components/uv_header/uv_header.json';
 import { useSelector } from 'react-redux';
 import { UVRootState } from './root.reducer';
 
-function App() {
+const App = ()=> {
 
   let centralTitle = useSelector((state: UVRootState) => {
     return state.dashboard.totalValue;

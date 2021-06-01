@@ -12,7 +12,7 @@ import UVAngularGauge from '../../components/uv_angular-gauge/uv_angular-gauge';
 import UVNumber from '../../components/uv_number/uv_number';
 import UVTable from '../../components/uv_table/uv_table.component';
 
-function UVDashboard() {
+const UVDashboard = ()=> {
 
   let uvNumberData = useSelector((state: UVRootState) => {
     return state.dashboard.numbers;

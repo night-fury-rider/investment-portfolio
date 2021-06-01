@@ -16,7 +16,7 @@ import { UVPieProps } from './uv_pie.types';
 am4core.useTheme(am4themes_material);
 am4core.useTheme(am4themes_animated);
 
-function UVPie(props: UVPieProps) {
+const UVPie = (props: UVPieProps) => {
 
   const dispatch = useDispatch();
 

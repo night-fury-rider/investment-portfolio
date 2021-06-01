@@ -149,7 +149,7 @@ const mapTableComponents = (selectedInstrument: UVItem) => {
  * @param valueType - Value Type (current or initial)
  * @param isAmountOnly - true if amount has to be used directly.
  */
-function getProcessedBarChartData(items: UVItem[], valueType: string, isAmountOnly: boolean) {
+const getProcessedBarChartData = (items: UVItem[], valueType: string, isAmountOnly: boolean) => {
   for (const item of items) {
     if(!item) {
       console.error('Data format is incorrect for bar chart');

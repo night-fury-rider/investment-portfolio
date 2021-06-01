@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import './uv_number.css';
 import { UVNumberProps } from './uv_number.types';
 
-function UVNumber(props: UVNumberProps) {
+const UVNumber = (props: UVNumberProps) => {
   return (
     <div className = {'uv-number-container ' + ((props.config && props.config.class) ? props.config.class : '')}>
       <div className={'bounce-top uv-primary-text uv-text-center align-middle ' +

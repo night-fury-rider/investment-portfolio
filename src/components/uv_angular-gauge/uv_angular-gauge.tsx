@@ -9,7 +9,7 @@ import { UVAngularGaugeConfig, UVAngularGaugeData } from './uv_angular-gauge.typ
 
 am4core.useTheme(am4themes_animated);
 
-function UVAngularGauge(props: any) {
+const UVAngularGauge = (props: any) => {
 
   const chart = useRef(null);
 
@@ -22,7 +22,7 @@ function UVAngularGauge(props: any) {
   data = props.data;
 
   //  Grading Lookup
-  function lookUpGrade(lookupScore: any, grades: any) {
+  const lookUpGrade = (lookupScore: any, grades: any) => {
     // Only change code below this line
     for (var i = 0; i < grades.length; i++) {
       if (grades[i].lowScore < lookupScore && grades[i].highScore >= lookupScore) {
@@ -127,7 +127,7 @@ function UVAngularGauge(props: any) {
     hand.stroke = am4core.color((config.hand && config.hand.stroke) ? config.hand.stroke : '#000');
     hand.showValue(config.score - 0.5);
 
-    hand.events.on("positionchanged", function(){
+    hand.events.on("positionchanged", () => {
       label.text = config.showScore ? (axis2.positionToValue(hand.currentPosition) + 0.5).toFixed(0) : '';
       let matchingGrade = lookUpGrade(axis.positionToValue(hand.currentPosition), data);
       label2.text = config.title;

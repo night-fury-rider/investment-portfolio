@@ -18,7 +18,7 @@ function UVDashboard() {
     return state.dashboard.numbers;
   }) || initialState.numbers;
 
-  debugger;
+
   let uvPieData = useSelector((state: UVRootState) => {
     return state.dashboard.pieCharts;
   }) || initialState.pieCharts;

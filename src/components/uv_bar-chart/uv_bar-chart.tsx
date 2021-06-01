@@ -12,12 +12,12 @@ import { UVItem } from '../../shared/Types';
 import { UVBarChartProps } from './uv_bar-chart.types';
 import { barChartColumnSelected } from './uv_bar-chart.actions';
 
-function UVBarChart(props: UVBarChartProps) {
+const UVBarChart = (props: UVBarChartProps) => {
   const dispatch = useDispatch();
 
   const chart = useRef({});
 
-  function getChartDimensions(chartDimension ?: string) {
+  const getChartDimensions = (chartDimension ?: string) => {
     switch(chartDimension) {
       case '3D':
         return {
@@ -79,7 +79,7 @@ function UVBarChart(props: UVBarChartProps) {
       return uvChart.colors.getIndex(dataItem.index);
     });
 
-    series.columns.template.events.on("hit", function(ev) {
+    series.columns.template.events.on("hit", (ev) => {
       dispatch(barChartColumnSelected(props.componentId, parseInt(ev.target.id)));
       uvDevice.scrollSmoothly('uv-barchart-heading');
     });
@@ -100,7 +100,7 @@ function UVBarChart(props: UVBarChartProps) {
 
     // Select item with max value by default.
     let selectedColumnIndex = 0;
-    uvChart.data.reduce(function(prev: UVItem, current: UVItem, columnIndex: number) {
+    uvChart.data.reduce((prev: UVItem, current: UVItem, columnIndex: number) => {
       if(current.value > prev.value) {
         selectedColumnIndex = columnIndex;
         return current;

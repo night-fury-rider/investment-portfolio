@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import uvNumber from '@uv-tech/util/lib/uv-number';
 
-function UVHeader(props: UVHeaderProps) {
+const UVHeader = (props: UVHeaderProps) => {
 
   return (
     <Container>

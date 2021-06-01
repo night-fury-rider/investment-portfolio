@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { UVTableProps } from './uv_table.types';
 import { Table } from 'react-bootstrap';
 
-function UVTable(props: UVTableProps) {
+const UVTable = (props: UVTableProps) => {
   return (
     <Table striped bordered hover responsive>
       <thead>

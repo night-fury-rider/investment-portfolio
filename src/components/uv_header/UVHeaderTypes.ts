@@ -1,3 +1,8 @@
+export type MenuItem = {
+  title: string;
+  href: string;
+  icon?: string;
+}
 export type UVHeaderProps = {
   title: string;
   centralTitle ?: number | string;
@@ -11,4 +16,5 @@ export type UVHeaderProps = {
   repositoryLogo ?: string;
   repositoryHeight ?: string;
   repositoryName ?: string;
+  menuItems ?: MenuItem[];
 };

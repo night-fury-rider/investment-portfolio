@@ -2,13 +2,13 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 
 import UVHeader from './components/uv_header/uv_header';
-import UVDashboard from './modules/uv_dashboard/uv_dashboard';
 
 import './App.css';
 import * as appData from './shared/uv_app-data.json';
 import * as headerData from './components/uv_header/uv_header.json';
 import { useSelector } from 'react-redux';
 import { UVRootState } from './root.reducer';
+import AppRouter from './AppRouter';
 
 const App = ()=> {
 
@@ -26,9 +26,10 @@ const App = ()=> {
                     alt={headerData.config.alt}
                     primaryWebsite={headerData.config.primaryWebsite}
                     repositoryUrl={headerData.config.repositoryUrl}
-                    repositoryLogo={headerData.config.repositoryLogo}/>
+                    repositoryLogo={headerData.config.repositoryLogo}
+                    menuItems={headerData.config.menuItems}/>
         </Row>
-      <UVDashboard ></UVDashboard>
+      <AppRouter></AppRouter>
       </Container>
     </div>
   );

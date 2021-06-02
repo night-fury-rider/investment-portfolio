@@ -9,6 +9,16 @@
       "width": "40px"
     },
     "repositoryUrl": "https://github.com/yuvi1422/uv-investment-portfolio",
-    "repositoryLogo": "github.png"
+    "repositoryLogo": "github.png",
+    "menuItems": [
+      {
+        "title": "Profile",
+        "href": "/profile"
+      },
+      {
+        "title": "Settings",
+        "href": "/settings"
+      }
+    ]
   }
 }

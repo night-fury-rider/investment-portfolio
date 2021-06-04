@@ -53,7 +53,12 @@ const UVHeader = (props: UVHeaderProps) => {
 
                     <Dropdown.Menu>
                       {props.menu.items.map((menuItem: any, index: any) => (
-                        <Dropdown.Item key={'menuItem-' + index} href={menuItem.href}>{menuItem.title}</Dropdown.Item>
+                        <React.Fragment key={'menuItem-' + index}>
+                          { index > 0 &&
+                            <Dropdown.Divider />
+                          }
+                          <Dropdown.Item href={menuItem.href}>{menuItem.title}</Dropdown.Item>
+                        </React.Fragment>
                       ))}
 
                     </Dropdown.Menu>

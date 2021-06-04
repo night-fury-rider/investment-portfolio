@@ -62,6 +62,10 @@
   justify-content: center;
 }
 
+.uv-header-container .dropdown-toggle {
+  padding: 0;
+}
+
 .uv-header-container .dropdown-toggle::after {
   display: none;
 }

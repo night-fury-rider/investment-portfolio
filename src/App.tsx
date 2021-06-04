@@ -25,9 +25,8 @@ const App = ()=> {
                     theme={headerData.config.theme}
                     alt={headerData.config.alt}
                     primaryWebsite={headerData.config.primaryWebsite}
-                    repositoryUrl={headerData.config.repositoryUrl}
-                    repositoryLogo={headerData.config.repositoryLogo}
-                    menuItems={headerData.config.menuItems}/>
+                    repository={headerData.config.repository}
+                    menu={headerData.config.menu}/>
         </Row>
       <AppRouter></AppRouter>
       </Container>

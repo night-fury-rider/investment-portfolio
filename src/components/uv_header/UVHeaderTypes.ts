@@ -12,9 +12,16 @@ export type UVHeaderProps = {
   logoFile ?: string;
   logoWidth ?: string;
   logoAlt ?: string;
-  repositoryUrl ?: string;
-  repositoryLogo ?: string;
-  repositoryHeight ?: string;
-  repositoryName ?: string;
-  menuItems ?: MenuItem[];
+  repository: {
+    logo ?: string;
+    url ?: string;
+    height ?: string;
+    name ?: string;
+  };
+  menu ?: {
+    logo ?: string;
+    items: MenuItem[];
+    height ?: string;
+    name ?: string;
+  }
 };

@@ -3,22 +3,27 @@
     "title": "UV Investment Portfolio",
     "theme": "success",
     "alt": "Yuvraj Patil",
-    "primaryWebsite": "http://yuvrajpatil.com",
+    "primaryWebsite": "/",
     "logo": {
       "logo": "logo192.png",
       "width": "40px"
     },
-    "repositoryUrl": "https://github.com/yuvi1422/uv-investment-portfolio",
-    "repositoryLogo": "github.png",
-    "menuItems": [
-      {
-        "title": "Profile",
-        "href": "/profile"
-      },
-      {
-        "title": "Settings",
-        "href": "/settings"
-      }
-    ]
+    "repository": {
+      "logo": "github.png",
+      "url": "https://github.com/yuvi1422/uv-investment-portfolio"
+    },
+    "menu": {
+      "logo": "user.png",
+      "items": [
+        {
+          "title": "Profile",
+          "href": "/profile"
+        },
+        {
+          "title": "Settings",
+          "href": "/settings"
+        }
+      ]
+    }
   }
 }

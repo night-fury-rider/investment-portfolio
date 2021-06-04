@@ -15,7 +15,7 @@ const UVHeader = (props: UVHeaderProps) => {
           <div id="headerDiv">
             <div className={'toolbar ' + (props.theme ? props.theme : 'primary')} role="banner">
               <Col xs={2} md={1}>
-                <a href={props.primaryWebsite} className="website-link" target="_blank" rel="noopener noreferrer">
+                <a href={props.primaryWebsite} className="website-link" rel="noopener noreferrer">
                   <img width={props.logoWidth ? props.logoWidth : '40px'}
                     alt={props.logoAlt ? props.logoAlt : 'Yuvraj Patil'}
                     src={props.logoFile ? props.logoFile : 'logo192.png'} />
@@ -34,25 +34,25 @@ const UVHeader = (props: UVHeaderProps) => {
               <Col md={{span:1, offset:1}} className="d-none d-md-block d-lg-block">
                 <div className="spacer"></div>
                 {
-                  props.repositoryUrl && !props.menuItems &&
-                  <a href={props.repositoryUrl} className="repository-link" target="_blank" rel="noopener noreferrer">
+                  props.repository && !props.menu &&
+                  <a href={props.repository.url} className="repository-link" target="_blank" rel="noopener noreferrer">
                     <img className="logo" alt={props.alt}
-                      height={props.repositoryHeight ? props.repositoryHeight : '40px'}
-                      src={props.repositoryLogo ? props.repositoryLogo : 'logo192.png'} />
+                      height={props.repository.height ? props.repository.height : '40px'}
+                      src={props.repository.logo ? props.repository.logo : 'logo192.png'} />
                   </a>
                 }
 
                 {
-                  props.menuItems &&
+                  props.menu &&
                   <Dropdown>
                     <Dropdown.Toggle variant="none" id="dropdown-basic">
                       <img className="menu" alt={props.alt}
-                        height={props.repositoryHeight ? props.repositoryHeight : '40px'}
-                        src={props.repositoryLogo ? props.repositoryLogo : 'logo192.png'} />
+                        height={props.menu.height ? props.menu.height : '40px'}
+                        src={props.menu.logo ? props.menu.logo : 'logo192.png'} />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      {props.menuItems.map((menuItem: any, index: any) => (
+                      {props.menu.items.map((menuItem: any, index: any) => (
                         <Dropdown.Item key={'menuItem-' + index} href={menuItem.href}>{menuItem.title}</Dropdown.Item>
                       ))}
 

@@ -1,10 +1,13 @@
 {
-	"languages": [
-		{
-			"title": "English"
-		},
-		{
-			"title": "Marathi"
-		}
-	]
+  "language": {
+    "label": "Language",
+    "items": [
+      {
+        "title": "English"
+      },
+      {
+        "title": "मराठी"
+      }
+    ]
+  }
 }

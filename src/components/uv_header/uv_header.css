@@ -36,7 +36,7 @@
   background-color: var(--color-faded);
 }
 
-.toolbar img {
+.toolbar .logo img {
   margin: 0 16px;
 }
 
@@ -60,6 +60,14 @@
   display: flex;
   font-size: 1.5rem;
   justify-content: center;
+}
+
+.uv-header-container .dropdown-toggle {
+  padding: 0;
+}
+
+.uv-header-container .dropdown-toggle::after {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {

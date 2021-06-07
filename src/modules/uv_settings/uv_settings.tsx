@@ -11,14 +11,14 @@ const Settings = () => {
 
   return (
     <div className="uv-settings-container">
-      <Col md={{ offset: 3 }}>
+      <Col md={{ offset: 3, span: 6 }}>
         <Form>
           <fieldset >
-            <Form.Group as={Row}>
-              <Form.Label as="legend" column md={{ span: 2 }} xs={{ span: 3 }}>
+            <Form.Group as={Row} className="uv-background-color-faded">
+              <Form.Label as="legend" column md={{offset: 1, span: 3 }} xs={{offset: 1, span: 3 }}>
                 {settingsData.language.label}
 		          </Form.Label>
-              <Col md={2} xs={5}>
+              <Col md={{offset: 3, span: 3}} xs={{offset: 2, span: 5}}>
                 <Form.Control as="select" onChange={changeLanguage}>
                   {settingsData.language.items.map((language: any, languageIndex: any) => (
                     <option key={'language-' + languageIndex}>{language.title}</option>

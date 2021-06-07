@@ -5,7 +5,7 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import UVHeader from './uv_header';
-
+import * as headerData from './uv_header.json';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -24,17 +24,13 @@ describe('Header Component Suite', ()=> {
         repositoryLogo = 'test.png';
 
   test('has correct snapshot', ()=> {
-    expect(<UVHeader title={headerTitle}
-                     centralTitle={centralTitle}
-                     theme={theme}
-                     alt={alt}
-                     primaryWebsite={primaryWebsite}
-                     logoWidth={logoWidth}
-                     logoAlt={logoAlt}
-                     logoFile={logoFile}
-                     repositoryUrl={repositoryUrl}
-                     repositoryHeight={repositoryHeight}
-                     repositoryLogo={repositoryLogo}/>).toMatchSnapshot();
+    expect(<UVHeader title={headerData.config.title}
+                    centralTitle={centralTitle}
+                    theme={headerData.config.theme}
+                    alt={headerData.config.alt}
+                    primaryWebsite={headerData.config.primaryWebsite}
+                    repository={headerData.config.repository}
+                    menu={headerData.config.menu}/>).toMatchSnapshot();
   });
 
   test('renders with props provided', ()=> {
@@ -49,37 +45,5 @@ describe('Header Component Suite', ()=> {
     expect(shallowComponent.find('.website-link img').prop('src')).not.toEqual(logoFile);
     expect(shallowComponent.find('.repository-link img').children().length).toEqual(0);
 
-    shallowComponent = shallow(<UVHeader title={headerTitle}
-                                         centralTitle={centralTitle}
-                                         theme={theme}
-                                         alt={alt}
-                                         primaryWebsite={primaryWebsite}
-                                         logoWidth={logoWidth}
-                                         logoAlt={logoAlt}
-                                         logoFile={logoFile}
-                                         repositoryUrl={repositoryUrl}
-                                         repositoryHeight={repositoryHeight}
-                                         repositoryLogo={repositoryLogo}/>);
-
-
-    expect(shallowComponent.find('.uv-central-title').length).toEqual(1);
-
-    expect(shallowComponent.find('.toolbar.' + theme).length).toEqual(1);
-    expect(shallowComponent.find('.website-link img').prop('width')).toEqual(logoWidth);
-
-    expect(shallowComponent.find('a.repository-link').prop('href')).toEqual(repositoryUrl);
-    expect(shallowComponent.find('.repository-link img').prop('alt')).toEqual(alt);
-    expect(shallowComponent.find('.repository-link img').prop('height')).toEqual(repositoryHeight);
-    expect(shallowComponent.find('.repository-link img').prop('src')).toEqual(repositoryLogo);
-
-
-    shallowComponent = shallow(<UVHeader title={headerTitle}
-                                         centralTitle={'' + centralTitle}
-                                         repositoryUrl={repositoryUrl}/>);
-
-    expect(shallowComponent.find('.uv-central-title').text()).toEqual('' + centralTitle);
-    expect(shallowComponent.find('.repository-link img').prop('height')).toEqual('40px');
-    expect(shallowComponent.find('.repository-link img').prop('src')).toEqual('logo192.png');
   });
-
 });

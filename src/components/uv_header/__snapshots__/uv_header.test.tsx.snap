@@ -2,16 +2,31 @@
 
 exports[`Header Component Suite has correct snapshot 1`] = `
 <Memo(UVHeader)
-  alt="Yuvi"
+  alt="Yuvraj Patil"
   centralTitle={12345678}
-  logoAlt="Yuvraj"
-  logoFile="test.png"
-  logoWidth="100px"
-  primaryWebsite="www.test.com"
-  repositoryHeight="100px"
-  repositoryLogo="test.png"
-  repositoryUrl="test20.com"
+  menu={
+    Object {
+      "items": Array [
+        Object {
+          "href": "/profile",
+          "title": "Profile",
+        },
+        Object {
+          "href": "/settings",
+          "title": "Settings",
+        },
+      ],
+      "logo": "user.png",
+    }
+  }
+  primaryWebsite="/"
+  repository={
+    Object {
+      "logo": "github.png",
+      "url": "https://github.com/yuvi1422/uv-investment-portfolio",
+    }
+  }
   theme="success"
-  title="Test Title"
+  title="UV Investment Portfolio"
 />
 `;

@@ -21,17 +21,17 @@ const UVHeader = (props: UVHeaderProps) => {
                     src={props.logoFile ? props.logoFile : 'logo192.png'} />
                 </a>
               </Col>
-              <Col xs={7} md={3}>
+              <Col xs={7} md={3} className="d-none d-md-block d-lg-block">
                 <span>{props.title}</span>
               </Col>
-              <Col xs={2} md={6}>
+              <Col xs={{offset:3, span:2}} md={6}>
                 { props.centralTitle &&
                   <div className="uv-central-title">
                     {Number.isInteger(props.centralTitle) ? uvNumber.changeFormat(props.centralTitle as number) : props.centralTitle}
                   </div>
                 }
               </Col>
-              <Col md={{span:1, offset:1}} className="d-none d-md-block d-lg-block">
+              <Col xs={{offset:3, span:1}} md={{span:1, offset:1}}>
                 <div className="spacer"></div>
                 {
                   props.repository && !props.menu &&

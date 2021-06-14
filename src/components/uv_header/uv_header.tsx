@@ -24,14 +24,14 @@ const UVHeader = (props: UVHeaderProps) => {
               <Col xs={7} md={3} className="d-none d-md-block d-lg-block">
                 <span>{props.title}</span>
               </Col>
-              <Col xs={{offset:3, span:2}} md={6}>
+              <Col xs={{offset:3, span:2}} md={{offset: 0, span:6}}>
                 { props.centralTitle &&
                   <div className="uv-central-title">
                     {Number.isInteger(props.centralTitle) ? uvNumber.changeFormat(props.centralTitle as number) : props.centralTitle}
                   </div>
                 }
               </Col>
-              <Col xs={{offset:3, span:1}} md={{span:1, offset:1}}>
+              <Col xs={{offset:2, span:1}} md={{span:1, offset:1}}>
                 <div className="spacer"></div>
                 {
                   props.repository && !props.menu &&
@@ -44,7 +44,7 @@ const UVHeader = (props: UVHeaderProps) => {
 
                 {
                   props.menu &&
-                  <Dropdown>
+                  <Dropdown className="menu-container">
                     <Dropdown.Toggle variant="none" id="dropdown-basic">
                       <img className="menu" alt={props.alt}
                         height={props.menu.height ? props.menu.height : '40px'}

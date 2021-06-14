@@ -24,7 +24,7 @@ const UVHeader = (props: UVHeaderProps) => {
               <Col xs={7} md={3} className="d-none d-md-block d-lg-block">
                 <span>{props.title}</span>
               </Col>
-              <Col xs={{offset:3, span:2}} md={6}>
+              <Col xs={{offset:3, span:2}} md={{offset: 0, span:6}}>
                 { props.centralTitle &&
                   <div className="uv-central-title">
                     {Number.isInteger(props.centralTitle) ? uvNumber.changeFormat(props.centralTitle as number) : props.centralTitle}

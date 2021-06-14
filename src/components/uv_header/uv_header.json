@@ -16,10 +16,6 @@
       "logo": "user.png",
       "items": [
         {
-          "title": "Profile",
-          "href": "/profile"
-        },
-        {
           "title": "Settings",
           "href": "/settings"
         }

@@ -70,6 +70,10 @@
   display: none;
 }
 
+.menu-container {
+  margin-left: 1.5rem;
+}
+
 @media screen and (max-width: 767px) {
 
 }

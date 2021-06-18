@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import UVDashboard from './modules/uv_dashboard/uv_dashboard';
@@ -12,10 +13,14 @@ export default function AppRouter() {
     <Router>
       <div>
         <Switch>
-          <Route path="/settings">
+
+          <Redirect exact from="/" to={process.env.PUBLIC_URL + "/"} />
+
+          <Route path={process.env.PUBLIC_URL + "/settings"}>
             <Settings></Settings>
           </Route>
-          <Route path="/">
+
+          <Route path={'/'}>
             <UVDashboard ></UVDashboard>
           </Route>
 

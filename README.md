@@ -9,6 +9,8 @@ This is a website to analyze our investment portfolio.
 * [React Bootstrap 1.3.0](https://react-bootstrap.github.io/)
 * [amCharts 4.10.11](https://www.amcharts.com/)
 * [Axios 0.21.0](https://github.com/axios/axios)
+* [React Router 5.2.0](https://reactrouter.com/web/guides/quick-start)
+* [env-cmd 10.1.0](https://github.com/toddbluhm/env-cmd)
 * [uvUtil 1.0.9](https://github.com/yuvi1422/npm-uv-util)
 * [bit Harmony](https://bit.dev/)
 
@@ -55,6 +57,17 @@ yarn run build
 Builds the app for production to the `build` folder.<br />
 
 
-## Notes
+<br />
+
+
+# Deployment
+
+Since we are using `BrowserRouter` of React Router, we need to do a [configuration on hosting server](https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing).
+
+
+<br />
+
+
+# Notes
 1. Objects of `items` array represents an investment plan.
 2. Objects of `subItems` array represents an instance of investment plan. It's values will be considered in all calculations.

@@ -15,7 +15,7 @@ const UVHeader = (props: UVHeaderProps) => {
           <div id="headerDiv">
             <div className={'toolbar ' + (props.theme ? props.theme : 'primary')} role="banner">
               <Col xs={2} md={1}>
-                <a href={props.primaryWebsite} className="website-link" rel="noopener noreferrer">
+                <a href={process.env.PUBLIC_URL + props.primaryWebsite} className="website-link" rel="noopener noreferrer">
                   <img width={props.logoWidth ? props.logoWidth : '40px'}
                     alt={props.logoAlt ? props.logoAlt : 'Yuvraj Patil'}
                     src={props.logoFile ? props.logoFile : 'logo192.png'} />
@@ -57,7 +57,7 @@ const UVHeader = (props: UVHeaderProps) => {
                           { index > 0 &&
                             <Dropdown.Divider />
                           }
-                          <Dropdown.Item href={menuItem.href}>{menuItem.title}</Dropdown.Item>
+                          <Dropdown.Item href={process.env.PUBLIC_URL + menuItem.href}>{menuItem.title}</Dropdown.Item>
                         </React.Fragment>
                       ))}
 

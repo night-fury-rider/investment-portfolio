@@ -1,5 +1,8 @@
 # Investment Portfolio
-This is a website to analyze our investment portfolio.
+This is a website to analyze our investment portfolio of various investment instruments.
+
+![Screenshot from 2021-06-18 11-55-19](https://user-images.githubusercontent.com/5191208/122516668-ac224e80-d02c-11eb-8e9d-560bda63256d.png)
+
 
 # Technologies and Libraries Used
 

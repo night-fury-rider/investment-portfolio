@@ -1,7 +1,9 @@
 {
   "config": {
     "initialIndex": 0,
-    "font": "medium"
+    "font": "medium",
+    "languageCode": "en-US",
+    "currencyCode": "INR"
   },
   "data": {
     "numbers": [

@@ -3,10 +3,12 @@
     "label": "Language",
     "items": [
       {
-        "title": "English"
+        "title": "English",
+        "languageCode": "en-US"
       },
       {
-        "title": "मराठी"
+        "title": "मराठी",
+        "languageCode": "mr"
       }
     ]
   }

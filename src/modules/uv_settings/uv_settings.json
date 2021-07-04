@@ -4,11 +4,37 @@
     "items": [
       {
         "title": "English",
-        "languageCode": "en-US"
+        "code": "en-US"
       },
       {
         "title": "मराठी",
-        "languageCode": "mr"
+        "code": "mr"
+      }
+    ]
+  },
+  "currency": {
+    "label": "Currency",
+    "items": [
+      {
+        "title": "Rupee",
+        "code": "INR"
+      },
+      {
+        "title": "Dollar",
+        "code": "USD"
+      }
+    ]
+  },
+    "locale": {
+    "label": "Region (Locale)",
+    "items": [
+      {
+        "title": "USA",
+        "code": "en-US"
+      },
+      {
+        "title": "MH, India",
+        "code": "mr"
       }
     ]
   }

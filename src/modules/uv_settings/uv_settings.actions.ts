@@ -1,12 +1,28 @@
-import UV_SETTINGS from "./uv_settings.constants";
+import UV_SETTINGS from './uv_settings.constants';
 
-const updateSettings = (settingsData: any) => {
+const updateLanguage = (language: any) => {
   return {
-    type: UV_SETTINGS.UPDATE,
-    data: settingsData
+    type: UV_SETTINGS.UPDATE_LANGUAGE,
+    data: language
+  }
+}
+
+const updateCurrency = (currency: any) => {
+  return {
+    type: UV_SETTINGS.UPDATE_CURRENCY,
+    data: currency
+  }
+}
+
+const updateLocale = (locale: any) => {
+  return {
+    type: UV_SETTINGS.UPDATE_LOCALE,
+    data: locale
   }
 }
 
 export {
-  updateSettings
+  updateLanguage,
+  updateCurrency,
+  updateLocale
 }

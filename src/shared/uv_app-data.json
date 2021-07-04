@@ -3,7 +3,8 @@
     "initialIndex": 0,
     "font": "medium",
     "languageCode": "en-US",
-    "currencyCode": "INR"
+    "currencyCode": "INR",
+    "localeCode": "en-US"
   },
   "data": {
     "numbers": [

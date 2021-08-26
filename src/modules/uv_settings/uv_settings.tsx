@@ -20,10 +20,12 @@ const Settings = () => {
 
   const changeLanguage = (event: any)=> {
     dispatch(updateLanguage(settingsData.language.items[event.target.selectedIndex]));
+    localStorage.setItem('uv_lang', JSON.stringify(settingsData.language.items[event.target.selectedIndex]));
   }
 
   const changeLocale = (event: any)=> {
     dispatch(updateLocale(settingsData.locale.items[event.target.selectedIndex]));
+    localStorage.setItem('uv_locale', JSON.stringify(settingsData.locale.items[event.target.selectedIndex]));
   }
 
   return (

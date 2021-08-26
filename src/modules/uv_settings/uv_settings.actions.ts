@@ -7,13 +7,6 @@ const updateLanguage = (language: any) => {
   }
 }
 
-const updateCurrency = (currency: any) => {
-  return {
-    type: UV_SETTINGS.UPDATE_CURRENCY,
-    data: currency
-  }
-}
-
 const updateLocale = (locale: any) => {
   return {
     type: UV_SETTINGS.UPDATE_LOCALE,
@@ -23,6 +16,5 @@ const updateLocale = (locale: any) => {
 
 export {
   updateLanguage,
-  updateCurrency,
   updateLocale
 }

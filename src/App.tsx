@@ -25,9 +25,6 @@ const App = () => {
     return state.settings.language;
   });
 
-  const currency = useSelector((state: UVRootState) => {
-    return state.settings.currency;
-  });
 
   const locale = useSelector((state: UVRootState) => {
     return state.settings.locale;
@@ -79,9 +76,7 @@ const App = () => {
                                                             id="header_title"
                                                             defaultMessage="Investment Portfolio"/>)}
                         centralTitle={renderToString(<UVFormatter appContent={appContent}
-                                                                  value={centralTitle}
-                                                                  currency={currency.code.toLowerCase()}
-                                                                  style="currency"/>)}
+                                                                  value={centralTitle}/>)}
                         theme={headerData.config.theme}
                         alt={headerData.config.alt}
                         primaryWebsite={headerData.config.primaryWebsite}

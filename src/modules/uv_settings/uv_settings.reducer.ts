@@ -5,7 +5,6 @@ import * as settingsData from './uv_settings.json';
 
 export const initialSettings = {
   language: settingsData.language.items[0],
-  currency: settingsData.currency.items[0],
   locale: settingsData.locale.items[0]
 };
 
@@ -16,12 +15,6 @@ const UVSettingsReducer = (state = initialSettings, action: UVAction) => {
       return {
         ...state,
         language: action.data,
-      }
-
-    case UV_SETTINGS.UPDATE_CURRENCY:
-      return {
-        ...state,
-        currency: action.data,
       }
 
     case UV_SETTINGS.UPDATE_LOCALE:

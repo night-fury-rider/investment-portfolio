@@ -12,29 +12,20 @@
       }
     ]
   },
-  "currency": {
-    "label": "Currency",
-    "items": [
-      {
-        "title": "Rupee",
-        "code": "INR"
-      },
-      {
-        "title": "Dollar",
-        "code": "USD"
-      }
-    ]
-  },
-    "locale": {
+  "locale": {
     "label": "Region (Locale)",
     "items": [
       {
-        "title": "USA",
-        "code": "en-US"
+        "title": "India",
+        "code": "en-IN"
       },
       {
         "title": "MH, India",
         "code": "mr"
+      },
+      {
+        "title": "USA",
+        "code": "en-US"
       }
     ]
   }

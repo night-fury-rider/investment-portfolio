@@ -13,6 +13,7 @@ This is a website to analyze our investment portfolio of various investment inst
 * [amCharts 4.10.11](https://www.amcharts.com/)
 * [Axios 0.21.0](https://github.com/axios/axios)
 * [React Router 5.2.0](https://reactrouter.com/web/guides/quick-start)
+* [Format JS 5.20.2](https://formatjs.io)
 * [env-cmd 10.1.0](https://github.com/toddbluhm/env-cmd)
 * [uvUtil 1.0.9](https://github.com/yuvi1422/npm-uv-util)
 * [bit Harmony](https://bit.dev/)

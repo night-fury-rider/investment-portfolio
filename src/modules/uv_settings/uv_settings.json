@@ -3,10 +3,29 @@
     "label": "Language",
     "items": [
       {
-        "title": "English"
+        "title": "English",
+        "code": "en-US"
       },
       {
-        "title": "मराठी"
+        "title": "मराठी",
+        "code": "mr"
+      }
+    ]
+  },
+  "locale": {
+    "label": "Region (Locale)",
+    "items": [
+      {
+        "title": "India",
+        "code": "en-IN"
+      },
+      {
+        "title": "MH, India",
+        "code": "mr"
+      },
+      {
+        "title": "USA",
+        "code": "en-US"
       }
     ]
   }

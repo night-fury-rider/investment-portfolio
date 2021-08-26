@@ -4,8 +4,6 @@ import './uv_header.css';
 import { UVHeaderProps } from './UVHeaderTypes';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 
-import uvNumber from '@uv-tech/util/lib/uv-number';
-
 const UVHeader = (props: UVHeaderProps) => {
 
   return (
@@ -27,7 +25,7 @@ const UVHeader = (props: UVHeaderProps) => {
               <Col xs={{offset:3, span:2}} md={{offset: 0, span:6}}>
                 { props.centralTitle &&
                   <div className="uv-central-title">
-                    {Number.isInteger(props.centralTitle) ? uvNumber.changeFormat(props.centralTitle as number) : props.centralTitle}
+                    {props.centralTitle}
                   </div>
                 }
               </Col>

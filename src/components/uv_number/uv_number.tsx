@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import { memo } from 'react';
 import { useSpring, animated } from 'react-spring'
 
 import './uv_number.css';

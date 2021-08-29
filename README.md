@@ -14,6 +14,7 @@ This is a website to analyze our investment portfolio of various investment inst
 * [Axios 0.21.0](https://github.com/axios/axios)
 * [React Router 5.2.0](https://reactrouter.com/web/guides/quick-start)
 * [Format JS 5.20.2](https://formatjs.io)
+* [react-spring 9.2.4](https://react-spring.io/)
 * [env-cmd 10.1.0](https://github.com/toddbluhm/env-cmd)
 * [uvUtil 1.0.9](https://github.com/yuvi1422/npm-uv-util)
 * [bit Harmony](https://bit.dev/)

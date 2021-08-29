@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useSpring, animated } from 'react-spring'
+import { useSpring, animated } from 'react-spring';
 
 import './uv_number.css';
 import { UVNumberProps } from './uv_number.types';
@@ -12,7 +12,7 @@ const UVNumber = (props: UVNumberProps) => {
     from: { number: 0 },
     number: props.title,
     delay: 750
-  })
+  });
 
   return (
     <div className = {'uv-number-container ' + ((props.config && props.config.class) ? props.config.class : '')}>

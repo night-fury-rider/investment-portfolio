@@ -1,78 +1,36 @@
-# Investment Portfolio
-This is a website to analyze our investment portfolio of various investment instruments.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-![Screenshot from 2021-06-18 11-55-19](https://user-images.githubusercontent.com/5191208/122516668-ac224e80-d02c-11eb-8e9d-560bda63256d.png)
+## Getting Started
 
+First, run the development server:
 
-# Technologies and Libraries Used
-
-* [React 17.0.2](https://reactjs.org/)
-* [Redux Saga 1.1.3](https://redux-saga.js.org/)
-* [TypeScript 4.1.2](https://www.typescriptlang.org/)
-* [React Bootstrap 1.3.0](https://react-bootstrap.github.io/)
-* [amCharts 4.10.11](https://www.amcharts.com/)
-* [Axios 0.21.0](https://github.com/axios/axios)
-* [React Router 5.2.0](https://reactrouter.com/web/guides/quick-start)
-* [Format JS 5.20.2](https://formatjs.io)
-* [react-spring 9.2.4](https://react-spring.io/)
-* [env-cmd 10.1.0](https://github.com/toddbluhm/env-cmd)
-* [uvUtil 1.0.9](https://github.com/yuvi1422/npm-uv-util)
-* [bit Harmony](https://bit.dev/)
-
-# File Naming convension
-
-* File name should be prefixed by `uv_`.
-* File name should be in lowercase separated by hypen (`-`)
-* File name should have dot (`.`) to separate file type. Ex. `uv_angular-gauge.reducer.ts`
-* File name of root interfaces should be prefixed by `uv_interface-`
-
-<br />
-
-# Available Scripts
-
-## Start Application
-
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-yarn start
-```
-Runs the app in the development mode which can be browsed at [http://localhost:3000](http://localhost:3000)
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Run Unit Tests
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-yarn test
-```
-Launches the test runner in the interactive watch mode.<br />
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-## Generate Coverage Report
+To learn more about Next.js, take a look at the following resources:
 
-```
-yarn test:coverageAll
-```
-Create coverage report and stores it inside coverage folder.<br />
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Make Build of Application
+## Deploy on Vercel
 
-```
-yarn run build
-```
-Builds the app for production to the `build` folder.<br />
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-
-<br />
-
-
-# Deployment
-
-Since we are using `BrowserRouter` of React Router, we need to do a [configuration on hosting server](https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing).
-
-
-<br />
-
-
-# Notes
-1. Objects of `items` array represents an investment plan.
-2. Objects of `subItems` array represents an instance of investment plan. It's values will be considered in all calculations.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

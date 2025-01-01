@@ -1,9 +1,0 @@
-#gaugeDiv {
-  height: 15rem;
-}
-
-@media screen and (max-width: 767px) {
-  #gaugeDiv {
-    height: 15rem;
-  }
-}

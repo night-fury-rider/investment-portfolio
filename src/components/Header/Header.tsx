@@ -32,7 +32,7 @@ const Header: React.FC = () => {
               color="inherit"
               onClick={handleUploadClick}
               sx={{
-                "&:hover": { backgroundColor: COLORS.lightWhite },
+                "&:hover": { backgroundColor: COLORS.whiteLight },
               }}
             >
               <UploadSharp />

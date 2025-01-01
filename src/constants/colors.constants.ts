@@ -5,7 +5,7 @@ export const COLORS = {
   grey: "grey",
   transparent: "transparent",
   white: "white",
-  lightWhite: "#ffffff14",
+  whiteLight: "#ffffff14",
 };
 
 export const LIGHT_COLORS = {

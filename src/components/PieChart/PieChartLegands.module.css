@@ -1,0 +1,17 @@
+.legandContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.legand {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.legandCircle {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
+}

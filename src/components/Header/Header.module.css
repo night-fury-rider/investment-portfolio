@@ -1,0 +1,22 @@
+.appBar {
+  background-color: "#1976d2";
+  box-shadow: 3;
+  top: 0;
+}
+
+.toolBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-weight: 600;
+  letter-spacing: 1;
+  color: "white";
+}
+
+.rightSideIcon {
+  display: "flex";
+  align-items: "center";
+}

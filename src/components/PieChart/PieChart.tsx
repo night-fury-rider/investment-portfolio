@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import PieChartCentralTitle from "$/components/PieChart/PicChartCentralTitle";
 import { useMediaQuery, useTheme } from "@mui/material";
-import EmptyCustomTooltip from "$/components/EmptyCustomTooltip";
+import styles from "$/components/PieChart/PieChart.module.css";
 
 const ResponsivePie = dynamic(
   () => import("@nivo/pie").then((m) => m.ResponsivePie),
@@ -12,9 +12,16 @@ const ResponsivePie = dynamic(
 interface iPieChartProps {
   data: any[];
   centralTitle?: string | number;
+  handleSliceClick?: (param: number) => void;
+  totalValue?: number;
 }
 
-const PieChart = ({ data, centralTitle }: iPieChartProps) => {
+const PieChart = ({
+  data,
+  centralTitle,
+  handleSliceClick,
+  totalValue,
+}: iPieChartProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -33,11 +40,15 @@ const PieChart = ({ data, centralTitle }: iPieChartProps) => {
     return newLayers;
   };
 
+  const margin = isMobile
+    ? { top: 20, right: 40, bottom: 60, left: 40 } // Mobile margin
+    : { top: 40, right: 150, bottom: 100, left: 150 }; // Desktop margin
+
   return (
     <>
       <ResponsivePie
         data={data}
-        margin={{ top: 40, right: 80, bottom: 20, left: 80 }}
+        margin={margin}
         innerRadius={0.5}
         padAngle={0.7}
         cornerRadius={3}
@@ -45,8 +56,16 @@ const PieChart = ({ data, centralTitle }: iPieChartProps) => {
         colors={{ datum: "data.color" }}
         borderWidth={1}
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-        arcLinkLabel={"label"}
+        arcLinkLabel="label"
+        arcLabel={({ data }) => {
+          const totalAmount = totalValue || 0;
+
+          const { value } = data;
+          const percentage = ((value / totalAmount) * 100).toFixed(1);
+          return `${percentage}%`;
+        }}
         arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsOffset={0}
         arcLinkLabelsThickness={2}
         arcLabelsRadiusOffset={0.5}
         arcLabelsSkipAngle={10}
@@ -61,9 +80,36 @@ const PieChart = ({ data, centralTitle }: iPieChartProps) => {
               <PieChartCentralTitle {...props} centralTitle={centralTitle} />
             ) : null,
         ])}
+        onClick={(data) => {
+          handleSliceClick?.(data?.arc?.index || 0);
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        tooltip={EmptyCustomTooltip}
+        theme={{
+          labels: {
+            text: {
+              fontSize: 16,
+              fontWeight: "bold",
+            },
+          },
+        }}
+        tooltip={({ datum }) => {
+          const { value, color } = datum;
+          return (
+            <div className={styles.tooltipContainer}>
+              <div
+                style={{
+                  backgroundColor: color,
+                  boxShadow: `0 0 12px ${color}`,
+                  color: "#fff",
+                }}
+                className={styles.tooltip}
+              >
+                {value}
+              </div>
+            </div>
+          );
+        }}
       />
     </>
   );

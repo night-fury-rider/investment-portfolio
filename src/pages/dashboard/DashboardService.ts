@@ -1,3 +1,4 @@
+import APP_CONFIG from "$/constants/app.config.constants";
 import { iCategory } from "$/dashboard/dashboard.types";
 import LoggerService from "services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "services/UtilService";
@@ -15,4 +16,44 @@ const getTotalAmount = (categories: iCategory[]) => {
   return getTotalAmountInSelectedUnit(totalAmount);
 };
 
-export { getTotalAmount };
+const refineEntireData = (data: any[], attr = "investedValue") => {
+  let categories = data.categories;
+  let categoryTotal = 0;
+  let subCategoryTotal = 0;
+
+  let totalValue = 0;
+  let absoluteValue = 0;
+
+  for (let i = 0; i < categories.length; i++) {
+    categoryTotal = 0;
+    for (let j = 0; j < categories[i].items.length; j++) {
+      subCategoryTotal = 0;
+      for (let k = 0; k < categories[i].items[j].subItems.length; k++) {
+        categoryTotal += categories[i].items[j].subItems[k]?.[attr];
+        subCategoryTotal += categories[i].items[j].subItems[k]?.[attr];
+      }
+      categories[i].items[j].value = getTotalAmountInSelectedUnit(
+        subCategoryTotal,
+        APP_CONFIG.unit
+      );
+      categories[i].items[j].absoluteValue = subCategoryTotal;
+    }
+    categories[i].value = getTotalAmountInSelectedUnit(
+      categoryTotal,
+      APP_CONFIG.unit
+    );
+    absoluteValue += categoryTotal;
+
+    categories[i].absoluteValue = categoryTotal;
+    totalValue += getTotalAmountInSelectedUnit(categoryTotal, APP_CONFIG.unit);
+  }
+
+  data.categories = categories;
+  data.absoluteValue = absoluteValue;
+  data.totalValue = Number(totalValue).toFixed(APP_CONFIG.decimalPlaces);
+
+  console.log(`refined data:`, data);
+  return data;
+};
+
+export { getTotalAmount, refineEntireData };

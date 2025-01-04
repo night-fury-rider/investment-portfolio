@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
+import { useMediaQuery, useTheme } from "@mui/material";
+
 import EmptyCustomTooltip from "$/components/EmptyCustomTooltip";
 
 const ResponsiveBar = dynamic(
@@ -12,6 +14,9 @@ interface iBarChartProps {
 }
 
 const BarChart = ({ data }: iBarChartProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleMouseEnter = (
     event: React.MouseEvent<SVGRectElement, MouseEvent>
   ) => {
@@ -29,13 +34,17 @@ const BarChart = ({ data }: iBarChartProps) => {
     event.currentTarget.style.transition = "transform 0.3s ease-in-out";
   };
 
+  const margin = isMobile
+    ? { top: 40, right: 30, bottom: 60, left: 50 } // Mobile margin
+    : { top: 40, right: 100, bottom: 100, left: 100 }; // Desktop margin
+
   return (
     <>
       <ResponsiveBar
         data={data}
         keys={["value"]}
         indexBy="label"
-        margin={{ top: 40, right: 30, bottom: 60, left: 60 }}
+        margin={margin}
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
@@ -53,7 +62,6 @@ const BarChart = ({ data }: iBarChartProps) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "country",
           legendPosition: "middle",
           legendOffset: 32,
           truncateTickAt: 0,
@@ -79,6 +87,14 @@ const BarChart = ({ data }: iBarChartProps) => {
           e.id + ": " + e.formattedValue + " in country: " + e.indexValue
         }
         tooltip={EmptyCustomTooltip}
+        theme={{
+          labels: {
+            text: {
+              fontSize: 16,
+              fontWeight: "bold",
+            },
+          },
+        }}
       />
     </>
   );

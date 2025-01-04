@@ -1,22 +1,14 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Box,
-  Tooltip,
-} from "@mui/material";
-import { UploadSharp } from "@mui/icons-material";
+import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import styles from "$/components/Header/Header.module.css";
 import { DASHBOARD } from "constants/strings.constants";
-import { COLORS } from "constants/colors.constants";
+import FileUpload from "../FileUpload";
 
-const Header: React.FC = () => {
-  const handleUploadClick = () => {
-    alert(`update Data`);
-  };
+interface iHeaderProps {
+  updateData: (data: string) => void;
+}
 
+const Header = ({ updateData }: iHeaderProps) => {
   return (
     <AppBar position="sticky" className={styles.appBar}>
       <Toolbar className={styles.toolBar}>
@@ -27,17 +19,10 @@ const Header: React.FC = () => {
 
         {/* Right side  */}
         <Box className={styles.rightSideIcon}>
-          <Tooltip title={DASHBOARD.header.upload.title}>
-            <IconButton
-              color="inherit"
-              onClick={handleUploadClick}
-              sx={{
-                "&:hover": { backgroundColor: COLORS.whiteLight },
-              }}
-            >
-              <UploadSharp />
-            </IconButton>
-          </Tooltip>
+          <FileUpload
+            fileUploadCallback={updateData}
+            title={DASHBOARD.header.upload.title}
+          />
         </Box>
       </Toolbar>
     </AppBar>

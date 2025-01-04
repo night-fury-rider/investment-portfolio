@@ -21,16 +21,16 @@ const refineEntireData = (data: any[], attr = "investedValue") => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
 
-  let totalValue = 0;
+  let value = 0;
   let absoluteValue = 0;
 
   for (let i = 0; i < categories.length; i++) {
     categoryTotal = 0;
     for (let j = 0; j < categories[i].items.length; j++) {
       subCategoryTotal = 0;
-      for (let k = 0; k < categories[i].items[j].subItems.length; k++) {
-        categoryTotal += categories[i].items[j].subItems[k]?.[attr];
-        subCategoryTotal += categories[i].items[j].subItems[k]?.[attr];
+      for (let k = 0; k < categories[i].items[j]?.subItems?.length; k++) {
+        categoryTotal += categories[i].items[j]?.subItems[k]?.[attr];
+        subCategoryTotal += categories[i].items[j]?.subItems[k]?.[attr];
       }
       categories[i].items[j].value = getTotalAmountInSelectedUnit(
         subCategoryTotal,
@@ -45,12 +45,16 @@ const refineEntireData = (data: any[], attr = "investedValue") => {
     absoluteValue += categoryTotal;
 
     categories[i].absoluteValue = categoryTotal;
-    totalValue += getTotalAmountInSelectedUnit(categoryTotal, APP_CONFIG.unit);
+    value += getTotalAmountInSelectedUnit(categoryTotal, APP_CONFIG.unit);
   }
+  /* Sorted categories based on the their absolute values */
+  categories = categories.sort(
+    (a: any, b: any) => b?.absoluteValue - a?.absoluteValue
+  );
 
   data.categories = categories;
   data.absoluteValue = absoluteValue;
-  data.totalValue = Number(totalValue).toFixed(APP_CONFIG.decimalPlaces);
+  data.value = Number(value.toFixed(APP_CONFIG.decimalPlaces));
 
   console.log(`refined data:`, data);
   return data;

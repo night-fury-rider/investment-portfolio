@@ -20,7 +20,7 @@ const DashboardPage = ({ data }: iDashboardPageProps) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [refinedData, setRefinedData] = useState(data);
-  const [totalValue, settotalValue] = useState(data?.totalValue || 0);
+  const [totalValue, setTotalValue] = useState(data?.value || 0);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const DashboardPage = ({ data }: iDashboardPageProps) => {
   }, [data]);
 
   useEffect(() => {
-    settotalValue(refinedData.totalValue);
+    setTotalValue(refinedData.value);
   }, [refinedData]);
 
   const handleSliceClick = (index: number) => {

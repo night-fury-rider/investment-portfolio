@@ -19,9 +19,7 @@ const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
     default:
       resultAmount = amount / 100000;
   }
-  if (resultAmount < 1) {
-    return 0;
-  }
+
   return Number(resultAmount.toFixed(APP_CONFIG.decimalPlaces));
 };
 

@@ -2,6 +2,7 @@
 
 const APP_CONFIG = {
   decimalPlaces: 2,
+  unit: "Lakh",
 };
 
 export default APP_CONFIG;

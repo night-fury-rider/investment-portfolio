@@ -1,0 +1,22 @@
+.tooltipContainer {
+  padding: 12px 12px;
+  background: rgba(255, 255, 255, 0.85); /* Light background */
+  color: #333; /* Dark text for good contrast */
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center;
+  opacity: 0.95;
+  pointer-events: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100px;
+  z-index: 999;
+}
+
+.tooltip {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 18px;
+}

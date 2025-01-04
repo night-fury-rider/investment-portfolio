@@ -56,7 +56,6 @@ const refineEntireData = (data: any[], attr = "investedValue") => {
   data.absoluteValue = absoluteValue;
   data.value = Number(value.toFixed(APP_CONFIG.decimalPlaces));
 
-  console.log(`refined data:`, data);
   return data;
 };
 

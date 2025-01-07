@@ -2,7 +2,6 @@
   "absoluteValue": 0,
   "value": 0,
   "config": {
-    "initialIndex": 2,
     "font": "medium"
   },
   "pieConfig": {
@@ -36,27 +35,6 @@
   },
 
   "goals": {
-    "5_7": {
-      "label": "5th - 7th Std",
-      "targetDate": "Jun-2031",
-      "targetValue": 200000,
-      "collection": 0,
-      "isOnTrack": true
-    },
-    "8_10": {
-      "label": "8th - 10th Std",
-      "targetDate": "Jun-2034",
-      "targetValue": 200000,
-      "collection": 0,
-      "isOnTrack": true
-    },
-    "11_12": {
-      "label": "11th - 12th Std",
-      "targetDate": "Jun-2037",
-      "targetValue": 200000,
-      "collection": 0,
-      "isOnTrack": true
-    },
     "graduation": {
       "label": "Graduation",
       "targetDate": "Jun-2039",
@@ -71,15 +49,8 @@
       "collection": 0,
       "isOnTrack": true
     },
-    "2040": {
-      "label": "Retirement - 2040",
-      "targetDate": "Dec-2040",
-      "targetValue": 200000,
-      "collection": 0,
-      "isOnTrack": true
-    },
-    "2050": {
-      "label": "Retirement - 2050",
+    "retirement": {
+      "label": "Retirement",
       "targetDate": "Dec-2050",
       "targetValue": 200000,
       "collection": 0,
@@ -91,13 +62,14 @@
     {
       "absoluteValue": 0,
       "color": "orange",
-      "expenseRatio": 1.17,
+      "expenseRatio": 0,
       "id": 1,
       "label": "Mutual Fund",
       "note": "Sort all keys alphabetically except items. value is meant for graphs. total is meant for calculations.",
       "value": 0,
       "items": [
         {
+          "absoluteValue": 0,
           "exitLoad": "0",
           "expenseRatio": 1.87,
           "firstInvestmentDate": "Dec-16",
@@ -119,14 +91,15 @@
           "value": 0,
           "subItems": [
             {
-              "folio": "1018240099",
               "investedValue": 100110,
               "currentValue": 180115,
-              "goal": "2040"
+              "folio": "1018240099",
+              "goal": "retirement"
             }
           ]
         },
         {
+          "absoluteValue": 0,
           "id": 1,
           "label": "ABSL Tax 96",
           "shortName": "AB-96",
@@ -149,60 +122,37 @@
               "folio": "1018240099",
               "investedValue": 200080,
               "currentValue": 200002,
-              "goal": "2040"
+              "goal": "retirement"
             }
           ]
         }
       ]
     },
     {
+      "absoluteValue": 0,
       "id": 2,
       "label": "Shares",
       "color": "red",
+      "expenseRatio": 0,
       "items": [
-        {
-          "id": 0,
-          "label": "Aarti Industries",
-          "shortName": "Aarti",
-          "symbol": "AARTIIND",
-          "incorporated": 111,
-          "marketCap": 111,
-          "totalDebt": 111,
-          "average_totalDebt": 0,
-          "promoterOwnership": 111,
-          "average_promoterOwnership": 50,
-          "firstInvestmentDate": "111",
-
-          "givesDividend": false,
-          "subItems": [
-            {
-              "folio": "Varsha - Zerodha",
-              "investedValue": 82577,
-              "currentValue": 85290,
-              "goal": "2050"
-            }
-          ]
-        },
         {
           "id": 1,
           "label": "Brightcom",
           "shortName": "BCG",
           "symbol": "BCG",
-          "incorporated": 111,
-          "marketCap": 111,
-          "totalDebt": 111,
-          "average_totalDebt": 0,
+          "companyFoundedYear": 111,
+          "marketCapInRsCr": 111,
+          "totalDebtInRsCr": 111,
           "promoterOwnership": 111,
-          "average_promoterOwnership": 50,
           "firstInvestmentDate": "111",
 
           "givesDividend": false,
           "subItems": [
             {
-              "folio": "Varsha - Zerodha",
               "investedValue": 130255,
               "currentValue": 111571,
-              "goal": "2050"
+              "folio": "Varsha - Zerodha",
+              "goal": "retirement"
             }
           ]
         },
@@ -211,31 +161,32 @@
           "label": "Berger Paints",
           "shortName": "Berger",
           "symbol": "BERGEPAINT",
-          "incorporated": 1923,
-          "marketCap": 68932.81,
-          "totalDebt": 535.89,
-          "average_totalDebt": 0,
+          "companyFoundedYear": 1923,
+          "marketCapInRsCr": 68932.81,
+          "totalDebtInRsCr": 535.89,
+          "average_totalDebtInRsCr": 0,
           "promoterOwnership": 74.98,
-          "average_promoterOwnership": 50,
           "firstInvestmentDate": "111",
 
           "givesDividend": false,
           "subItems": [
             {
-              "folio": "Varsha - Zerodha",
               "investedValue": 4552,
               "currentValue": 6575,
-              "goal": "2050"
+              "folio": "Varsha - Zerodha",
+              "goal": "retirement"
             }
           ]
         }
       ]
     },
     {
+      "absoluteValue": 0,
       "id": 3,
       "label": "PPF",
       "value": 0,
       "color": "#5cb85c",
+      "expenseRatio": 0,
       "note": "This category is an exception. We have intensionally kept year data as separate item for better analysis.",
       "items": [
         {
@@ -248,10 +199,10 @@
           "fundHouse": "ppf",
           "subItems": [
             {
-              "folio": "Yuvraj-SBI",
               "investedValue": 202200,
               "currentValue": 258220,
-              "goal": "2050"
+              "folio": "Yuvraj-SBI",
+              "goal": "retirement"
             }
           ]
         },
@@ -265,16 +216,17 @@
           "fundHouse": "ppf",
           "subItems": [
             {
-              "folio": "Yuvraj-SBI",
               "investedValue": 20220,
               "currentValue": 30228,
-              "goal": "2050"
+              "folio": "Yuvraj-SBI",
+              "goal": "retirement"
             }
           ]
         }
       ]
     },
     {
+      "absoluteValue": 0,
       "id": 4,
       "label": "Virtual Gold",
       "value": 0,
@@ -296,69 +248,71 @@
           "fundSize": 0,
           "subItems": [
             {
-              "folio": "",
               "investedValue": 124761,
               "currentValue": 124761,
-              "goal": "2050"
+              "folio": "",
+              "goal": "retirement"
             }
           ]
         }
       ]
     },
     {
+      "absoluteValue": 0,
       "id": 5,
       "label": "EPF",
       "value": 0,
       "color": "green",
+      "expenseRatio": 0,
       "items": [
         {
+          "absoluteValue": 0,
           "id": 1,
           "label": "EPF @ e-Zest",
           "shortName": "e-Zest",
           "launchDate": "111",
           "firstInvestmentDate": "111",
-
           "fundHouse": "epf",
           "subItems": [
             {
-              "folio": "Yuvraj-EPF",
               "investedValue": 22534,
               "currentValue": 26367,
-              "goal": "2050"
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement"
             }
           ]
         },
         {
+          "absoluteValue": 0,
           "id": 2,
           "label": "EPF @ Globant",
           "shortName": "Globant",
           "launchDate": "111",
           "firstInvestmentDate": "111",
-
           "fundHouse": "epf",
           "subItems": [
             {
-              "folio": "Yuvraj-EPF",
               "investedValue": 70496,
               "currentValue": 70592,
-              "goal": "2050"
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement"
             }
           ]
         },
         {
-          "id": 4,
+          "absoluteValue": 0,
+          "id": 3,
           "label": "EPF @ WU",
           "shortName": "WU",
           "launchDate": "111",
           "firstInvestmentDate": "111",
-
           "fundHouse": "epf",
           "subItems": [
             {
-              "folio": "Yuvraj-EPF",
               "investedValue": 97441,
               "currentValue": 98205,
-              "goal": "2050"
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement"
             }
           ]
         }

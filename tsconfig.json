@@ -23,10 +23,15 @@
       "$/components/*": ["components/*"],
       "$/constants/*": ["constants/*"],
       "$/services/*": ["services/*"],
-
       "$/dashboard/*": ["pages/dashboard/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "build/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

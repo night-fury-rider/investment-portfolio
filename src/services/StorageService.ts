@@ -1,6 +1,8 @@
 // This file is inteneded to contain data storage related services.
 // Use wrapper for every method in such a way that if in future we need to change the storage vendor, changes should happpen in this file only.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const StorageService = (() => {
   let storage: any = null;
   const init = () => {
@@ -9,7 +11,7 @@ const StorageService = (() => {
     }
   };
 
-  const get = (storeKey: string, storedValueType?: any) => {
+  const get = (storeKey: string) => {
     if (storage === null) {
       return "";
     }

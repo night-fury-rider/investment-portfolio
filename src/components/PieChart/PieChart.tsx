@@ -3,6 +3,8 @@ import React from "react";
 import PieChartCentralTitle from "$/components/PieChart/PicChartCentralTitle";
 import { useMediaQuery, useTheme } from "@mui/material";
 import styles from "$/components/PieChart/PieChart.module.css";
+import APP_CONFIG from "$/constants/app.config.constants";
+import { DefaultRawDatum } from "@nivo/pie";
 
 const ResponsivePie = dynamic(
   () => import("@nivo/pie").then((m) => m.ResponsivePie),
@@ -10,7 +12,7 @@ const ResponsivePie = dynamic(
 );
 
 interface iPieChartProps {
-  data: any[];
+  data: DefaultRawDatum[];
   centralTitle?: string | number;
   handleSliceClick?: (param: number) => void;
   totalValue?: number;
@@ -31,8 +33,8 @@ const PieChart = ({
   const handleMouseLeave = () => {
     document.body.style.cursor = "default";
   };
-
-  const getLayers = (defaultLayers: any[]) => {
+  // eslint-disable-next-line
+  const getLayers = (defaultLayers: any[]): any[] => {
     const newLayers = [...defaultLayers, "arcs", "arcLabels", "legends"];
     if (!isMobile) {
       newLayers.push("arcLinkLabels");
@@ -41,7 +43,7 @@ const PieChart = ({
   };
 
   const margin = isMobile
-    ? { top: 20, right: 40, bottom: 60, left: 40 } // Mobile margin
+    ? { top: 20, right: 40, bottom: 20, left: 40 } // Mobile margin
     : { top: 40, right: 150, bottom: 100, left: 150 }; // Desktop margin
 
   return (
@@ -59,8 +61,8 @@ const PieChart = ({
         arcLinkLabel="label"
         arcLabel={({ data }) => {
           const totalAmount = totalValue || 0;
-
-          const { value } = data;
+          // eslint-disable-next-line
+          const { value } = data as any;
           const percentage = ((value / totalAmount) * 100).toFixed(1);
           return `${percentage}%`;
         }}
@@ -74,12 +76,14 @@ const PieChart = ({
           modifiers: [["darker", 0.6]],
         }}
         arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+        /* eslint-disable */
         layers={getLayers([
-          (props) =>
+          (props: any) =>
             centralTitle ? (
               <PieChartCentralTitle {...props} centralTitle={centralTitle} />
             ) : null,
         ])}
+        /* eslint-enable */
         onClick={(data) => {
           handleSliceClick?.(data?.arc?.index || 0);
         }}
@@ -90,6 +94,7 @@ const PieChart = ({
             text: {
               fontSize: 16,
               fontWeight: "bold",
+              fontFamily: APP_CONFIG.font.family,
             },
           },
         }}

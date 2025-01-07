@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Grid from "@mui/material/Grid2";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -9,30 +9,39 @@ import BarChart from "$/components/BarChart/BarChart";
 import PieChartLegands from "$/components/PieChart/PieChartLegands";
 
 import styles from "$/dashboard/dashboard.module.css";
-import { refineEntireData } from "./DashboardService";
+import { getBarChartData, refineEntireData } from "./DashboardService";
+import { iCategory } from "./dashboard.types";
+import { BarDatum } from "@nivo/bar";
 
 interface iDashboardPageProps {
-  data: any;
+  categories: iCategory[];
 }
 
-const DashboardPage = ({ data }: iDashboardPageProps) => {
+const DashboardPage = ({ categories }: iDashboardPageProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [refinedData, setRefinedData] = useState(data);
-  const [totalValue, setTotalValue] = useState(data?.value || 0);
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [refinedData, setRefinedData] = useState({
+    absoluteValue: 0,
+    value: 0,
+    categories,
+  });
+  const [barChartData, setBarChartData] = useState([] as BarDatum[]);
+  const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
-    setRefinedData(refineEntireData(data));
-  }, [data]);
+    setRefinedData(refineEntireData(categories));
+  }, [categories]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);
+    setBarChartData(getBarChartData(refinedData.categories[0]?.items || []));
   }, [refinedData]);
 
   const handleSliceClick = (index: number) => {
-    setSelectedCategoryIndex(index);
+    setBarChartData(
+      getBarChartData(refinedData.categories[index]?.items || [])
+    );
   };
 
   return (
@@ -53,7 +62,17 @@ const DashboardPage = ({ data }: iDashboardPageProps) => {
             />
           </Box>
           {/* Pie Chart Legands -- Display on mobile only */}
-          {isMobile ? <PieChartLegands data={refinedData.categories} /> : null}
+          {isMobile ? (
+            <>
+              <div className={styles.legandContainer}>
+                {categories.map((item: iCategory) => (
+                  <React.Fragment key={`${item.label}_${item.color}`}>
+                    <PieChartLegands color={item.color} label={item.label} />
+                  </React.Fragment>
+                ))}
+              </div>
+            </>
+          ) : null}
         </Grid>
       ) : null}
 
@@ -61,9 +80,7 @@ const DashboardPage = ({ data }: iDashboardPageProps) => {
       {refinedData?.categories?.length > 0 ? (
         <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Box className={styles.chartContainer}>
-            <BarChart
-              data={refinedData.categories[selectedCategoryIndex]?.items}
-            />
+            <BarChart data={barChartData} />
           </Box>
         </Grid>
       ) : null}

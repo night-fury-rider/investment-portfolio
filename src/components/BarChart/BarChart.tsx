@@ -3,6 +3,9 @@ import React from "react";
 import { useMediaQuery, useTheme } from "@mui/material";
 
 import EmptyCustomTooltip from "$/components/EmptyCustomTooltip";
+import APP_CONFIG from "$/constants/app.config.constants";
+import { COLORS } from "$/constants/colors.constants";
+import { BarDatum } from "@nivo/bar";
 
 const ResponsiveBar = dynamic(
   () => import("@nivo/bar").then((m) => m.ResponsiveBar),
@@ -10,7 +13,7 @@ const ResponsiveBar = dynamic(
 );
 
 interface iBarChartProps {
-  data: any[];
+  data: BarDatum[];
 }
 
 const BarChart = ({ data }: iBarChartProps) => {
@@ -48,7 +51,7 @@ const BarChart = ({ data }: iBarChartProps) => {
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
-        colors={{ scheme: "category10" }}
+        colors={{ scheme: "nivo" }}
         colorBy="indexValue"
         borderRadius={5}
         borderWidth={2}
@@ -83,14 +86,32 @@ const BarChart = ({ data }: iBarChartProps) => {
         onMouseLeave={(bar, event) => handleMouseLeave(event)}
         role="application"
         ariaLabel="Yuvraj Patil Bar Chart"
-        barAriaLabel={(e) =>
-          e.id + ": " + e.formattedValue + " in country: " + e.indexValue
-        }
         tooltip={EmptyCustomTooltip}
         theme={{
+          // Apply font to the whole chart
+          axis: {
+            ticks: {
+              line: {
+                stroke: COLORS.greyLight,
+                strokeWidth: 1,
+              },
+              text: {
+                fontFamily: APP_CONFIG.font.family,
+                fontSize: 14,
+                fontWeight: "bold",
+              },
+            },
+          },
+          grid: {
+            line: {
+              stroke: COLORS.greyLight,
+              strokeWidth: 1,
+            },
+          },
           labels: {
             text: {
-              fontSize: 16,
+              fontFamily: APP_CONFIG.font.family,
+              fontSize: 14,
               fontWeight: "bold",
             },
           },

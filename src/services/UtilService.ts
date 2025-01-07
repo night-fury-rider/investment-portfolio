@@ -3,7 +3,7 @@
 import LoggerService from "./LoggerService";
 import APP_CONFIG from "constants/app.config.constants";
 
-const getClonedObject = (sourceObj: any) =>
+const getClonedObject = <T>(sourceObj: T): T =>
   JSON.parse(JSON.stringify(sourceObj));
 
 const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {

@@ -1,5 +1,5 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { iCategory } from "$/dashboard/dashboard.types";
+import { iCategory, iItem } from "$/dashboard/dashboard.types";
 import LoggerService from "services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "services/UtilService";
 
@@ -16,8 +16,7 @@ const getTotalAmount = (categories: iCategory[]) => {
   return getTotalAmountInSelectedUnit(totalAmount);
 };
 
-const refineEntireData = (data: any[], attr = "investedValue") => {
-  let categories = data.categories;
+const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
 
@@ -29,8 +28,11 @@ const refineEntireData = (data: any[], attr = "investedValue") => {
     for (let j = 0; j < categories[i].items.length; j++) {
       subCategoryTotal = 0;
       for (let k = 0; k < categories[i].items[j]?.subItems?.length; k++) {
-        categoryTotal += categories[i].items[j]?.subItems[k]?.[attr];
-        subCategoryTotal += categories[i].items[j]?.subItems[k]?.[attr];
+        if (attr === "investedValue" || attr === "currentValue") {
+          categoryTotal +=
+            categories[i]?.items?.[j]?.subItems?.[k]?.[attr] || 0;
+          subCategoryTotal += categories[i].items[j]?.subItems[k]?.[attr] || 0;
+        }
       }
       categories[i].items[j].value = getTotalAmountInSelectedUnit(
         subCategoryTotal,
@@ -49,14 +51,21 @@ const refineEntireData = (data: any[], attr = "investedValue") => {
   }
   /* Sorted categories based on the their absolute values */
   categories = categories.sort(
-    (a: any, b: any) => b?.absoluteValue - a?.absoluteValue
+    (a: iCategory, b: iCategory) => b?.absoluteValue - a?.absoluteValue
   );
 
-  data.categories = categories;
-  data.absoluteValue = absoluteValue;
-  data.value = Number(value.toFixed(APP_CONFIG.decimalPlaces));
-
-  return data;
+  return {
+    categories,
+    absoluteValue,
+    value: Number(value.toFixed(APP_CONFIG.decimalPlaces)),
+  };
 };
 
-export { getTotalAmount, refineEntireData };
+const getBarChartData = (barChartData: iItem[]) => {
+  return barChartData.map((barChartObj) => ({
+    label: barChartObj.label,
+    value: barChartObj.value,
+  }));
+};
+
+export { getBarChartData, getTotalAmount, refineEntireData };

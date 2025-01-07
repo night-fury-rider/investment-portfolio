@@ -2,18 +2,20 @@ import Header from "$/components/Header/Header";
 import { useState } from "react";
 import DashboardPage from "./DashboardPage";
 import data from "$/constants/data.json";
+import { ibmFont } from "app/fonts";
+import { iCategory } from "./dashboard.types";
 
 export default function Page() {
-  const [investments, setInvestments] = useState(data);
+  const [categories, setCategories] = useState(data.categories as iCategory[]);
 
   const updateData = (data: string) => {
-    setInvestments(JSON.parse(data));
+    setCategories(JSON.parse(data)?.categories || []);
   };
 
   return (
-    <>
+    <div className={ibmFont.className}>
       <Header updateData={updateData} />
-      <DashboardPage data={investments} />
-    </>
+      <DashboardPage categories={categories} />
+    </div>
   );
 }

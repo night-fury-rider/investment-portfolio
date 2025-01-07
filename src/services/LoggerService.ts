@@ -1,5 +1,7 @@
 // This file is inteneded to contain local logging related services. Currently it is not having any telemetry logging.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const LoggerService = (() => {
   const log = (message: any, ...otherMessages: any[]) => {
     console.log(

@@ -3,6 +3,9 @@
 const APP_CONFIG = {
   decimalPlaces: 2,
   unit: "Lakh",
+  font: {
+    family: "IBM Plex Serif",
+  },
 };
 
 export default APP_CONFIG;

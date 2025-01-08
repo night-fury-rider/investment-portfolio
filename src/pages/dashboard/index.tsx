@@ -1,7 +1,7 @@
 import Header from "$/components/Header/Header";
 import { useState } from "react";
 import DashboardPage from "./DashboardPage";
-import data from "$/constants/data.json";
+import data from "../../../public/data.json";
 import { ibmFont } from "app/fonts";
 import { iCategory } from "./dashboard.types";
 

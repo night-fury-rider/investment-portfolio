@@ -1,0 +1,272 @@
+{
+  "absoluteValue": 0,
+  "amc": {
+    "axis": {
+      "aum": 194828,
+      "label": "Axis Mutual Fund",
+      "launchDate": "04-Sep-2009",
+      "registrar": "KFin Tech"
+    }
+  },
+  "categories": [
+    {
+      "absoluteValue": 0,
+      "color": "orange",
+      "expenseRatio": 0,
+      "id": 1,
+      "items": [
+        {
+          "absoluteValue": 0,
+          "exitLoad": "0",
+          "expenseRatio": 1.87,
+          "firstInvestmentDate": "Dec-16",
+          "fundHouse": "birla",
+          "fundManagers": ["Ajay Garg"],
+          "fundSize": 516.53,
+          "id": 0,
+          "label": "ABSL Tax Plan",
+          "launchDate": "02-Jan-2013",
+          "notes": "Sort all keys alphabetically except subItems",
+          "rating": 4,
+          "returns": [
+            ["1", 40.2],
+            ["3", 5.29],
+            ["5", 11.92],
+            ["Since Inception", 14.89]
+          ],
+          "shortName": "ABSL",
+          "subItems": [
+            {
+              "currentValue": 180115,
+              "folio": "1018240099",
+              "goal": "retirement",
+              "investedValue": 100110
+            }
+          ],
+          "value": 0
+        }
+      ],
+      "label": "Mutual Fund",
+      "notes": "Value is meant for graphs. total is meant for calculations.",
+      "value": 0
+    },
+    {
+      "absoluteValue": 0,
+      "color": "red",
+      "expenseRatio": 0,
+      "id": 2,
+      "items": [
+        {
+          "absoluteValue": 0,
+          "companyFoundedYear": 111,
+          "firstInvestmentDate": "111",
+          "givesDividend": false,
+          "id": 1,
+          "label": "Brightcom",
+          "marketCapInRsCr": 111,
+          "promoterOwnership": 111,
+          "shortName": "BCG",
+          "subItems": [
+            {
+              "currentValue": 111571,
+              "folio": "Zerodha",
+              "goal": "retirement",
+              "investedValue": 130255
+            }
+          ],
+          "symbol": "BCG",
+          "totalDebtInRsCr": 111
+        }
+      ],
+      "label": "Shares",
+      "notes": "Value is meant for graphs. total is meant for calculations.",
+      "value": 0
+    },
+    {
+      "absoluteValue": 0,
+      "color": "#5cb85c",
+      "expenseRatio": 0,
+      "id": 3,
+      "items": [
+        {
+          "firstInvestmentDate": "111",
+          "fundHouse": "ppf",
+          "id": 0,
+          "label": "PPF 2015-16",
+          "launchDate": "111",
+          "shortName": "PPF 15",
+          "subItems": [
+            {
+              "currentValue": 258220,
+              "folio": "Yuvraj-SBI",
+              "goal": "retirement",
+              "investedValue": 202200
+            }
+          ]
+        },
+        {
+          "firstInvestmentDate": "111",
+          "fundHouse": "ppf",
+          "id": 1,
+          "label": "PPF 2016-17",
+          "launchDate": "111",
+          "shortName": "PPF 16",
+          "subItems": [
+            {
+              "currentValue": 30228,
+              "folio": "Yuvraj-SBI",
+              "goal": "retirement",
+              "investedValue": 20220
+            }
+          ]
+        }
+      ],
+      "label": "PPF",
+      "notes": "This category is an exception. We have intensionally kept year data as separate item for better analysis.",
+      "value": 0
+    },
+    {
+      "absoluteValue": 0,
+      "color": "gold",
+      "expenseRatio": 0,
+      "id": 4,
+      "items": [
+        {
+          "exitLoad": "0",
+          "expenseRatio": 0,
+          "firstInvestmentDate": "Nov-21",
+          "fundHouse": "sbi",
+          "fundManagers": ["RBI"],
+          "fundSize": 0,
+          "id": 1,
+          "label": "Sovereign Gold Bond",
+          "launchDate": "Nov-2015",
+          "rating": 4,
+          "returns": [],
+          "shortName": "Sovereign Gold",
+          "subItems": [
+            {
+              "currentValue": 12345,
+              "folio": "",
+              "goal": "retirement",
+              "investedValue": 124761
+            }
+          ]
+        }
+      ],
+      "label": "Gold",
+      "notes": "Sort all keys alphabetically except items. value is meant for graphs. total is meant for calculations.",
+      "value": 0
+    },
+    {
+      "absoluteValue": 0,
+      "color": "green",
+      "expenseRatio": 0,
+      "id": 5,
+      "items": [
+        {
+          "absoluteValue": 0,
+          "firstInvestmentDate": "111",
+          "fundHouse": "epf",
+          "id": 1,
+          "label": "e-Zest",
+          "launchDate": "111",
+          "shortName": "e-Zest",
+          "subItems": [
+            {
+              "currentValue": 26367,
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement",
+              "investedValue": 22534
+            }
+          ]
+        },
+        {
+          "absoluteValue": 0,
+          "firstInvestmentDate": "111",
+          "fundHouse": "epf",
+          "id": 2,
+          "label": "Globant",
+          "launchDate": "111",
+          "shortName": "Globant",
+          "subItems": [
+            {
+              "currentValue": 70592,
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement",
+              "investedValue": 70496
+            }
+          ]
+        },
+        {
+          "absoluteValue": 0,
+          "firstInvestmentDate": "111",
+          "fundHouse": "epf",
+          "id": 3,
+          "label": "WU",
+          "launchDate": "111",
+          "shortName": "WU",
+          "subItems": [
+            {
+              "currentValue": 98205,
+              "folio": "Yuvraj-EPF",
+              "goal": "retirement",
+              "investedValue": 97441
+            }
+          ]
+        }
+      ],
+      "label": "EPF",
+      "notes": "Sort all keys alphabetically except items. value is meant for graphs. total is meant for calculations.",
+      "value": 0
+    }
+  ],
+  "config": {
+    "font": "medium"
+  },
+  "goals": {
+    "dhruv": {
+      "collection": 0,
+      "isOnTrack": true,
+      "label": "Dhruv Graduation",
+      "targetDate": "Jun-2036",
+      "targetValue": 200000
+    },
+    "graduation": {
+      "collection": 0,
+      "isOnTrack": true,
+      "label": "Graduation",
+      "targetDate": "Jun-2039",
+      "targetValue": 200000
+    },
+    "retirement": {
+      "collection": 0,
+      "isOnTrack": true,
+      "label": "Retirement",
+      "targetDate": "Dec-2050",
+      "targetValue": 200000
+    }
+  },
+  "pieConfig": {
+    "chart": {
+      "innerRadiusPercent": 30
+    },
+    "label": {
+      "width": 100,
+      "wrap": true
+    },
+    "series": {
+      "animation": {
+        "endAngle": -90
+      },
+      "categoryKey": "label",
+      "fillColorKey": "color",
+      "slices": {
+        "template": {
+          "cursorStyle": "pointer"
+        }
+      }
+    }
+  },
+  "value": 0
+}

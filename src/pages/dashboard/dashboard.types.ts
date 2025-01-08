@@ -11,7 +11,7 @@ export type iItem = {
   absoluteValue: number;
   id: number;
   label: string;
-  note: string;
+  notes: string[];
   value: number;
   subItems: iSubItem[];
   exitLoad?: string;
@@ -32,7 +32,7 @@ export type iCategory = {
   expenseRatio: number;
   id: number;
   label: string;
-  note: string;
+  notes: string;
   value: number;
   items: iItem[];
 };

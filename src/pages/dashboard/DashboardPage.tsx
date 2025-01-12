@@ -9,7 +9,11 @@ import BarChart from "$/components/BarChart/BarChart";
 import PieChartLegands from "$/components/PieChart/PieChartLegands";
 
 import styles from "$/dashboard/dashboard.module.css";
-import { getBarChartData, refineEntireData } from "./DashboardService";
+import {
+  getBarChartData,
+  getHighestItemIndex,
+  refineEntireData,
+} from "./DashboardService";
 import { iCategory, iSubItem } from "./dashboard.types";
 import { BarDatum } from "@nivo/bar";
 import Table from "$/components/Table/Table";
@@ -49,7 +53,6 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
   }, [refinedData]);
 
   useEffect(() => {
-    console.log();
     setInvestmentRows(
       refinedData.categories?.[selectedCategoryIndex]?.items?.[
         selectedItemIndex
@@ -59,6 +62,9 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
 
   const handlePieSliceClick = (index: number) => {
     setSelectedCategoryIndex(index);
+    setSelectedItemIndex(
+      getHighestItemIndex(refinedData.categories[index]?.items)
+    );
     setBarChartData(
       getBarChartData(refinedData.categories[index]?.items || [])
     );

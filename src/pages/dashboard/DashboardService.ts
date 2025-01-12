@@ -61,11 +61,27 @@ const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
   };
 };
 
-const getBarChartData = (barChartData: iItem[]) => {
-  return barChartData.map((barChartObj) => ({
+const getBarChartData = (barChartData: iItem[]) =>
+  barChartData.map((barChartObj) => ({
     label: barChartObj.label,
     value: barChartObj.value,
   }));
-};
 
-export { getBarChartData, getTotalAmount, refineEntireData };
+/**
+ * @description Finds the index of the item with the highest value in an array of items.
+ * @param {iItem[]} barChartData - An array of objects representing the data for a bar chart.
+ * @returns {number} The index of the item with the highest value in the `barChartData` array.
+ */
+const getHighestItemIndex = (barChartData: iItem[]) =>
+  barChartData.reduce(
+    (accumulator, currentObj, index) =>
+      currentObj.value > barChartData[accumulator].value ? index : accumulator,
+    0
+  );
+
+export {
+  getBarChartData,
+  getHighestItemIndex,
+  getTotalAmount,
+  refineEntireData,
+};

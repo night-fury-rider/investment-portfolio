@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
+import uvNumber from "@uv-tech/util/lib/uv-number";
+
 import { COMMON } from "$/constants/strings.constants";
 import { iColumn, iData, iOrder } from "./Table.types";
 import { getComparator, stableSort } from "./TableService";
@@ -74,6 +76,9 @@ const Table: React.FC<iTableProps> = ({
   };
 
   const sortedRows = stableSort(rows, getComparator(order, orderBy));
+
+  const getFormattedValue = (value: number | string, isNumeric: boolean) =>
+    isNumeric ? uvNumber.changeCurrencyFormat(Number(value)) : value;
 
   return (
     <Box sx={{ width: "100%", padding: 3 }}>
@@ -141,7 +146,7 @@ const Table: React.FC<iTableProps> = ({
                         key={column.id}
                         align={column.numeric ? "right" : "left"}
                       >
-                        {row[column.id]}
+                        {getFormattedValue(row[column.id], column.numeric)}
                       </TableCell>
                     ))}
                   </TableRowCustom>

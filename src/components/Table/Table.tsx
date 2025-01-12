@@ -67,7 +67,7 @@ const Table: React.FC<iTableProps> = ({
   rows = [],
   title = "",
 }) => {
-  const [order, setOrder] = useState<iOrder["order"]>("asc");
+  const [order, setOrder] = useState<iOrder["order"]>("desc");
   const [orderBy, setOrderBy] = useState<string>(columns[0]?.id || "");
 
   const handleRequestSort = (property: string, newOrder: "asc" | "desc") => {

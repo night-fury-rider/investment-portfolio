@@ -14,9 +14,10 @@ const ResponsiveBar = dynamic(
 
 interface iBarChartProps {
   data: BarDatum[];
+  handleBarClick?: (param: number) => void;
 }
 
-const BarChart = ({ data }: iBarChartProps) => {
+const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -81,6 +82,9 @@ const BarChart = ({ data }: iBarChartProps) => {
         labelTextColor={{
           from: "color",
           modifiers: [["darker", 1.6]],
+        }}
+        onClick={(data) => {
+          handleBarClick?.(data?.index || 0);
         }}
         onMouseEnter={(bar, event) => handleMouseEnter(event)}
         onMouseLeave={(bar, event) => handleMouseLeave(event)}

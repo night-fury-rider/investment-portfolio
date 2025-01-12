@@ -9,6 +9,7 @@ export const COMMON = {
     light: "light",
     dark: "dark",
   },
+  noData: "No data is available",
 };
 
 export const DASHBOARD = {
@@ -17,6 +18,9 @@ export const DASHBOARD = {
     upload: {
       title: "Update Data",
     },
+  },
+  table: {
+    title: "Investment Details",
   },
 };
 

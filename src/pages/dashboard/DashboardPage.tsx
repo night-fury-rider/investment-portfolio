@@ -10,8 +10,11 @@ import PieChartLegands from "$/components/PieChart/PieChartLegands";
 
 import styles from "$/dashboard/dashboard.module.css";
 import { getBarChartData, refineEntireData } from "./DashboardService";
-import { iCategory } from "./dashboard.types";
+import { iCategory, iSubItem } from "./dashboard.types";
 import { BarDatum } from "@nivo/bar";
+import Table from "$/components/Table/Table";
+import { COMMON, DASHBOARD } from "$/constants/strings.constants";
+import { COLORS } from "$/constants/colors.constants";
 
 interface iDashboardPageProps {
   categories: iCategory[];
@@ -27,6 +30,13 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
     categories,
   });
   const [barChartData, setBarChartData] = useState([] as BarDatum[]);
+  const [investmentRows, setInvestmentRows] = useState([] as iSubItem[]);
+
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(
+    0 as number
+  );
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+
   const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
@@ -38,10 +48,35 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
     setBarChartData(getBarChartData(refinedData.categories[0]?.items || []));
   }, [refinedData]);
 
-  const handleSliceClick = (index: number) => {
+  useEffect(() => {
+    console.log();
+    setInvestmentRows(
+      refinedData.categories?.[selectedCategoryIndex]?.items?.[
+        selectedItemIndex
+      ]?.subItems || []
+    );
+  }, [refinedData.categories, selectedCategoryIndex, selectedItemIndex]);
+
+  const handlePieSliceClick = (index: number) => {
+    setSelectedCategoryIndex(index);
     setBarChartData(
       getBarChartData(refinedData.categories[index]?.items || [])
     );
+  };
+
+  const handleBarClick = (index: number) => {
+    setSelectedItemIndex(index);
+  };
+
+  const columns = [
+    { id: "folio", label: "Folio", numeric: false },
+    { id: "goal", label: "Goal", numeric: false },
+    { id: "investedValue", label: "Invested Value", numeric: true },
+    { id: "currentValue", label: "Current Value", numeric: true },
+  ];
+
+  const headerStyles = {
+    backgroundColor: COLORS.blue,
   };
 
   return (
@@ -57,7 +92,7 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
             <PieChart
               data={refinedData.categories}
               centralTitle={totalValue || 0}
-              handleSliceClick={handleSliceClick}
+              handleSliceClick={handlePieSliceClick}
               totalValue={totalValue}
             />
           </Box>
@@ -80,7 +115,24 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
       {refinedData?.categories?.length > 0 ? (
         <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
           <Box className={styles.chartContainer}>
-            <BarChart data={barChartData} />
+            <BarChart data={barChartData} handleBarClick={handleBarClick} />
+          </Box>
+        </Grid>
+      ) : null}
+
+      {refinedData?.categories?.length > 0 ? (
+        <Grid
+          sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}
+          offset={{ xs: 0, sm: 0, md: 1, lg: 1 }}
+        >
+          <Box className={styles.chartContainer}>
+            <Table
+              columns={columns}
+              headerStyles={headerStyles}
+              noDataMsg={COMMON.noData}
+              rows={investmentRows}
+              title={DASHBOARD.table.title}
+            />
           </Box>
         </Grid>
       ) : null}

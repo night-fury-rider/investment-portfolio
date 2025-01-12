@@ -26,7 +26,7 @@
           "id": 0,
           "label": "ABSL Tax Plan",
           "launchDate": "02-Jan-2013",
-          "notes": "Sort all keys alphabetically except subItems",
+          "notes": [""],
           "rating": 4,
           "returns": [
             ["1", 40.2],
@@ -47,7 +47,10 @@
         }
       ],
       "label": "Mutual Fund",
-      "notes": "Value is meant for graphs. total is meant for calculations.",
+      "notes": [
+        "All keys are sorted alphabetically",
+        "Value is meant for graphs. absoluteValue is meant for calculations."
+      ],
       "value": 0
     },
     {
@@ -122,7 +125,7 @@
         }
       ],
       "label": "PPF",
-      "notes": "This category is an exception. We have intensionally kept year data as separate item for better analysis.",
+      "notes": [""],
       "value": 0
     },
     {
@@ -155,7 +158,7 @@
         }
       ],
       "label": "Gold",
-      "notes": "Sort all keys alphabetically except items. value is meant for graphs. total is meant for calculations.",
+      "notes": [""],
       "value": 0
     },
     {
@@ -217,7 +220,7 @@
         }
       ],
       "label": "EPF",
-      "notes": "Sort all keys alphabetically except items. value is meant for graphs. total is meant for calculations.",
+      "notes": [""],
       "value": 0
     }
   ],

@@ -11,9 +11,8 @@ export type iItem = {
   absoluteValue: number;
   id: number;
   label: string;
-  notes: string[];
-  value: number;
   subItems: iSubItem[];
+  value: number;
   exitLoad?: string;
   expenseRatio?: number;
   firstInvestmentDate?: string;
@@ -21,6 +20,7 @@ export type iItem = {
   fundManagers?: string[];
   fundSize?: number;
   launchDate?: string;
+  notes?: string[];
   rating?: number;
   returns?: [[string, number]];
   shortName?: string;
@@ -29,10 +29,10 @@ export type iItem = {
 export type iCategory = {
   absoluteValue: number;
   color: string;
-  expenseRatio: number;
   id: number;
-  label: string;
-  notes: string;
-  value: number;
   items: iItem[];
+  label: string;
+  value: number;
+  expenseRatio?: number;
+  notes?: string;
 };

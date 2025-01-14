@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 
 import Grid from "@mui/material/Grid2";
@@ -27,6 +27,7 @@ interface iDashboardPageProps {
 const DashboardPage = ({ categories }: iDashboardPageProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const secondRowRef = useRef<HTMLDivElement | null>(null);
 
   const [refinedData, setRefinedData] = useState({
     absoluteValue: 0,
@@ -72,6 +73,7 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
 
   const handleBarClick = (index: number) => {
     setSelectedItemIndex(index);
+    handleScrollToSecondRow();
   };
 
   const columns = [
@@ -83,6 +85,18 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
 
   const headerStyles = {
     backgroundColor: COLORS.blue,
+  };
+
+  /**
+   * @description Smoothly scrolls the page to the second row of the content.
+   */
+  const handleScrollToSecondRow = () => {
+    if (secondRowRef.current) {
+      secondRowRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
@@ -130,6 +144,7 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
         <Grid
           sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}
           offset={{ xs: 0, sm: 0, md: 1, lg: 1 }}
+          ref={secondRowRef}
         >
           <Box className={styles.chartContainer}>
             <Table

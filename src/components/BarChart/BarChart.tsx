@@ -1,11 +1,11 @@
+import { useMediaQuery, useTheme } from "@mui/material";
+import { BarDatum } from "@nivo/bar";
 import dynamic from "next/dynamic";
 import React from "react";
-import { useMediaQuery, useTheme } from "@mui/material";
 
-import EmptyCustomTooltip from "$/components/EmptyCustomTooltip";
+import EmptyTooltip from "$/components/Tooltip/EmptyTooltip";
 import APP_CONFIG from "$/constants/app.config.constants";
 import { COLORS } from "$/constants/colors.constants";
-import { BarDatum } from "@nivo/bar";
 
 const ResponsiveBar = dynamic(
   () => import("@nivo/bar").then((m) => m.ResponsiveBar),
@@ -90,7 +90,7 @@ const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
         onMouseLeave={(bar, event) => handleMouseLeave(event)}
         role="application"
         ariaLabel="Yuvraj Patil Bar Chart"
-        tooltip={EmptyCustomTooltip}
+        tooltip={EmptyTooltip}
         theme={{
           // Apply font to the whole chart
           axis: {

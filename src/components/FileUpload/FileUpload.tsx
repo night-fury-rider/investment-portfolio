@@ -1,6 +1,7 @@
-import React from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { UploadSharp } from "@mui/icons-material";
+import React from "react";
+
 import { COLORS } from "$/constants/colors.constants";
 
 interface iFileUploadProps {

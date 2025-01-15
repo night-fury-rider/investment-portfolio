@@ -1,7 +1,7 @@
 // It is inteneded to contain all local utility things like string operations, object manipulalations etc.
 
 import LoggerService from "./LoggerService";
-import APP_CONFIG from "constants/app.config.constants";
+import APP_CONFIG from "$/constants/app.config.constants";
 
 const getClonedObject = <T>(sourceObj: T): T =>
   JSON.parse(JSON.stringify(sourceObj));

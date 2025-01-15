@@ -1,9 +1,10 @@
-import React from "react";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
+import React from "react";
+
 import styles from "$/components/Header/Header.module.css";
-import { DASHBOARD } from "constants/strings.constants";
-import FileUpload from "../FileUpload";
+import FileUpload from "$/components/FileUpload/FileUpload";
 import { COLORS } from "$/constants/colors.constants";
+import { DASHBOARD } from "$/constants/strings.constants";
 
 interface iHeaderProps {
   updateData: (data: string) => void;

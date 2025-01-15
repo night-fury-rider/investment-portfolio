@@ -1,5 +1,5 @@
-import styles from "$/components/PieChart/PicChartCentralTitle.module.css";
 import { COLORS } from "$/constants/colors.constants";
+import styles from "$/components/PieChart/PicChartCentralTitle.module.css";
 
 interface iPieChartCentralTitleProps {
   centerX: number;

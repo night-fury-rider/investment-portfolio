@@ -1,10 +1,11 @@
+import { useMediaQuery, useTheme } from "@mui/material";
+import { DefaultRawDatum } from "@nivo/pie";
 import dynamic from "next/dynamic";
 import React from "react";
+
 import PieChartCentralTitle from "$/components/PieChart/PicChartCentralTitle";
-import { useMediaQuery, useTheme } from "@mui/material";
 import styles from "$/components/PieChart/PieChart.module.css";
 import APP_CONFIG from "$/constants/app.config.constants";
-import { DefaultRawDatum } from "@nivo/pie";
 
 const ResponsivePie = dynamic(
   () => import("@nivo/pie").then((m) => m.ResponsivePie),

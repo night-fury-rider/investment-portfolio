@@ -1,7 +1,7 @@
 import type { NextPageWithLayout } from "./_app";
 
 const Page: NextPageWithLayout = () => {
-  return <p>hello world</p>;
+  return <p>Welcome to the World of Investments</p>;
 };
 
 Page.getLayout = function getLayout() {

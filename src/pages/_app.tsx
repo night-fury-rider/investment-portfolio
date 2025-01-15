@@ -1,8 +1,9 @@
+import { ThemeProvider } from "@mui/material";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
+
 import "../app/globals.css";
-import { ThemeProvider } from "@mui/material";
 import theme from "app/theme";
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {

@@ -78,7 +78,8 @@
             }
           ],
           "symbol": "BCG",
-          "totalDebtInRsCr": 111
+          "totalDebtInRsCr": 111,
+          "value": 0
         }
       ],
       "label": "Shares",
@@ -105,7 +106,8 @@
               "goal": "retirement",
               "investedValue": 202200
             }
-          ]
+          ],
+          "value": 0
         },
         {
           "firstInvestmentDate": "111",
@@ -121,7 +123,8 @@
               "goal": "retirement",
               "investedValue": 20220
             }
-          ]
+          ],
+          "value": 0
         }
       ],
       "label": "PPF",
@@ -154,7 +157,8 @@
               "goal": "retirement",
               "investedValue": 124761
             }
-          ]
+          ],
+          "value": 0
         }
       ],
       "label": "Gold",
@@ -182,7 +186,8 @@
               "goal": "retirement",
               "investedValue": 22534
             }
-          ]
+          ],
+          "value": 0
         },
         {
           "absoluteValue": 0,
@@ -199,7 +204,8 @@
               "goal": "retirement",
               "investedValue": 70496
             }
-          ]
+          ],
+          "value": 0
         },
         {
           "absoluteValue": 0,
@@ -216,7 +222,8 @@
               "goal": "retirement",
               "investedValue": 97441
             }
-          ]
+          ],
+          "value": 0
         }
       ],
       "label": "EPF",

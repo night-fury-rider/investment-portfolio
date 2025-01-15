@@ -38,7 +38,7 @@
           "subItems": [
             {
               "currentValue": 180115,
-              "folio": "1018240099",
+              "folio": "12345",
               "goal": "retirement",
               "investedValue": 100110
             }
@@ -95,13 +95,13 @@
           "firstInvestmentDate": "111",
           "fundHouse": "ppf",
           "id": 0,
-          "label": "PPF 2015-16",
+          "label": "PPF 2015-20",
           "launchDate": "111",
           "shortName": "PPF 15",
           "subItems": [
             {
               "currentValue": 258220,
-              "folio": "Yuvraj-SBI",
+              "folio": "SBI",
               "goal": "retirement",
               "investedValue": 202200
             }
@@ -111,13 +111,13 @@
           "firstInvestmentDate": "111",
           "fundHouse": "ppf",
           "id": 1,
-          "label": "PPF 2016-17",
+          "label": "PPF 2021-25",
           "launchDate": "111",
-          "shortName": "PPF 16",
+          "shortName": "PPF 21",
           "subItems": [
             {
               "currentValue": 30228,
-              "folio": "Yuvraj-SBI",
+              "folio": "SBI",
               "goal": "retirement",
               "investedValue": 20220
             }
@@ -178,7 +178,7 @@
           "subItems": [
             {
               "currentValue": 26367,
-              "folio": "Yuvraj-EPF",
+              "folio": "EPF",
               "goal": "retirement",
               "investedValue": 22534
             }
@@ -195,7 +195,7 @@
           "subItems": [
             {
               "currentValue": 70592,
-              "folio": "Yuvraj-EPF",
+              "folio": "EPF",
               "goal": "retirement",
               "investedValue": 70496
             }
@@ -212,7 +212,7 @@
           "subItems": [
             {
               "currentValue": 98205,
-              "folio": "Yuvraj-EPF",
+              "folio": "EPF",
               "goal": "retirement",
               "investedValue": 97441
             }

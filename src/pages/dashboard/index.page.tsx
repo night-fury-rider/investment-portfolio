@@ -1,6 +1,6 @@
 import Header from "$/components/Header/Header";
 import { useState } from "react";
-import DashboardPage from "./DashboardPage";
+import Dashboard from "./Dashboard";
 import data from "../../../public/data.json";
 import { ibmFont } from "app/fonts";
 import { iCategory } from "./dashboard.types";
@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <div className={ibmFont.className}>
       <Header updateData={updateData} />
-      <DashboardPage categories={categories} />
+      <Dashboard categories={categories} />
     </div>
   );
 }

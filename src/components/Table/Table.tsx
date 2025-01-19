@@ -16,6 +16,7 @@ import { visuallyHidden } from "@mui/utils";
 import uvNumber from "@uv-tech/util/lib/uv-number";
 import React, { useState } from "react";
 
+import styles from "$/components/Table/Table.module.css";
 import { COMMON } from "$/constants/strings.constants";
 import { iColumn, iData, iOrder } from "./Table.types";
 import { getComparator, stableSort } from "./TableService";
@@ -81,7 +82,7 @@ const Table: React.FC<iTableProps> = ({
     isNumeric ? uvNumber.changeCurrencyFormat(Number(value)) : value;
 
   return (
-    <Box sx={{ width: "100%", padding: 3 }}>
+    <Box sx={{ width: "100%" }} className={styles.tableContainer}>
       <TableTitle variant="h4">{title}</TableTitle>
 
       <TableWrapper>

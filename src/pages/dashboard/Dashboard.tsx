@@ -20,11 +20,11 @@ import Table from "$/components/Table/Table";
 import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import { COLORS } from "$/constants/colors.constants";
 
-interface iDashboardPageProps {
+interface iDashboardProps {
   categories: iCategory[];
 }
 
-const DashboardPage = ({ categories }: iDashboardPageProps) => {
+const DashboardLite = ({ categories }: iDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const secondRowRef = useRef<HTMLDivElement | null>(null);
@@ -45,6 +45,8 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
   const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
+    setSelectedCategoryIndex(0);
+    setSelectedItemIndex(0);
     setRefinedData(refineEntireData(categories));
   }, [categories]);
 
@@ -100,65 +102,62 @@ const DashboardPage = ({ categories }: iDashboardPageProps) => {
   };
 
   return (
-    <Grid
-      container
-      rowSpacing={{ xs: 5, sm: 5, md: 20, lg: 20 }}
-      className={styles.gridContainer}
-    >
-      {/* Pie Chart */}
-      {refinedData?.categories?.length > 0 ? (
-        <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
-          <Box className={styles.chartContainer}>
-            <PieChart
-              data={refinedData.categories}
-              centralTitle={totalValue || 0}
-              handleSliceClick={handlePieSliceClick}
-              totalValue={totalValue}
-            />
-          </Box>
-          {/* Pie Chart Legands -- Display on mobile only */}
-          {isMobile ? (
-            <>
+    <>
+      <Grid
+        container
+        spacing={{ xs: 0, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {refinedData?.categories?.length > 0 ? (
+          <Grid size={{ xs: 4, sm: 8, md: 6 }}>
+            {/* Pie Chart */}
+            <Box className={styles.chartContainer}>
+              <PieChart
+                data={refinedData.categories}
+                centralTitle={totalValue || 0}
+                handleSliceClick={handlePieSliceClick}
+                totalValue={totalValue}
+              />
+            </Box>
+            {/* Pie Chart Legands -- Display on mobile only */}
+            {isMobile ? (
               <div className={styles.legandContainer}>
-                {categories.map((item: iCategory) => (
+                {refinedData?.categories.map((item: iCategory) => (
                   <React.Fragment key={`${item.label}_${item.color}`}>
                     <PieChartLegands color={item.color} label={item.label} />
                   </React.Fragment>
                 ))}
               </div>
-            </>
-          ) : null}
-        </Grid>
-      ) : null}
+            ) : null}
+          </Grid>
+        ) : null}
 
-      {/* Bar Chart Section */}
-      {refinedData?.categories?.length > 0 ? (
-        <Grid sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
-          <Box className={styles.chartContainer}>
-            <BarChart data={barChartData} handleBarClick={handleBarClick} />
-          </Box>
-        </Grid>
-      ) : null}
+        {/* Bar Chart */}
+        {refinedData?.categories?.length > 0 ? (
+          <Grid size={{ xs: 4, sm: 8, md: 6 }}>
+            <Box className={styles.chartContainer}>
+              <BarChart data={barChartData} handleBarClick={handleBarClick} />
+            </Box>
+          </Grid>
+        ) : null}
 
-      {refinedData?.categories?.length > 0 ? (
-        <Grid
-          sx={{ xs: 12, sm: 12, md: 6, lg: 6 }}
-          offset={{ xs: 0, sm: 0, md: 1, lg: 1 }}
-          ref={secondRowRef}
-        >
-          <Box className={styles.chartContainer}>
-            <Table
-              columns={columns}
-              headerStyles={headerStyles}
-              noDataMsg={COMMON.noData}
-              rows={investmentRows}
-              title={DASHBOARD.table.title}
-            />
-          </Box>
-        </Grid>
-      ) : null}
-    </Grid>
+        {/* Investment Table */}
+        {refinedData?.categories?.length > 0 ? (
+          <Grid size={{ xs: 4, sm: 4, md: 6 }}>
+            <Box>
+              <Table
+                columns={columns}
+                headerStyles={headerStyles}
+                noDataMsg={COMMON.noData}
+                rows={investmentRows}
+                title={DASHBOARD.table.title}
+              />
+            </Box>
+          </Grid>
+        ) : null}
+      </Grid>
+    </>
   );
 };
 
-export default DashboardPage;
+export default DashboardLite;

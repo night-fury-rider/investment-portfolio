@@ -1,0 +1,10 @@
+.tableContainer {
+  padding: 3;
+}
+
+/* Media queries for mobile devices */
+@media (max-width: 1024px) {
+  .tableContainer {
+    padding: 0;
+  }
+}

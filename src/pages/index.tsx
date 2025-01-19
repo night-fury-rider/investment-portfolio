@@ -1,6 +1,4 @@
-import type { NextPageWithLayout } from "./_app";
-
-const Page: NextPageWithLayout = () => {
+const Page = () => {
   return <p>Welcome to the World of Investments</p>;
 };
 

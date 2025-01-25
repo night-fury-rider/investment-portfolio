@@ -143,11 +143,7 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
 
         {/* Investment Table */}
         {refinedData?.categories?.length > 0 ? (
-          <Grid
-            size={{ xs: 4, sm: 4, md: 6 }}
-            offset={{ xs: 0, sm: 0, md: 1, lg: 1 }}
-            ref={secondRowRef}
-          >
+          <Grid size={{ xs: 4, sm: 4, md: 6 }} ref={secondRowRef}>
             <Box>
               <Table
                 columns={columns}

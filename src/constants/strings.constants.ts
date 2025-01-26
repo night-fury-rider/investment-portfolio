@@ -1,8 +1,6 @@
 // This file is intended to serve as the single source of truth for all strings/messages which are visible to user (including error messages)
 // Prefer keeping strings inside appropriate module objects
 
-import { title } from "process";
-
 export const COMMON = {
   errorsMsg: {
     itemNotFound: "Unable to find the item",

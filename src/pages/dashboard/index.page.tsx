@@ -6,14 +6,17 @@ import { ibmFont } from "app/fonts";
 import theme from "app/theme";
 import Header from "$/components/Header/Header";
 import Dashboard from "./Dashboard";
-import { ICategory, INewInvestment } from "./dashboard.types";
+import { ICategory, IGoal, INewInvestment } from "./dashboard.types";
 import AddInvestmentModal from "$/components/Modal/AddInvestmentModal";
 
 export default function Page() {
+  const [goals, setGoals] = useState(data.goals as IGoal[]);
   const [categories, setCategories] = useState(data.categories as ICategory[]);
 
   const updateData = (data: string) => {
-    setCategories(JSON.parse(data)?.categories || []);
+    const rawJSON = JSON.parse(data);
+    setGoals(rawJSON?.goals || []);
+    setCategories(rawJSON?.categories || []);
   };
 
   const [openAddInvestmentModal, setOpenAddInvestmentModal] =
@@ -27,6 +30,7 @@ export default function Page() {
     ].records.push({
       currentValue: newInvestment.amount,
       folio: newInvestment.folioName,
+      goal: goals[newInvestment.goalIndex].label,
       investedValue: newInvestment.amount,
     });
     setOpenAddInvestmentModal(false);
@@ -38,6 +42,7 @@ export default function Page() {
       <div className={ibmFont.className}>
         <AddInvestmentModal
           categories={categories}
+          goals={goals}
           open={openAddInvestmentModal}
           onClose={handleCloseAddInvestmentModal}
         />

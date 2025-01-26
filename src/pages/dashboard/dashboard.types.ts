@@ -10,11 +10,22 @@ type ICategory = {
   notes?: string[];
 };
 
+type IGoal = {
+  label: string;
+  collection?: number;
+  id?: number;
+  targetAmount?: number;
+  isOnTrack?: boolean;
+  notes?: string[];
+  targetDate?: string;
+};
+
 type INewInvestment = {
-  categoryIndex: number;
-  subCategoryIndex: number;
-  folioName: string;
   amount: number;
+  categoryIndex: number;
+  folioName: string;
+  goalIndex: number;
+  subCategoryIndex: number;
 };
 
 type ISubCategory = {
@@ -46,4 +57,11 @@ type ISubItem = {
 
 type IValueType = "investedValue" | "currentValue";
 
-export type { ICategory, INewInvestment, ISubCategory, ISubItem, IValueType };
+export type {
+  ICategory,
+  IGoal,
+  INewInvestment,
+  ISubCategory,
+  ISubItem,
+  IValueType,
+};

@@ -260,29 +260,26 @@
   "config": {
     "font": "medium"
   },
-  "goals": {
-    "dhruv": {
+  "goals": [
+    {
       "collection": 0,
-      "isOnTrack": true,
-      "label": "Dhruv Graduation",
-      "targetDate": "Jun-2036",
-      "targetValue": 200000
-    },
-    "graduation": {
-      "collection": 0,
+      "id": 1,
       "isOnTrack": true,
       "label": "Graduation",
-      "targetDate": "Jun-2039",
-      "targetValue": 200000
+      "notes": [""],
+      "targetAmount": 2000000,
+      "targetDate": "Jun-2030"
     },
-    "retirement": {
+    {
       "collection": 0,
+      "id": 1,
       "isOnTrack": true,
       "label": "Retirement",
-      "targetDate": "Dec-2050",
-      "targetValue": 200000
+      "notes": [""],
+      "targetAmount": 2000000,
+      "targetDate": "Jun-2030"
     }
-  },
+  ],
   "pieConfig": {
     "chart": {
       "innerRadiusPercent": 30

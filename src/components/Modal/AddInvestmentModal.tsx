@@ -16,49 +16,23 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { DASHBOARD } from "$/constants/strings.constants";
-import { INewInvestment } from "$/dashboard/dashboard.types";
+import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
 
-interface AddInvestmentModalProps {
-  categories: {
-    absoluteValue: number;
-    color: string;
-    expenseRatio?: number;
-    id: number;
-    label: string;
-    subCategories: {
-      absoluteValue: number;
-      exitLoad?: string;
-      expenseRatio?: number;
-      firstInvestmentDate?: string;
-      fundHouse?: string;
-      fundSize?: number;
-      id: number;
-      label: string;
-      notes?: string[];
-      rating?: number;
-      returns?: Array<[string, number]>;
-      shortName?: string;
-      records: {
-        currentValue?: number;
-        folio: string;
-        goal?: string;
-        investedValue: number;
-      }[];
-      value: number;
-    }[];
-    notes?: string[];
-    value: number;
-  }[];
+interface IAddInvestmentModalProps {
+  categories: ICategory[];
+  goals: IGoal[];
   open: boolean;
   onClose: (newInvestment: INewInvestment) => void;
 }
 
-const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
+const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
   categories,
+  goals,
   open,
   onClose,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | "">("");
+  const [selectedGoal, setSelectedGoal] = useState<number | "">("");
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | "">(
     ""
   );
@@ -69,6 +43,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
   useEffect(() => {
     if (open) {
       setSelectedCategory("");
+      setSelectedGoal("");
       setSelectedSubCategory("");
       setFolioName("");
       setAmount("");
@@ -78,6 +53,10 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
   const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
     setSelectedCategory(event.target.value as number);
     setSelectedSubCategory("");
+  };
+
+  const handleGoalChange = (event: SelectChangeEvent<unknown>) => {
+    setSelectedGoal(event.target.value as number);
   };
 
   const handleSubCategoryChange = (event: SelectChangeEvent<unknown>) => {
@@ -96,15 +75,17 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
 
   const handleClose = () => {
     onClose({
-      categoryIndex: Number(selectedCategory),
-      subCategoryIndex: Number(selectedSubCategory),
-      folioName,
       amount: Number(amount),
+      categoryIndex: Number(selectedCategory),
+      folioName,
+      goalIndex: Number(selectedGoal),
+      subCategoryIndex: Number(selectedSubCategory),
     });
   };
 
   const isFormValid = () =>
     selectedCategory !== "" &&
+    selectedGoal !== "" &&
     selectedSubCategory !== "" &&
     selectedSubCategory !== null &&
     selectedSubCategory !== undefined &&
@@ -137,6 +118,31 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
             {DASHBOARD.addInvestment.title}
           </Typography>
 
+          {/* Goal Dropdown */}
+          <FormControl fullWidth sx={styles.dropdownForm}>
+            <InputLabel id="goal-label" sx={styles.dropdownLable}>
+              {DASHBOARD.addInvestment.goal}
+            </InputLabel>
+            <Select
+              labelId="goal-label"
+              value={selectedGoal}
+              label={DASHBOARD.addInvestment.goal}
+              onChange={handleGoalChange}
+              MenuProps={{
+                PaperProps: {
+                  style: styles.dropdownMenuProps,
+                },
+              }}
+              sx={styles.dropdownSelect}
+            >
+              {goals.map((goal, index) => (
+                <MenuItem key={goal.id} value={index}>
+                  {goal.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           {/* Category Dropdown */}
           <FormControl fullWidth sx={styles.dropdownForm}>
             <InputLabel id="category-label" sx={styles.dropdownLable}>
@@ -145,7 +151,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
             <Select
               labelId="category-label"
               value={selectedCategory}
-              label="Investment Category"
+              label={DASHBOARD.addInvestment.category}
               onChange={handleCategoryChange}
               MenuProps={{
                 PaperProps: {
@@ -171,7 +177,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
               <Select
                 labelId="subcategory-label"
                 value={selectedSubCategory}
-                label="Investment Sub-Category"
+                label={DASHBOARD.addInvestment.subCategory}
                 onChange={handleSubCategoryChange}
                 MenuProps={{
                   PaperProps: {

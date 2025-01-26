@@ -20,6 +20,7 @@ export const DASHBOARD = {
     amount: "Amount",
     category: "Category",
     folio: "Folio Name",
+    goal: "Goal",
     subCategory: "Sub-Category",
     successDialog: {
       buttonClose: "Close",

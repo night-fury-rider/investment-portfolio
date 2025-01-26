@@ -8,6 +8,14 @@ const nextConfig = {
     // your project has ESLint errors.
     // ignoreDuringBuilds: true,
   },
+  basePath:
+    process.env.NODE_ENV === "production"
+      ? "/analyzers/investments-v2"
+      : undefined,
+  assetPrefix:
+    process.env.NODE_ENV === "production"
+      ? "/analyzers/investments-v2/"
+      : undefined,
 };
 
 export default nextConfig;

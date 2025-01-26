@@ -16,6 +16,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { DASHBOARD } from "$/constants/strings.constants";
+import { INewInvestment } from "$/dashboard/dashboard.types";
 
 interface AddInvestmentModalProps {
   categories: {
@@ -37,7 +38,7 @@ interface AddInvestmentModalProps {
       rating?: number;
       returns?: Array<[string, number]>;
       shortName?: string;
-      subItems: {
+      records: {
         currentValue?: number;
         folio: string;
         goal?: string;
@@ -49,7 +50,7 @@ interface AddInvestmentModalProps {
     value: number;
   }[];
   open: boolean;
-  onClose: () => void;
+  onClose: (newInvestment: INewInvestment) => void;
 }
 
 const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
@@ -76,7 +77,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
 
   const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
     setSelectedCategory(event.target.value as number);
-    setSelectedSubCategory(""); // Reset sub-category when category changes
+    setSelectedSubCategory("");
   };
 
   const handleSubCategoryChange = (event: SelectChangeEvent<unknown>) => {
@@ -94,7 +95,12 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
   };
 
   const handleClose = () => {
-    onClose();
+    onClose({
+      categoryIndex: Number(selectedCategory),
+      subCategoryIndex: Number(selectedSubCategory),
+      folioName,
+      amount: Number(amount),
+    });
   };
 
   const isFormValid = () =>
@@ -118,9 +124,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
   };
 
   // Get subCategories for selectedCategory
-  const selectedCategoryObj = categories.find(
-    (category) => category.id === selectedCategory
-  );
+  const selectedCategoryObj = categories[Number(selectedCategory)];
   const subCategoryOptions = selectedCategoryObj
     ? selectedCategoryObj.subCategories
     : [];
@@ -150,8 +154,8 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
               }}
               sx={styles.dropdownSelect}
             >
-              {categories.map((category) => (
-                <MenuItem key={category.id} value={category.id}>
+              {categories.map((category, index) => (
+                <MenuItem key={category.id} value={index}>
                   {category.label}
                 </MenuItem>
               ))}
@@ -159,7 +163,7 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
           </FormControl>
 
           {/* Sub-category Dropdown */}
-          {selectedCategory && subCategoryOptions.length > 0 && (
+          {selectedCategory !== "" && subCategoryOptions.length > 0 && (
             <FormControl fullWidth sx={styles.dropdownForm}>
               <InputLabel id="subcategory-label" sx={styles.dropdownLable}>
                 {DASHBOARD.addInvestment.subCategory}
@@ -176,8 +180,8 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({
                 }}
                 sx={styles.dropdownSelect}
               >
-                {subCategoryOptions.map((subCategory) => (
-                  <MenuItem key={subCategory.id} value={subCategory.id}>
+                {subCategoryOptions.map((subCategory, index) => (
+                  <MenuItem key={subCategory.id} value={index}>
                     {subCategory.label}
                   </MenuItem>
                 ))}

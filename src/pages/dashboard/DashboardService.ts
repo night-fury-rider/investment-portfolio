@@ -1,9 +1,9 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { iCategory, iSubCategory } from "$/dashboard/dashboard.types";
+import { ICategory, ISubCategory } from "$/dashboard/dashboard.types";
 import LoggerService from "services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "services/UtilService";
 
-const getTotalAmount = (categories: iCategory[]) => {
+const getTotalAmount = (categories: ICategory[]) => {
   if (!Array.isArray(categories)) {
     LoggerService.error(`Incorrect Number is passed for getting total amount`);
     return 0;
@@ -16,27 +16,45 @@ const getTotalAmount = (categories: iCategory[]) => {
   return getTotalAmountInSelectedUnit(totalAmount);
 };
 
-const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
+const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
 
   let value = 0;
   let absoluteValue = 0;
 
+  let currentCategory;
+  let currentSubCategory;
+  let currentRecord;
+
+  /* Interate through Categories */
   for (let i = 0; i < categories.length; i++) {
+    currentCategory = categories[i];
     categoryTotal = 0;
-    for (let j = 0; j < categories[i].subCategories.length; j++) {
+
+    /* Interate through Sub Categories */
+    for (let j = 0; j < currentCategory.subCategories.length; j++) {
+      currentSubCategory = currentCategory.subCategories[j];
+
       subCategoryTotal = 0;
-      for (
-        let k = 0;
-        k < categories[i].subCategories[j]?.subItems?.length;
-        k++
-      ) {
+
+      /* Interate through Records */
+      for (let k = 0; k < currentSubCategory?.records?.length; k++) {
+        currentRecord = currentSubCategory.records[k];
+
         if (attr === "investedValue" || attr === "currentValue") {
-          categoryTotal +=
-            categories[i]?.subCategories?.[j]?.subItems?.[k]?.[attr] || 0;
-          subCategoryTotal +=
-            categories[i].subCategories[j]?.subItems[k]?.[attr] || 0;
+          categoryTotal += currentRecord?.[attr] || 0;
+          subCategoryTotal += currentRecord?.[attr] || 0;
+        }
+        // Set Goal to record if not set.
+        if (currentRecord && !currentRecord?.goal) {
+          if (currentSubCategory.goal) {
+            currentRecord.goal = currentSubCategory.goal;
+          } else if (currentCategory.goal) {
+            currentRecord.goal = currentCategory.goal;
+          } else {
+            currentRecord.goal = "";
+          }
         }
       }
       categories[i].subCategories[j].value = getTotalAmountInSelectedUnit(
@@ -56,7 +74,7 @@ const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
   }
   /* Sorted categories based on the their absolute values */
   categories = categories.sort(
-    (a: iCategory, b: iCategory) => b?.absoluteValue - a?.absoluteValue
+    (a: ICategory, b: ICategory) => b?.absoluteValue - a?.absoluteValue
   );
 
   return {
@@ -66,7 +84,7 @@ const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
   };
 };
 
-const getBarChartData = (barChartData: iSubCategory[]) =>
+const getBarChartData = (barChartData: ISubCategory[]) =>
   barChartData.map((barChartObj) => ({
     label: barChartObj.label,
     value: barChartObj.value,
@@ -74,10 +92,10 @@ const getBarChartData = (barChartData: iSubCategory[]) =>
 
 /**
  * @description Finds the index of the item with the highest value in an array of subCategories.
- * @param {iSubCategory[]} barChartData - An array of objects representing the data for a bar chart.
+ * @param {ISubCategory[]} barChartData - An array of objects representing the data for a bar chart.
  * @returns {number} The index of the item with the highest value in the `barChartData` array.
  */
-const getHighestItemIndex = (barChartData: iSubCategory[]) =>
+const getHighestItemIndex = (barChartData: ISubCategory[]) =>
   barChartData.reduce(
     (accumulator, currentObj, index) =>
       currentObj.value > barChartData[accumulator].value ? index : accumulator,

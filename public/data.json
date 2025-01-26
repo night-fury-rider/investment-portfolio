@@ -13,6 +13,7 @@
       "absoluteValue": 0,
       "color": "orange",
       "expenseRatio": 0,
+      "goal": "retirement",
       "id": 1,
       "subCategories": [
         {
@@ -35,12 +36,40 @@
             ["Since Inception", 14.89]
           ],
           "shortName": "ABSL",
-          "subItems": [
+          "records": [
             {
               "currentValue": 180115,
               "folio": "12345",
-              "goal": "retirement",
               "investedValue": 100110
+            }
+          ],
+          "value": 0
+        },
+        {
+          "absoluteValue": 0,
+          "exitLoad": "0",
+          "expenseRatio": 1.87,
+          "firstInvestmentDate": "Dec-16",
+          "fundHouse": "axis",
+          "fundManagers": ["Ajay Garg"],
+          "fundSize": 516.53,
+          "id": 0,
+          "label": "Axis Tax Plan",
+          "launchDate": "02-Jan-2013",
+          "notes": [""],
+          "rating": 4,
+          "returns": [
+            ["1", 40.2],
+            ["3", 5.29],
+            ["5", 11.92],
+            ["Since Inception", 14.89]
+          ],
+          "shortName": "Axis",
+          "records": [
+            {
+              "currentValue": 202020,
+              "folio": "12345",
+              "investedValue": 202020
             }
           ],
           "value": 0
@@ -57,6 +86,7 @@
       "absoluteValue": 0,
       "color": "red",
       "expenseRatio": 0,
+      "goal": "retirement",
       "id": 2,
       "subCategories": [
         {
@@ -69,11 +99,10 @@
           "marketCapInRsCr": 111,
           "promoterOwnership": 111,
           "shortName": "BCG",
-          "subItems": [
+          "records": [
             {
               "currentValue": 111571,
               "folio": "Zerodha",
-              "goal": "retirement",
               "investedValue": 130255
             }
           ],
@@ -90,6 +119,7 @@
       "absoluteValue": 0,
       "color": "#5cb85c",
       "expenseRatio": 0,
+      "goal": "retirement",
       "id": 3,
       "subCategories": [
         {
@@ -99,11 +129,10 @@
           "label": "PPF 2015-20",
           "launchDate": "111",
           "shortName": "PPF 15",
-          "subItems": [
+          "records": [
             {
               "currentValue": 258220,
               "folio": "SBI",
-              "goal": "retirement",
               "investedValue": 202200
             }
           ],
@@ -116,11 +145,10 @@
           "label": "PPF 2021-25",
           "launchDate": "111",
           "shortName": "PPF 21",
-          "subItems": [
+          "records": [
             {
               "currentValue": 30228,
               "folio": "SBI",
-              "goal": "retirement",
               "investedValue": 20220
             }
           ],
@@ -150,7 +178,7 @@
           "rating": 4,
           "returns": [],
           "shortName": "Sovereign Gold",
-          "subItems": [
+          "records": [
             {
               "currentValue": 12345,
               "folio": "Sovereign Gold Bond",
@@ -169,6 +197,7 @@
       "absoluteValue": 0,
       "color": "green",
       "expenseRatio": 0,
+      "goal": "retirement",
       "id": 5,
       "subCategories": [
         {
@@ -179,11 +208,10 @@
           "label": "e-Zest",
           "launchDate": "111",
           "shortName": "e-Zest",
-          "subItems": [
+          "records": [
             {
               "currentValue": 26367,
               "folio": "EPF",
-              "goal": "retirement",
               "investedValue": 22534
             }
           ],
@@ -197,11 +225,10 @@
           "label": "Globant",
           "launchDate": "111",
           "shortName": "Globant",
-          "subItems": [
+          "records": [
             {
               "currentValue": 70592,
               "folio": "EPF",
-              "goal": "retirement",
               "investedValue": 70496
             }
           ],
@@ -215,11 +242,10 @@
           "label": "WU",
           "launchDate": "111",
           "shortName": "WU",
-          "subItems": [
+          "records": [
             {
               "currentValue": 98205,
               "folio": "EPF",
-              "goal": "retirement",
               "investedValue": 97441
             }
           ],

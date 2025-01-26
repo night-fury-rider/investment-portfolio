@@ -1,17 +1,27 @@
-export type iValueType = "investedValue" | "currentValue";
-
-export type iSubItem = {
-  folio: string;
-  investedValue: number;
-  currentValue?: number;
+type ICategory = {
+  absoluteValue: number;
+  color: string;
+  id: number;
+  subCategories: ISubCategory[];
+  label: string;
+  value: number;
+  expenseRatio?: number;
   goal?: string;
+  notes?: string[];
 };
 
-export type iSubCategory = {
+type INewInvestment = {
+  categoryIndex: number;
+  subCategoryIndex: number;
+  folioName: string;
+  amount: number;
+};
+
+type ISubCategory = {
   absoluteValue: number;
   id: number;
   label: string;
-  subItems: iSubItem[];
+  records: ISubItem[];
   value: number;
   exitLoad?: string;
   expenseRatio?: number;
@@ -19,6 +29,7 @@ export type iSubCategory = {
   fundHouse?: string;
   fundManagers?: string[];
   fundSize?: number;
+  goal?: string;
   launchDate?: string;
   notes?: string[];
   rating?: number;
@@ -26,13 +37,13 @@ export type iSubCategory = {
   shortName?: string;
 };
 
-export type iCategory = {
-  absoluteValue: number;
-  color: string;
-  id: number;
-  subCategories: iSubCategory[];
-  label: string;
-  value: number;
-  expenseRatio?: number;
-  notes?: string[];
+type ISubItem = {
+  folio: string;
+  investedValue: number;
+  currentValue?: number;
+  goal?: string;
 };
+
+type IValueType = "investedValue" | "currentValue";
+
+export type { ICategory, INewInvestment, ISubCategory, ISubItem, IValueType };

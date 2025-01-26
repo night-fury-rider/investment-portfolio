@@ -14,14 +14,14 @@ import {
   getHighestItemIndex,
   refineEntireData,
 } from "./DashboardService";
-import { iCategory, iSubItem } from "./dashboard.types";
+import { ICategory, ISubItem } from "./dashboard.types";
 import { BarDatum } from "@nivo/bar";
 import Table from "$/components/Table/Table";
 import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import { COLORS } from "$/constants/colors.constants";
 
 interface iDashboardProps {
-  categories: iCategory[];
+  categories: ICategory[];
 }
 
 const DashboardLite = ({ categories }: iDashboardProps) => {
@@ -35,7 +35,7 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
     categories,
   });
   const [barChartData, setBarChartData] = useState([] as BarDatum[]);
-  const [investmentRows, setInvestmentRows] = useState([] as iSubItem[]);
+  const [investmentRows, setInvestmentRows] = useState([] as ISubItem[]);
 
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(
     0 as number
@@ -61,7 +61,7 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
     setInvestmentRows(
       refinedData.categories?.[selectedCategoryIndex]?.subCategories?.[
         selectedItemIndex
-      ]?.subItems || []
+      ]?.records || []
     );
   }, [refinedData.categories, selectedCategoryIndex, selectedItemIndex]);
 
@@ -124,7 +124,7 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
             {/* Pie Chart Legands -- Display on mobile only */}
             {isMobile ? (
               <div className={styles.legandContainer}>
-                {refinedData?.categories.map((item: iCategory) => (
+                {refinedData?.categories.map((item: ICategory) => (
                   <React.Fragment key={`${item.label}_${item.color}`}>
                     <PieChartLegands color={item.color} label={item.label} />
                   </React.Fragment>

@@ -1,13 +1,13 @@
 export type iValueType = "investedValue" | "currentValue";
 
 export type iSubItem = {
+  folio: string;
   investedValue: number;
   currentValue?: number;
-  folio?: string;
   goal?: string;
 };
 
-export type iItem = {
+export type iSubCategory = {
   absoluteValue: number;
   id: number;
   label: string;
@@ -30,9 +30,9 @@ export type iCategory = {
   absoluteValue: number;
   color: string;
   id: number;
-  items: iItem[];
+  subCategories: iSubCategory[];
   label: string;
   value: number;
   expenseRatio?: number;
-  notes?: string;
+  notes?: string[];
 };

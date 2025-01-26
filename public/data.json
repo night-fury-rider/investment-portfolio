@@ -14,7 +14,7 @@
       "color": "orange",
       "expenseRatio": 0,
       "id": 1,
-      "items": [
+      "subCategories": [
         {
           "absoluteValue": 0,
           "exitLoad": "0",
@@ -58,7 +58,7 @@
       "color": "red",
       "expenseRatio": 0,
       "id": 2,
-      "items": [
+      "subCategories": [
         {
           "absoluteValue": 0,
           "companyFoundedYear": 111,
@@ -91,7 +91,7 @@
       "color": "#5cb85c",
       "expenseRatio": 0,
       "id": 3,
-      "items": [
+      "subCategories": [
         {
           "firstInvestmentDate": "111",
           "fundHouse": "ppf",
@@ -136,7 +136,7 @@
       "color": "gold",
       "expenseRatio": 0,
       "id": 4,
-      "items": [
+      "subCategories": [
         {
           "exitLoad": "0",
           "expenseRatio": 0,
@@ -170,7 +170,7 @@
       "color": "green",
       "expenseRatio": 0,
       "id": 5,
-      "items": [
+      "subCategories": [
         {
           "absoluteValue": 0,
           "firstInvestmentDate": "111",

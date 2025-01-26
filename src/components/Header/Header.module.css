@@ -13,7 +13,6 @@
   font-weight: 600;
 }
 
-.rightSideIcon {
-  display: "flex";
-  align-items: "center";
+.rightSideIconContainer {
+  display: flex;
 }

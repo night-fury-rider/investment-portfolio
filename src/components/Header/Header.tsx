@@ -1,4 +1,6 @@
-import { AppBar, Toolbar, Typography, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
 import React from "react";
 
 import styles from "$/components/Header/Header.module.css";
@@ -8,9 +10,10 @@ import { DASHBOARD } from "$/constants/strings.constants";
 
 interface iHeaderProps {
   updateData: (data: string) => void;
+  handleAddBtnPress?: () => void;
 }
 
-const Header = ({ updateData }: iHeaderProps) => {
+const Header = ({ updateData, handleAddBtnPress }: iHeaderProps) => {
   return (
     <AppBar
       position="sticky"
@@ -24,7 +27,17 @@ const Header = ({ updateData }: iHeaderProps) => {
         </Typography>
 
         {/* Right side  */}
-        <Box className={styles.rightSideIcon}>
+        <Box className={styles.rightSideIconContainer}>
+          <IconButton
+            color="inherit"
+            component="label"
+            sx={{
+              "&:hover": { backgroundColor: COLORS.whiteLight },
+            }}
+            onClick={handleAddBtnPress}
+          >
+            <AddIcon />
+          </IconButton>
           <FileUpload
             fileUploadCallback={updateData}
             title={DASHBOARD.header.upload.title}

@@ -52,12 +52,14 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
 
   useEffect(() => {
     setTotalValue(refinedData.value);
-    setBarChartData(getBarChartData(refinedData.categories[0]?.items || []));
+    setBarChartData(
+      getBarChartData(refinedData.categories[0]?.subCategories || [])
+    );
   }, [refinedData]);
 
   useEffect(() => {
     setInvestmentRows(
-      refinedData.categories?.[selectedCategoryIndex]?.items?.[
+      refinedData.categories?.[selectedCategoryIndex]?.subCategories?.[
         selectedItemIndex
       ]?.subItems || []
     );
@@ -66,10 +68,10 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
   const handlePieSliceClick = (index: number) => {
     setSelectedCategoryIndex(index);
     setSelectedItemIndex(
-      getHighestItemIndex(refinedData.categories[index]?.items)
+      getHighestItemIndex(refinedData.categories[index]?.subCategories)
     );
     setBarChartData(
-      getBarChartData(refinedData.categories[index]?.items || [])
+      getBarChartData(refinedData.categories[index]?.subCategories || [])
     );
   };
 

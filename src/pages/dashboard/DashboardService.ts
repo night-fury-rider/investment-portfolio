@@ -1,5 +1,5 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { iCategory, iItem } from "$/dashboard/dashboard.types";
+import { iCategory, iSubCategory } from "$/dashboard/dashboard.types";
 import LoggerService from "services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "services/UtilService";
 
@@ -25,20 +25,25 @@ const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
 
   for (let i = 0; i < categories.length; i++) {
     categoryTotal = 0;
-    for (let j = 0; j < categories[i].items.length; j++) {
+    for (let j = 0; j < categories[i].subCategories.length; j++) {
       subCategoryTotal = 0;
-      for (let k = 0; k < categories[i].items[j]?.subItems?.length; k++) {
+      for (
+        let k = 0;
+        k < categories[i].subCategories[j]?.subItems?.length;
+        k++
+      ) {
         if (attr === "investedValue" || attr === "currentValue") {
           categoryTotal +=
-            categories[i]?.items?.[j]?.subItems?.[k]?.[attr] || 0;
-          subCategoryTotal += categories[i].items[j]?.subItems[k]?.[attr] || 0;
+            categories[i]?.subCategories?.[j]?.subItems?.[k]?.[attr] || 0;
+          subCategoryTotal +=
+            categories[i].subCategories[j]?.subItems[k]?.[attr] || 0;
         }
       }
-      categories[i].items[j].value = getTotalAmountInSelectedUnit(
+      categories[i].subCategories[j].value = getTotalAmountInSelectedUnit(
         subCategoryTotal,
         APP_CONFIG.unit
       );
-      categories[i].items[j].absoluteValue = subCategoryTotal;
+      categories[i].subCategories[j].absoluteValue = subCategoryTotal;
     }
     categories[i].value = getTotalAmountInSelectedUnit(
       categoryTotal,
@@ -61,18 +66,18 @@ const refineEntireData = (categories: iCategory[], attr = "investedValue") => {
   };
 };
 
-const getBarChartData = (barChartData: iItem[]) =>
+const getBarChartData = (barChartData: iSubCategory[]) =>
   barChartData.map((barChartObj) => ({
     label: barChartObj.label,
     value: barChartObj.value,
   }));
 
 /**
- * @description Finds the index of the item with the highest value in an array of items.
- * @param {iItem[]} barChartData - An array of objects representing the data for a bar chart.
+ * @description Finds the index of the item with the highest value in an array of subCategories.
+ * @param {iSubCategory[]} barChartData - An array of objects representing the data for a bar chart.
  * @returns {number} The index of the item with the highest value in the `barChartData` array.
  */
-const getHighestItemIndex = (barChartData: iItem[]) =>
+const getHighestItemIndex = (barChartData: iSubCategory[]) =>
   barChartData.reduce(
     (accumulator, currentObj, index) =>
       currentObj.value > barChartData[accumulator].value ? index : accumulator,

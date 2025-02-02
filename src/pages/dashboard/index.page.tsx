@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { useState } from "react";
 
-import data from "../../../public/data.json";
+import data from "../../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
 import Header from "$/components/Header/Header";
@@ -48,6 +48,7 @@ export default function Page() {
         />
 
         <Header
+          investmentHREF="/investments"
           updateData={updateData}
           handleAddBtnPress={handleAddInvestment}
         />

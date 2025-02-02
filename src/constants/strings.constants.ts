@@ -1,7 +1,7 @@
 // This file is intended to serve as the single source of truth for all strings/messages which are visible to user (including error messages)
 // Prefer keeping strings inside appropriate module objects
 
-export const COMMON = {
+const COMMON = {
   errorsMsg: {
     itemNotFound: "Unable to find the item",
   },
@@ -12,7 +12,7 @@ export const COMMON = {
   noData: "No data is available",
 };
 
-export const DASHBOARD = {
+const DASHBOARD = {
   addInvestment: {
     addButtonLabel: "Add Investment",
     amount: "Amount",
@@ -27,18 +27,40 @@ export const DASHBOARD = {
     },
     title: "Add Investment",
   },
-  header: {
-    title: "Investment Portfolio",
-    upload: {
-      title: "Update Data",
-    },
-  },
   table: {
     title: "Investment Details",
   },
 };
 
-export const SETTINGS = {
+const HEADER = {
+  add: {
+    title: "Add",
+  },
+  home: {
+    title: "Home",
+  },
+  investments: {
+    title: "Investments",
+  },
+  title: "Investment Portfolio",
+  upload: {
+    title: "Update Data",
+  },
+};
+
+const INVESTMENT_RECORDS = {
+  category: "Category",
+  currentValue: "Current (₹)",
+  folio: "Folio",
+  goal: "Goal",
+  investedValue: "Invested (₹)",
+  subCategory: "Sub-Category",
+  title: "Investment Records",
+};
+
+const SETTINGS = {
   title: "Settings",
   appVersion: "App Version",
 };
+
+export { COMMON, DASHBOARD, HEADER, INVESTMENT_RECORDS, SETTINGS };

@@ -20,6 +20,16 @@ type IGoal = {
   targetDate?: string;
 };
 
+type IInvestmentRecord = {
+  id: number;
+  category: string;
+  currentValue: number;
+  folio: string;
+  goal: string;
+  investedValue: number;
+  subCategory: string;
+};
+
 type INewInvestment = {
   amount: number;
   categoryIndex: number;
@@ -60,6 +70,7 @@ type IValueType = "investedValue" | "currentValue";
 export type {
   ICategory,
   IGoal,
+  IInvestmentRecord,
   INewInvestment,
   ISubCategory,
   ISubItem,

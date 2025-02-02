@@ -16,3 +16,7 @@
 .rightSideIconContainer {
   display: flex;
 }
+
+.icon {
+  height: 24px;
+}

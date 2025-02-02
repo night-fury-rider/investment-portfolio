@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
@@ -43,9 +43,6 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
   return (
     <Container>
       <Box sx={styles.investmentContainerBox}>
-        <Typography variant="h4" gutterBottom>
-          {INVESTMENT_RECORDS.title}
-        </Typography>
         <div style={styles.gridContainer}>
           <DataGrid rows={rows} columns={columns} checkboxSelection />
         </div>

@@ -35,8 +35,6 @@ const prepareInvestmentRecords = (categories: ICategory[]) => {
     }
   }
 
-  console.log(result);
-
   return result;
 };
 

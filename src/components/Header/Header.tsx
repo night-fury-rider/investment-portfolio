@@ -20,12 +20,14 @@ interface iHeaderProps {
   updateData: (data: string) => void;
   handleAddBtnPress?: () => void;
   investmentHREF?: string;
+  title?: string;
 }
 
 const Header = ({
   updateData,
   handleAddBtnPress,
   investmentHREF,
+  title,
 }: iHeaderProps) => {
   return (
     <AppBar
@@ -54,7 +56,7 @@ const Header = ({
 
         {/*  Title */}
         <Typography variant="h6" className={styles.title}>
-          {HEADER.title}
+          {title || HEADER.title}
         </Typography>
 
         {/* Right side  */}

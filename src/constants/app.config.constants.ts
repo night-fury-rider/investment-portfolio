@@ -6,6 +6,9 @@ const APP_CONFIG = {
   font: {
     family: "IBM Plex Serif",
   },
+  sessionStorage: {
+    appData: "investmentData",
+  },
 };
 
 export default APP_CONFIG;

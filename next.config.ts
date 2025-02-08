@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
+
+const basePathOnServer =
+  process.env.NODE_ENV === "production"
+    ? "/analyzers/investments-v2"
+    : undefined;
+
 const nextConfig = {
   distDir: "build",
   output: "export",
@@ -8,14 +14,8 @@ const nextConfig = {
     // ignoreDuringBuilds: true,
   },
   /* Comment out basePath and assetPrefix for testing build before uploading to server */
-  basePath:
-    process.env.NODE_ENV === "production"
-      ? "/analyzers/investments-v2"
-      : undefined,
-  assetPrefix:
-    process.env.NODE_ENV === "production"
-      ? "/analyzers/investments-v2/"
-      : undefined,
+  basePath: basePathOnServer,
+  assetPrefix: basePathOnServer,
 };
 
 export default nextConfig;

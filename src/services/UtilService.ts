@@ -15,6 +15,7 @@ const getParsedObject = (sourceObj: string) => {
     result = JSON.parse(sourceObj);
   } catch (err) {
     LoggerService.error(`Error in getting parsed object: ${err}`);
+    return "";
   }
 
   return result;

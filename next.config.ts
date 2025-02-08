@@ -4,10 +4,10 @@ const nextConfig = {
   output: "export",
   pageExtensions: ["page.tsx", "page.ts", "page.jsx", "page.js"],
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
+    // To Ignore ESLint errors. DEPLOYMENT BUILD SHOULD NOT HAVE THIS FLAG ENABLED.
     // ignoreDuringBuilds: true,
   },
+  /* Comment out basePath and assetPrefix for testing build before uploading to server */
   basePath:
     process.env.NODE_ENV === "production"
       ? "/analyzers/investments-v2"

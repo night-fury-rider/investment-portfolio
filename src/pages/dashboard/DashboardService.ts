@@ -1,7 +1,11 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { ICategory, ISubCategory } from "$/dashboard/dashboard.types";
-import LoggerService from "services/LoggerService";
-import { getTotalAmountInSelectedUnit } from "services/UtilService";
+import {
+  ICategory,
+  ISubCategory,
+  IUploadData,
+} from "$/dashboard/dashboard.types";
+import LoggerService from "$/services/LoggerService";
+import { getTotalAmountInSelectedUnit } from "$/services/UtilService";
 
 const getTotalAmount = (categories: ICategory[]) => {
   if (!Array.isArray(categories)) {
@@ -34,7 +38,7 @@ const getHighestItemIndex = (barChartData: ISubCategory[]) =>
     0
   );
 
-const isDashboardDataValid = (dashboardData: any) => {
+const isDashboardDataValid = (dashboardData: IUploadData) => {
   let result;
 
   /***

@@ -3,8 +3,22 @@
 import LoggerService from "./LoggerService";
 import APP_CONFIG from "$/constants/app.config.constants";
 
+// TODO: Yuvraj Add this in util npm package
 const getClonedObject = <T>(sourceObj: T): T =>
   JSON.parse(JSON.stringify(sourceObj));
+
+// TODO: Yuvraj Add this in util npm package
+const getParsedObject = (sourceObj: string) => {
+  let result;
+
+  try {
+    result = JSON.parse(sourceObj);
+  } catch (err) {
+    LoggerService.error(`Error in getting parsed object: ${err}`);
+  }
+
+  return result;
+};
 
 const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
   if (isNaN(amount)) {
@@ -23,4 +37,4 @@ const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
   return Number(resultAmount.toFixed(APP_CONFIG.decimalPlaces));
 };
 
-export { getClonedObject, getTotalAmountInSelectedUnit };
+export { getClonedObject, getParsedObject, getTotalAmountInSelectedUnit };

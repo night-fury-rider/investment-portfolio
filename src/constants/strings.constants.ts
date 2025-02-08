@@ -32,6 +32,12 @@ const DASHBOARD = {
   },
 };
 
+const ERRORS = {
+  data: {
+    corrupt: "The upload data does not meet the required criteria.",
+  },
+};
+
 const HEADER = {
   add: {
     title: "Add",
@@ -63,4 +69,4 @@ const SETTINGS = {
   appVersion: "App Version",
 };
 
-export { COMMON, DASHBOARD, HEADER, INVESTMENT_RECORDS, SETTINGS };
+export { COMMON, DASHBOARD, ERRORS, HEADER, INVESTMENT_RECORDS, SETTINGS };

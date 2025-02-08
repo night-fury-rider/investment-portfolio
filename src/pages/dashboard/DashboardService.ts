@@ -16,6 +16,48 @@ const getTotalAmount = (categories: ICategory[]) => {
   return getTotalAmountInSelectedUnit(totalAmount);
 };
 
+const getBarChartData = (barChartData: ISubCategory[]) =>
+  barChartData.map((barChartObj) => ({
+    label: barChartObj.label,
+    value: barChartObj.value,
+  }));
+
+/**
+ * @description Finds the index of the item with the highest value in an array of subCategories.
+ * @param {ISubCategory[]} barChartData - An array of objects representing the data for a bar chart.
+ * @returns {number} The index of the item with the highest value in the `barChartData` array.
+ */
+const getHighestItemIndex = (barChartData: ISubCategory[]) =>
+  barChartData.reduce(
+    (accumulator, currentObj, index) =>
+      currentObj.value > barChartData[accumulator].value ? index : accumulator,
+    0
+  );
+
+const isDashboardDataValid = (dashboardData: any) => {
+  let result;
+
+  /***
+   * If data does not have valid
+   * - categories
+   * - goals
+   * - sub-categories
+   */
+
+  if (
+    !dashboardData?.categories ||
+    !Array.isArray(dashboardData.categories) ||
+    !dashboardData?.goals ||
+    !Array.isArray(dashboardData.goals) ||
+    !dashboardData?.categories[0].subCategories ||
+    !Array.isArray(dashboardData.categories[0].subCategories)
+  ) {
+    return result;
+  }
+
+  return dashboardData;
+};
+
 const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
@@ -33,7 +75,7 @@ const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
     categoryTotal = 0;
 
     /* Interate through Sub Categories */
-    for (let j = 0; j < currentCategory.subCategories.length; j++) {
+    for (let j = 0; j < currentCategory?.subCategories?.length; j++) {
       currentSubCategory = currentCategory.subCategories[j];
 
       subCategoryTotal = 0;
@@ -84,27 +126,10 @@ const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
   };
 };
 
-const getBarChartData = (barChartData: ISubCategory[]) =>
-  barChartData.map((barChartObj) => ({
-    label: barChartObj.label,
-    value: barChartObj.value,
-  }));
-
-/**
- * @description Finds the index of the item with the highest value in an array of subCategories.
- * @param {ISubCategory[]} barChartData - An array of objects representing the data for a bar chart.
- * @returns {number} The index of the item with the highest value in the `barChartData` array.
- */
-const getHighestItemIndex = (barChartData: ISubCategory[]) =>
-  barChartData.reduce(
-    (accumulator, currentObj, index) =>
-      currentObj.value > barChartData[accumulator].value ? index : accumulator,
-    0
-  );
-
 export {
   getBarChartData,
   getHighestItemIndex,
   getTotalAmount,
+  isDashboardDataValid,
   refineEntireData,
 };

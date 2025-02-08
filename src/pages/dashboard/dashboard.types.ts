@@ -65,6 +65,15 @@ type ISubItem = {
   goal?: string;
 };
 
+type IUploadData = {
+  absoluteValue: number;
+  amc: unknown;
+  categories: ICategory[];
+  config: unknown;
+  goals: IGoal[];
+  value: number;
+};
+
 type IValueType = "investedValue" | "currentValue";
 
 export type {
@@ -74,5 +83,6 @@ export type {
   INewInvestment,
   ISubCategory,
   ISubItem,
+  IUploadData,
   IValueType,
 };

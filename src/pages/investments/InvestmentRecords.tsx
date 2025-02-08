@@ -1,47 +1,30 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
-import { INVESTMENT_RECORDS } from "$/constants/strings.constants";
 import { ICategory, IInvestmentRecord } from "$/dashboard/dashboard.types";
-import { prepareInvestmentRecords } from "./InvestmentService";
+import {
+  getInvestmentColumns,
+  prepareInvestmentRecords,
+} from "./InvestmentService";
 
 interface IInvestmentRecordProps {
   categories: ICategory[];
 }
 
 const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [rows, setRows] = useState([] as IInvestmentRecord[]);
 
   useEffect(() => {
     setRows(prepareInvestmentRecords(categories));
   }, [categories]);
 
-  const columns: GridColDef[] = [
-    { field: "goal", headerName: INVESTMENT_RECORDS.goal, width: 200 },
-    { field: "category", headerName: INVESTMENT_RECORDS.category, width: 150 },
-    {
-      field: "subCategory",
-      headerName: INVESTMENT_RECORDS.subCategory,
-      width: 200,
-    },
-    { field: "folio", headerName: INVESTMENT_RECORDS.folio, width: 200 },
-    {
-      field: "investedValue",
-      headerName: INVESTMENT_RECORDS.investedValue,
-      width: 150,
-      type: "number",
-    },
-    {
-      field: "currentValue",
-      headerName: INVESTMENT_RECORDS.currentValue,
-      width: 150,
-      type: "number",
-    },
-  ];
+  const columns: GridColDef[] = getInvestmentColumns(isMobile) as GridColDef[];
 
   return (
-    <Container>
+    <Container sx={styles.container}>
       <Box sx={styles.investmentContainerBox}>
         <div style={styles.gridContainer}>
           <DataGrid rows={rows} columns={columns} checkboxSelection />
@@ -52,8 +35,13 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
 };
 
 const styles = {
+  container: {
+    maxWidth: "none !important",
+    width: "100%",
+    padding: 0,
+  },
   gridContainer: { height: 400, width: "100%" },
-  investmentContainerBox: { padding: "20px", textAlign: "center" },
+  investmentContainerBox: { paddingTop: "20px", textAlign: "center" },
 };
 
 export default InvestmentRecords;

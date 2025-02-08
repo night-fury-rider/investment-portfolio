@@ -47,7 +47,7 @@ const Header = ({
             <Link
               aria-label="home"
               className={styles.icon}
-              href="/dashboard"
+              href="/"
               style={{ color: "white" }}
             >
               <Home />

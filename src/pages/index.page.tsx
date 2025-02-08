@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { useState } from "react";
 
-import data from "../../../public/data/data.json";
+import data from "../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
 import Header from "$/components/Header/Header";
@@ -10,11 +10,11 @@ import Snackbar from "$/components/Snackbar/Snackbar";
 import { ERRORS } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
 import { getParsedObject } from "$/services/UtilService";
-import Dashboard from "./Dashboard";
-import { ICategory, IGoal, INewInvestment } from "./dashboard.types";
-import { isDashboardDataValid } from "./DashboardService";
+import Dashboard from "$/dashboard/Dashboard";
+import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
+import { isDashboardDataValid } from "$/dashboard/DashboardService";
 
-export default function Page() {
+const Page = () => {
   const [goals, setGoals] = useState(data.goals as IGoal[]);
   const [categories, setCategories] = useState(data.categories as ICategory[]);
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
@@ -79,4 +79,6 @@ export default function Page() {
       </div>
     </ThemeProvider>
   );
-}
+};
+
+export default Page;

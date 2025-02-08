@@ -280,26 +280,5 @@
       "targetDate": "Jun-2030"
     }
   ],
-  "pieConfig": {
-    "chart": {
-      "innerRadiusPercent": 30
-    },
-    "label": {
-      "width": 100,
-      "wrap": true
-    },
-    "series": {
-      "animation": {
-        "endAngle": -90
-      },
-      "categoryKey": "label",
-      "fillColorKey": "color",
-      "slices": {
-        "template": {
-          "cursorStyle": "pointer"
-        }
-      }
-    }
-  },
   "value": 0
 }

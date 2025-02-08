@@ -45,8 +45,9 @@ const Header = ({
             }}
           >
             <Link
-              href="/dashboard"
               aria-label="home"
+              className={styles.icon}
+              href="/dashboard"
               style={{ color: "white" }}
             >
               <Home />
@@ -72,10 +73,10 @@ const Header = ({
                 }}
               >
                 <Link
-                  href={investmentHREF}
                   aria-label="investments"
-                  style={{ color: "white" }}
                   className={styles.icon}
+                  href={investmentHREF}
+                  style={{ color: "white" }}
                 >
                   <Receipt />
                 </Link>

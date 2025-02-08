@@ -1,9 +1,0 @@
-#pieDiv {
-  height: 25em;
-}
-
-@media screen and (max-width: 767px) {
-  #pieDiv {
-    height: 40em;
-  }
-}

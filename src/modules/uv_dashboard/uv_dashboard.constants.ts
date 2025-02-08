@@ -1,6 +1,0 @@
-const UV_DASHBOARD = {
-  INIT: 'UV_DASHBOARD_INIT',
-  UPDATE: 'UV_DASHBOARD_UPDATE'
-};
-
-export default UV_DASHBOARD;

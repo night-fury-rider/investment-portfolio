@@ -1,12 +1,12 @@
-import { Alert, Slide, SlideProps, ThemeProvider } from "@mui/material";
-import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
-import { SyntheticEvent, useState } from "react";
+import { ThemeProvider } from "@mui/material";
+import { useState } from "react";
 
 import data from "../../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
 import Header from "$/components/Header/Header";
 import AddInvestmentModal from "$/components/Modal/AddInvestmentModal";
+import Snackbar from "$/components/Snackbar/Snackbar";
 import { ERRORS } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
 import { getParsedObject } from "$/services/UtilService";
@@ -49,49 +49,25 @@ export default function Page() {
     setCategories(tmpCategories);
   };
 
-  const handleSnackbarClose = (
-    event?: SyntheticEvent | Event,
-    reason?: SnackbarCloseReason
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
+  const handleCloseSnackbar = () => {
     setOpenDataErrorSnackbar(false);
-  };
-
-  // Slide transition function
-  const slideTransition = (props: SlideProps): React.ReactElement => {
-    return <Slide {...props} direction="up" />;
   };
 
   return (
     <ThemeProvider theme={theme}>
       <div className={ibmFont.className}>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
-          autoHideDuration={5000}
-          onClose={handleSnackbarClose}
-          open={openDataErrorSnackbar}
-          TransitionComponent={slideTransition}
-        >
-          <Alert
-            onClose={handleSnackbarClose}
-            severity="error"
-            variant="filled"
-            sx={{ width: "100%" }}
-          >
-            {ERRORS.data.corrupt}
-          </Alert>
-        </Snackbar>
         <AddInvestmentModal
           categories={categories}
           goals={goals}
           open={openAddInvestmentModal}
           onClose={handleCloseAddInvestmentModal}
+        />
+
+        <Snackbar
+          message={ERRORS.data.corrupt}
+          open={openDataErrorSnackbar}
+          onClose={handleCloseSnackbar}
+          severity="error"
         />
 
         <Header

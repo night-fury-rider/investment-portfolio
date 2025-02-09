@@ -7,7 +7,9 @@ import {
   Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { Home, Receipt } from "@mui/icons-material";
+import HomeIcon from "@mui/icons-material/Home";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Link from "next/link";
 import React from "react";
 
@@ -15,10 +17,12 @@ import styles from "$/components/Header/Header.module.css";
 import FileUpload from "$/components/FileUpload/FileUpload";
 import { COLORS } from "$/constants/colors.constants";
 import { HEADER } from "$/constants/strings.constants";
+import APP_CONFIG from "$/constants/app.config.constants";
 
 interface iHeaderProps {
   handleAddBtnPress?: () => void;
   investmentHREF?: string;
+  isSettingsPage?: boolean;
   title?: string;
   updateData?: (data: string) => void;
 }
@@ -26,6 +30,7 @@ interface iHeaderProps {
 const Header = ({
   handleAddBtnPress,
   investmentHREF,
+  isSettingsPage,
   title,
   updateData,
 }: iHeaderProps) => {
@@ -50,7 +55,7 @@ const Header = ({
               href="/"
               style={{ color: "white" }}
             >
-              <Home />
+              <HomeIcon />
             </Link>
           </IconButton>
         </Tooltip>
@@ -78,7 +83,7 @@ const Header = ({
                   href={investmentHREF}
                   style={{ color: "white" }}
                 >
-                  <Receipt />
+                  <ReceiptIcon />
                 </Link>
               </IconButton>
             </Tooltip>
@@ -106,6 +111,28 @@ const Header = ({
               fileUploadCallback={updateData}
               title={HEADER.upload.title}
             />
+          )}
+
+          {/* Settings Icon */}
+          {!isSettingsPage && (
+            <Tooltip title={HEADER.home.title}>
+              <IconButton
+                color="inherit"
+                component="label"
+                sx={{
+                  "&:hover": { backgroundColor: COLORS.whiteLight },
+                }}
+              >
+                <Link
+                  aria-label="settings"
+                  className={styles.icon}
+                  href={APP_CONFIG.routes.settings}
+                  style={{ color: "white" }}
+                >
+                  <SettingsIcon />
+                </Link>
+              </IconButton>
+            </Tooltip>
           )}
         </Box>
       </Toolbar>

@@ -17,17 +17,17 @@ import { COLORS } from "$/constants/colors.constants";
 import { HEADER } from "$/constants/strings.constants";
 
 interface iHeaderProps {
-  updateData: (data: string) => void;
   handleAddBtnPress?: () => void;
   investmentHREF?: string;
   title?: string;
+  updateData?: (data: string) => void;
 }
 
 const Header = ({
-  updateData,
   handleAddBtnPress,
   investmentHREF,
   title,
+  updateData,
 }: iHeaderProps) => {
   return (
     <AppBar
@@ -101,10 +101,12 @@ const Header = ({
           )}
 
           {/* Update Data Icon */}
-          <FileUpload
-            fileUploadCallback={updateData}
-            title={HEADER.upload.title}
-          />
+          {updateData && (
+            <FileUpload
+              fileUploadCallback={updateData}
+              title={HEADER.upload.title}
+            />
+          )}
         </Box>
       </Toolbar>
     </AppBar>

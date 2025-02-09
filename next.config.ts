@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const basePathOnServer =
-  process.env.NODE_ENV === "production"
-    ? "/analyzers/investments-v2"
-    : undefined;
+  process.env.NODE_ENV === "production" ? "/analyzers/investments" : undefined;
 
 const nextConfig = {
   distDir: "build",

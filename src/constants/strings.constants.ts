@@ -67,7 +67,17 @@ const INVESTMENT_RECORDS = {
 
 const SETTINGS = {
   title: "Settings",
+  applySettings: "Apply Settings",
   appVersion: "App Version",
+  language: {
+    title: "Language",
+    instruction: "Select Language",
+  },
+  numberFormat: {
+    title: "Number Format",
+    instruction: "Select Format",
+    sampleNumber: "Sample Number (1234567890): ",
+  },
 };
 
 export { COMMON, DASHBOARD, ERRORS, HEADER, INVESTMENT_RECORDS, SETTINGS };

@@ -2,18 +2,37 @@
 
 const APP_CONFIG = {
   decimalPlaces: 2,
-  unit: "Lakh",
   font: {
     family: "IBM Plex Serif",
   },
-  sessionStorage: {
-    appData: "investmentData",
-  },
+  languages: [
+    {
+      title: "English",
+      value: "en",
+    },
+  ],
+
+  numberFormats: [
+    {
+      title: "Indian Format (en-IN)",
+      value: "en-IN",
+    },
+    {
+      title: "US Format (en-US)",
+      value: "en-US",
+    },
+  ],
   routes: {
     home: "/",
     investments: "/investments",
     settings: "/settings",
   },
+  sessionStorage: {
+    appData: "investmentData",
+    language: "language",
+    numberFormat: "numberFormat",
+  },
+  unit: "Lakh",
 };
 
 export default APP_CONFIG;

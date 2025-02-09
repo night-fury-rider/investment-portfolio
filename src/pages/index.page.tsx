@@ -1,4 +1,4 @@
-import { ThemeProvider, useMediaQuery, useTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import data from "../../public/data/data.json";
@@ -16,9 +16,6 @@ import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
 
 const Page = () => {
-  const mUItheme = useTheme();
-  const isMobile = useMediaQuery(mUItheme.breakpoints.down("sm"));
-
   const [goals, setGoals] = useState(data.goals as IGoal[]);
   const [categories, setCategories] = useState(data.categories as ICategory[]);
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
@@ -102,7 +99,7 @@ const Page = () => {
         <Header
           updateData={updateData}
           handleAddBtnPress={handleAddInvestment}
-          title={isMobile ? HEADER.titleMobile : HEADER.title}
+          title={HEADER.title}
         />
         <Dashboard categories={categories} />
       </div>

@@ -48,8 +48,7 @@ const HEADER = {
   investments: {
     title: "Investments",
   },
-  title: "Investment Portfolio",
-  titleMobile: "Investments",
+  title: "Dashboard",
   upload: {
     title: "Update Data",
   },

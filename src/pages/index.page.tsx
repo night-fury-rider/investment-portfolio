@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import data from "../../public/data/data.json";
@@ -8,7 +8,7 @@ import Header from "$/components/Header/Header";
 import AddInvestmentModal from "$/components/Modal/AddInvestmentModal";
 import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
-import { ERRORS } from "$/constants/strings.constants";
+import { ERRORS, HEADER } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
 import { getParsedObject } from "$/services/UtilService";
 import Dashboard from "$/dashboard/Dashboard";
@@ -16,11 +16,16 @@ import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
 
 const Page = () => {
+  const mUItheme = useTheme();
+  const isMobile = useMediaQuery(mUItheme.breakpoints.down("sm"));
+
   const [goals, setGoals] = useState(data.goals as IGoal[]);
   const [categories, setCategories] = useState(data.categories as ICategory[]);
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
   const [openAddInvestmentModal, setOpenAddInvestmentModal] =
     useState<boolean>(false);
+
+  const [isInitialRender, setIsInitialRender] = useState(true);
 
   /* Use Effect for one time tasks */
   useEffect(() => {
@@ -33,6 +38,7 @@ const Page = () => {
         setCategories(extractedData.categories);
       }
     }
+    setIsInitialRender(false);
   }, []);
 
   const updateData = (data: string) => {
@@ -71,6 +77,11 @@ const Page = () => {
     setOpenDataErrorSnackbar(false);
   };
 
+  // To Avoid initial render flickering
+  if (isInitialRender) {
+    return null;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className={ibmFont.className}>
@@ -92,6 +103,7 @@ const Page = () => {
           investmentHREF="/investments"
           updateData={updateData}
           handleAddBtnPress={handleAddInvestment}
+          title={isMobile ? HEADER.titleMobile : HEADER.title}
         />
         <Dashboard categories={categories} />
       </div>

@@ -116,7 +116,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     <>
       <Grid
         container
-        rowSpacing={{ xs: 5, sm: 5, md: 20, lg: 20 }}
+        rowSpacing={{ xs: 20, sm: 20, md: 20, lg: 20 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         {refinedData?.categories?.length > 0 ? (

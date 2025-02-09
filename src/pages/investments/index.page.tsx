@@ -58,7 +58,11 @@ export default function Page() {
           onClose={handleCloseSnackbar}
           severity="error"
         />
-        <Header updateData={updateData} title={INVESTMENT_RECORDS.title} />
+        <Header
+          isInvestmentsPage
+          updateData={updateData}
+          title={INVESTMENT_RECORDS.title}
+        />
         <InvestmentRecords categories={categories} />
       </div>
     </ThemeProvider>

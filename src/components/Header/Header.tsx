@@ -21,15 +21,16 @@ import APP_CONFIG from "$/constants/app.config.constants";
 
 interface iHeaderProps {
   handleAddBtnPress?: () => void;
-  investmentHREF?: string;
+  investmentRoute?: string;
   isSettingsPage?: boolean;
+  isInvestmentsPage?: boolean;
   title?: string;
   updateData?: (data: string) => void;
 }
 
 const Header = ({
   handleAddBtnPress,
-  investmentHREF,
+  isInvestmentsPage,
   isSettingsPage,
   title,
   updateData,
@@ -52,7 +53,7 @@ const Header = ({
             <Link
               aria-label="home"
               className={styles.icon}
-              href="/"
+              href={APP_CONFIG.routes.home}
               style={{ color: "white" }}
             >
               <HomeIcon />
@@ -68,7 +69,7 @@ const Header = ({
         {/* Right side  */}
         <Box className={styles.rightSideIconContainer}>
           {/* Investment Records Icon */}
-          {investmentHREF && (
+          {!isInvestmentsPage && (
             <Tooltip title={HEADER.home.title}>
               <IconButton
                 color="inherit"
@@ -80,7 +81,7 @@ const Header = ({
                 <Link
                   aria-label="investments"
                   className={styles.icon}
-                  href={investmentHREF}
+                  href={APP_CONFIG.routes.investments}
                   style={{ color: "white" }}
                 >
                   <ReceiptIcon />

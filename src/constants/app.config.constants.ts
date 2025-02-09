@@ -9,6 +9,11 @@ const APP_CONFIG = {
   sessionStorage: {
     appData: "investmentData",
   },
+  routes: {
+    home: "/",
+    investments: "/investments",
+    settings: "/settings",
+  },
 };
 
 export default APP_CONFIG;

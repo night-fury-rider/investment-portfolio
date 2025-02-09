@@ -100,7 +100,6 @@ const Page = () => {
         />
 
         <Header
-          investmentHREF="/investments"
           updateData={updateData}
           handleAddBtnPress={handleAddInvestment}
           title={isMobile ? HEADER.titleMobile : HEADER.title}

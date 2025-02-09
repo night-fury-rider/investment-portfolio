@@ -24,7 +24,7 @@ interface iDashboardProps {
   categories: ICategory[];
 }
 
-const DashboardLite = ({ categories }: iDashboardProps) => {
+const Dashboard = ({ categories }: iDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const secondRowRef = useRef<HTMLDivElement | null>(null);
@@ -162,4 +162,4 @@ const DashboardLite = ({ categories }: iDashboardProps) => {
   );
 };
 
-export default DashboardLite;
+export default Dashboard;

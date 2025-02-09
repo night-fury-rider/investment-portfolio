@@ -116,7 +116,7 @@ const Header = ({
 
           {/* Settings Icon */}
           {!isSettingsPage && (
-            <Tooltip title={HEADER.home.title}>
+            <Tooltip title={HEADER.settings.title}>
               <IconButton
                 color="inherit"
                 component="label"

@@ -33,6 +33,7 @@ const Settings: React.FC = () => {
     language: APP_CONFIG?.languages[0]?.value,
   });
 
+  /* Use Effect for one time tasks */
   useEffect(() => {
     const storedNumberFormat = sessionStorage.getItem(
       APP_CONFIG?.sessionStorage?.numberFormat
@@ -41,8 +42,12 @@ const Settings: React.FC = () => {
       APP_CONFIG?.sessionStorage?.language
     );
 
-    if (storedNumberFormat) setNumberFormat(storedNumberFormat);
-    if (storedLanguage) setLanguage(storedLanguage);
+    if (storedNumberFormat) {
+      setNumberFormat(storedNumberFormat);
+    }
+    if (storedLanguage) {
+      setLanguage(storedLanguage);
+    }
 
     setInitialSettings({
       numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats[0]?.value,

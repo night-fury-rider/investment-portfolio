@@ -1,24 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Box } from "@mui/material";
-
 import Grid from "@mui/material/Grid2";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { BarDatum } from "@nivo/bar";
+import React, { useEffect, useRef, useState } from "react";
 
-import PieChart from "$/components/PieChart/PieChart";
 import BarChart from "$/components/BarChart/BarChart";
+import PieChart from "$/components/PieChart/PieChart";
 import PieChartLegands from "$/components/PieChart/PieChartLegands";
-
+import Table from "$/components/Table/Table";
+import APP_CONFIG from "$/constants/app.config.constants";
+import { COLORS } from "$/constants/colors.constants";
+import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import styles from "$/dashboard/dashboard.module.css";
+import { ICategory, ISubItem } from "$/dashboard/dashboard.types";
 import {
   getBarChartData,
   getHighestItemIndex,
   refineEntireData,
-} from "./DashboardService";
-import { ICategory, ISubItem } from "./dashboard.types";
-import { BarDatum } from "@nivo/bar";
-import Table from "$/components/Table/Table";
-import { COMMON, DASHBOARD } from "$/constants/strings.constants";
-import { COLORS } from "$/constants/colors.constants";
+} from "$/dashboard/DashboardService";
 
 interface iDashboardProps {
   categories: ICategory[];
@@ -36,13 +34,24 @@ const Dashboard = ({ categories }: iDashboardProps) => {
   });
   const [barChartData, setBarChartData] = useState([] as BarDatum[]);
   const [investmentRows, setInvestmentRows] = useState([] as ISubItem[]);
-
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(
     0 as number
   );
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-
   const [totalValue, setTotalValue] = useState(0);
+  const [numberFormat, setNumberFormat] = useState(
+    APP_CONFIG?.numberFormats?.[0]?.value
+  );
+
+  /* Use Effect for one time tasks */
+  useEffect(() => {
+    const storedNumberFormat = sessionStorage.getItem(
+      APP_CONFIG?.sessionStorage?.numberFormat
+    );
+    if (storedNumberFormat) {
+      setNumberFormat(storedNumberFormat);
+    }
+  }, []);
 
   useEffect(() => {
     setSelectedCategoryIndex(0);
@@ -151,6 +160,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
                 columns={columns}
                 headerStyles={headerStyles}
                 noDataMsg={COMMON.noData}
+                locale={numberFormat}
                 rows={investmentRows}
                 title={DASHBOARD.table.title}
               />

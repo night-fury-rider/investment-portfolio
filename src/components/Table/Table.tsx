@@ -55,6 +55,7 @@ interface iTableProps {
   columns?: iColumn[];
   headerStyles?: React.CSSProperties;
   loading?: boolean;
+  locale?: string;
   noDataMsg?: string;
   rows?: iData[];
   title?: string;
@@ -64,6 +65,7 @@ const Table: React.FC<iTableProps> = ({
   columns = [],
   headerStyles = {},
   loading = false,
+  locale = "en-IN",
   noDataMsg = COMMON?.noData,
   rows = [],
   title = "",
@@ -79,7 +81,7 @@ const Table: React.FC<iTableProps> = ({
   const sortedRows = stableSort(rows, getComparator(order, orderBy));
 
   const getFormattedValue = (value: number | string, isNumeric: boolean) =>
-    isNumeric ? uvNumber.changeCurrencyFormat(Number(value)) : value;
+    isNumeric ? uvNumber.changeCurrencyFormat(Number(value), locale) : value;
 
   return (
     <Box sx={{ width: "100%" }} className={styles.tableContainer}>

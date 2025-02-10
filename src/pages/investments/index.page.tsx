@@ -13,6 +13,7 @@ import { isDashboardDataValid } from "$/dashboard/DashboardService";
 import InvestmentRecords from "./InvestmentRecords";
 import { getParsedObject } from "$/services/UtilService";
 import LoggerService from "$/services/LoggerService";
+import StorageService from "$/services/StorageService";
 
 export default function Page() {
   const [categories, setCategories] = useState(data.categories as ICategory[]);
@@ -20,7 +21,7 @@ export default function Page() {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const savedData = sessionStorage.getItem(APP_CONFIG.sessionStorage.appData);
+    const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
     if (savedData) {
       const extractedData = getParsedObject(savedData);
 
@@ -35,7 +36,7 @@ export default function Page() {
 
     if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
       setCategories(newInvestmentData.categories);
-      sessionStorage.setItem(
+      StorageService.set(
         APP_CONFIG.sessionStorage.appData,
         JSON.stringify(newInvestmentData)
       );

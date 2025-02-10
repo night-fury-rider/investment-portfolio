@@ -7,13 +7,13 @@ const StorageService = (() => {
   let storage: any = null;
   const init = () => {
     if (storage === null) {
-      storage = localStorage;
+      storage = sessionStorage;
     }
   };
 
   const get = (storeKey: string) => {
     if (storage === null) {
-      return "";
+      init();
     }
     return storage.getItem(storeKey);
   };

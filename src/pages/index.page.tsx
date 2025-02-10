@@ -19,6 +19,7 @@ import {
   INewInvestment,
 } from "$/dashboard/dashboard.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
+import StorageService from "$/services/StorageService";
 
 const Page = () => {
   const [baseData, setBaseData] = useState(data as IBaseData);
@@ -34,7 +35,7 @@ const Page = () => {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const savedData = sessionStorage.getItem(APP_CONFIG.sessionStorage.appData);
+    const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
     if (savedData) {
       const extractedData = getParsedObject(savedData);
       if (isDashboardDataValid(extractedData)) {
@@ -51,7 +52,7 @@ const Page = () => {
       setCategories(newInvestmentData.categories);
       setGoals(newInvestmentData.goals);
       setBaseData(newInvestmentData);
-      sessionStorage.setItem(
+      StorageService.set(
         APP_CONFIG.sessionStorage.appData,
         JSON.stringify(newInvestmentData)
       );

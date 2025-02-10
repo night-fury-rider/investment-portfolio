@@ -17,6 +17,7 @@ import {
   getHighestItemIndex,
   refineEntireData,
 } from "$/dashboard/DashboardService";
+import StorageService from "$/services/StorageService";
 
 interface iDashboardProps {
   categories: ICategory[];
@@ -45,7 +46,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const storedNumberFormat = sessionStorage.getItem(
+    const storedNumberFormat = StorageService.get(
       APP_CONFIG?.sessionStorage?.numberFormat
     );
     if (storedNumberFormat) {

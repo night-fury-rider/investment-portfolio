@@ -17,6 +17,7 @@ import Grid from "@mui/material/Grid2";
 
 import { SETTINGS } from "$/constants/strings.constants";
 import APP_CONFIG from "$/constants/app.config.constants";
+import StorageService from "$/services/StorageService";
 
 const Settings: React.FC = () => {
   const theme = useTheme();
@@ -35,10 +36,10 @@ const Settings: React.FC = () => {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const storedNumberFormat = sessionStorage.getItem(
+    const storedNumberFormat = StorageService.get(
       APP_CONFIG?.sessionStorage?.numberFormat
     );
-    const storedLanguage = sessionStorage.getItem(
+    const storedLanguage = StorageService.get(
       APP_CONFIG?.sessionStorage?.language
     );
 
@@ -68,11 +69,8 @@ const Settings: React.FC = () => {
   };
 
   const handleApplySettings = () => {
-    sessionStorage.setItem(
-      APP_CONFIG?.sessionStorage?.numberFormat,
-      numberFormat
-    );
-    sessionStorage.setItem(APP_CONFIG?.sessionStorage?.language, language);
+    StorageService.set(APP_CONFIG?.sessionStorage?.numberFormat, numberFormat);
+    StorageService.set(APP_CONFIG?.sessionStorage?.language, language);
     setInitialSettings({ numberFormat, language });
     setisPrimaryButtonDisabled(true);
   };

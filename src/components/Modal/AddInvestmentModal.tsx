@@ -19,16 +19,18 @@ import { DASHBOARD } from "$/constants/strings.constants";
 import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
 
 interface IAddInvestmentModalProps {
+  addInvestment: (newInvestment: INewInvestment) => void;
   categories: ICategory[];
   goals: IGoal[];
-  open: boolean;
-  onClose: (newInvestment: INewInvestment) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
+  addInvestment,
   categories,
   goals,
-  open,
+  isOpen,
   onClose,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | "">("");
@@ -41,14 +43,14 @@ const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
   const [openSuccessDialog, setOpenSuccessDialog] = useState<boolean>(false);
 
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       setSelectedCategory("");
       setSelectedGoal("");
       setSelectedSubCategory("");
       setFolioName("");
       setAmount("");
     }
-  }, [open]);
+  }, [isOpen]);
 
   const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
     setSelectedCategory(event.target.value as number);
@@ -73,16 +75,6 @@ const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
     setAmount(event.target.value);
   };
 
-  const handleClose = () => {
-    onClose({
-      amount: Number(amount),
-      categoryIndex: Number(selectedCategory),
-      folioName,
-      goalIndex: Number(selectedGoal),
-      subCategoryIndex: Number(selectedSubCategory),
-    });
-  };
-
   const isFormValid = () =>
     selectedCategory !== "" &&
     selectedGoal !== "" &&
@@ -96,7 +88,13 @@ const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
   // Handle the form submission and show success dialog
   const handleAddInvestment = () => {
     setOpenSuccessDialog(true);
-    handleClose();
+    addInvestment({
+      amount: Number(amount),
+      categoryIndex: Number(selectedCategory),
+      folioName,
+      goalIndex: Number(selectedGoal),
+      subCategoryIndex: Number(selectedSubCategory),
+    });
   };
 
   // Handle success dialog close event
@@ -112,7 +110,7 @@ const AddInvestmentModal: React.FC<IAddInvestmentModalProps> = ({
 
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={isOpen} onClose={onClose}>
         <Box sx={styles.container}>
           <Typography variant="h5" sx={styles.title}>
             {DASHBOARD.addInvestment.title}

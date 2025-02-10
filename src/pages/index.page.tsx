@@ -19,7 +19,7 @@ const Page = () => {
   const [goals, setGoals] = useState(data.goals as IGoal[]);
   const [categories, setCategories] = useState(data.categories as ICategory[]);
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
-  const [openAddInvestmentModal, setOpenAddInvestmentModal] =
+  const [isAddInvestmentModalOpen, setIsAddInvestmentModalOpen] =
     useState<boolean>(false);
 
   const [isInitialRender, setIsInitialRender] = useState(true);
@@ -54,9 +54,15 @@ const Page = () => {
     }
   };
 
-  const handleAddInvestment = () => setOpenAddInvestmentModal(true);
+  const openAddInvestmentModal = () => {
+    setIsAddInvestmentModalOpen(true);
+  };
 
-  const handleCloseAddInvestmentModal = (newInvestment: INewInvestment) => {
+  const closeAddInvestmentModal = () => {
+    setIsAddInvestmentModalOpen(false);
+  };
+
+  const addInvestment = (newInvestment: INewInvestment) => {
     const tmpCategories = structuredClone(categories);
     tmpCategories[newInvestment.categoryIndex].subCategories[
       newInvestment.subCategoryIndex
@@ -66,8 +72,8 @@ const Page = () => {
       goal: goals[newInvestment.goalIndex].label,
       investedValue: newInvestment.amount,
     });
-    setOpenAddInvestmentModal(false);
     setCategories(tmpCategories);
+    closeAddInvestmentModal();
   };
 
   const handleCloseSnackbar = () => {
@@ -83,10 +89,11 @@ const Page = () => {
     <ThemeProvider theme={theme}>
       <div className={ibmFont.className}>
         <AddInvestmentModal
+          addInvestment={addInvestment}
           categories={categories}
           goals={goals}
-          open={openAddInvestmentModal}
-          onClose={handleCloseAddInvestmentModal}
+          isOpen={isAddInvestmentModalOpen}
+          onClose={closeAddInvestmentModal}
         />
 
         <Snackbar
@@ -98,7 +105,7 @@ const Page = () => {
 
         <Header
           updateData={updateData}
-          handleAddBtnPress={handleAddInvestment}
+          handleAddBtnPress={openAddInvestmentModal}
           title={HEADER.title}
         />
         <Dashboard categories={categories} />

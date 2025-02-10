@@ -10,14 +10,22 @@ import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
 import { ERRORS, HEADER } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
-import { getParsedObject } from "$/services/UtilService";
+import { getClonedObject, getParsedObject } from "$/services/UtilService";
 import Dashboard from "$/dashboard/Dashboard";
-import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
+import {
+  IBaseData,
+  ICategory,
+  IGoal,
+  INewInvestment,
+} from "$/dashboard/dashboard.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
 
 const Page = () => {
-  const [goals, setGoals] = useState(data.goals as IGoal[]);
-  const [categories, setCategories] = useState(data.categories as ICategory[]);
+  const [baseData, setBaseData] = useState(data as IBaseData);
+  const [goals, setGoals] = useState(baseData.goals as IGoal[]);
+  const [categories, setCategories] = useState(
+    baseData.categories as ICategory[]
+  );
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
   const [isAddInvestmentModalOpen, setIsAddInvestmentModalOpen] =
     useState<boolean>(false);
@@ -29,7 +37,6 @@ const Page = () => {
     const savedData = sessionStorage.getItem(APP_CONFIG.sessionStorage.appData);
     if (savedData) {
       const extractedData = getParsedObject(savedData);
-
       if (isDashboardDataValid(extractedData)) {
         setGoals(extractedData.goals);
         setCategories(extractedData.categories);
@@ -40,10 +47,10 @@ const Page = () => {
 
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);
-
     if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
       setCategories(newInvestmentData.categories);
       setGoals(newInvestmentData.goals);
+      setBaseData(newInvestmentData);
       sessionStorage.setItem(
         APP_CONFIG.sessionStorage.appData,
         JSON.stringify(newInvestmentData)
@@ -63,7 +70,7 @@ const Page = () => {
   };
 
   const addInvestment = (newInvestment: INewInvestment) => {
-    const tmpCategories = structuredClone(categories);
+    const tmpCategories = getClonedObject(categories);
     tmpCategories[newInvestment.categoryIndex].subCategories[
       newInvestment.subCategoryIndex
     ].records.push({
@@ -72,7 +79,9 @@ const Page = () => {
       goal: goals[newInvestment.goalIndex].label,
       investedValue: newInvestment.amount,
     });
-    setCategories(tmpCategories);
+    const tmpBaseData = getClonedObject(baseData);
+    tmpBaseData.categories = tmpCategories;
+    updateData(JSON.stringify(tmpBaseData));
     closeAddInvestmentModal();
   };
 

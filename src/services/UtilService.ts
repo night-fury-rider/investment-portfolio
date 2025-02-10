@@ -4,8 +4,7 @@ import LoggerService from "./LoggerService";
 import APP_CONFIG from "$/constants/app.config.constants";
 
 // TODO: Yuvraj Add this in util npm package
-const getClonedObject = <T>(sourceObj: T): T =>
-  JSON.parse(JSON.stringify(sourceObj));
+const getClonedObject = <T>(sourceObj: T): T => structuredClone(sourceObj);
 
 // TODO: Yuvraj Add this in util npm package
 const getParsedObject = (sourceObj: string) => {

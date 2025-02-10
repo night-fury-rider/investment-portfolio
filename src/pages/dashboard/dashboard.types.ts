@@ -65,7 +65,7 @@ type ISubItem = {
   goal?: string;
 };
 
-type IUploadData = {
+type IBaseData = {
   absoluteValue: number;
   amc: unknown;
   categories: ICategory[];
@@ -83,6 +83,6 @@ export type {
   INewInvestment,
   ISubCategory,
   ISubItem,
-  IUploadData,
+  IBaseData,
   IValueType,
 };

@@ -98,21 +98,17 @@ const Table: React.FC<iTableProps> = ({
               <Typography>{noDataMsg}</Typography>{" "}
             </Box>
           ) : (
-            <MUITable aria-labelledby="tableTitle" size="medium">
+            <MUITable aria-labelledby="tableTitle" size="medium" stickyHeader>
               {/* Table Head */}
               <TableHead>
-                <TableRow
-                  sx={{
-                    backgroundColor: "primary.main",
-                    color: "#fff",
-                    ...headerStyles,
-                  }}
-                >
+                <TableRow>
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.numeric ? "right" : "left"}
                       sortDirection={orderBy === column.id ? order : false}
+                      sx={{ backgroundColor: "primary.main", color: "white" }}
+                      style={headerStyles}
                     >
                       <TableSortLabel
                         active={orderBy === column.id}

@@ -23,7 +23,9 @@
       "$/components/*": ["components/*"],
       "$/constants/*": ["constants/*"],
       "$/services/*": ["services/*"],
-      "$/dashboard/*": ["pages/dashboard/*"]
+      "$/dashboard/*": ["pages/dashboard/*"],
+      "$/investments/*": ["pages/investments/*"],
+      "$/settings/*": ["pages/settings/*"]
     }
   },
   "include": [

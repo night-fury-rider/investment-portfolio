@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import data from "../../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
+import ErrorBoundary from "$/components/ErrorBoundary/ErrorBoundary";
 import Header from "$/components/Header/Header";
 import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
 import { ERRORS, INVESTMENT_RECORDS } from "$/constants/strings.constants";
 import { ICategory } from "$/dashboard/dashboard.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
-import InvestmentRecords from "./InvestmentRecords";
+import InvestmentRecords from "$/investments/InvestmentRecords";
 import { getParsedObject } from "$/services/UtilService";
 import LoggerService from "$/services/LoggerService";
 import StorageService from "$/services/StorageService";
@@ -64,7 +65,9 @@ export default function Page() {
           updateData={updateData}
           title={INVESTMENT_RECORDS.title}
         />
-        <InvestmentRecords categories={categories} />
+        <ErrorBoundary>
+          <InvestmentRecords categories={categories} />
+        </ErrorBoundary>
       </div>
     </ThemeProvider>
   );

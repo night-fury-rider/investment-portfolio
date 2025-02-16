@@ -33,6 +33,11 @@ const DASHBOARD = {
 };
 
 const ERRORS = {
+  boundary: {
+    headerText: "Oops! Something went wrong.",
+    buttonText: "Try Again",
+    message: "Error caught by ErrorBoundary:",
+  },
   data: {
     corrupt: "The upload data does not meet the required criteria.",
   },

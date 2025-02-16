@@ -4,6 +4,7 @@ import { BarDatum } from "@nivo/bar";
 import React, { useEffect, useRef, useState } from "react";
 
 import BarChart from "$/components/BarChart/BarChart";
+import ErrorBoundary from "$/components/ErrorBoundary/ErrorBoundary";
 import PieChart from "$/components/PieChart/PieChart";
 import PieChartLegands from "$/components/PieChart/PieChartLegands";
 import Table from "$/components/Table/Table";
@@ -124,12 +125,14 @@ const Dashboard = ({ categories }: iDashboardProps) => {
           <Grid size={{ xs: 4, sm: 8, md: 6 }}>
             {/* Pie Chart */}
             <Box className={styles.chartContainer}>
-              <PieChart
-                data={refinedData.categories}
-                centralTitle={totalValue || 0}
-                handleSliceClick={handlePieSliceClick}
-                totalValue={totalValue}
-              />
+              <ErrorBoundary>
+                <PieChart
+                  data={refinedData.categories}
+                  centralTitle={totalValue || 0}
+                  handleSliceClick={handlePieSliceClick}
+                  totalValue={totalValue}
+                />
+              </ErrorBoundary>
             </Box>
             {/* Pie Chart Legands -- Display on mobile only */}
             {isMobile ? (
@@ -148,7 +151,9 @@ const Dashboard = ({ categories }: iDashboardProps) => {
         {refinedData?.categories?.length > 0 ? (
           <Grid size={{ xs: 4, sm: 8, md: 6 }}>
             <Box className={styles.chartContainer}>
-              <BarChart data={barChartData} handleBarClick={handleBarClick} />
+              <ErrorBoundary>
+                <BarChart data={barChartData} handleBarClick={handleBarClick} />
+              </ErrorBoundary>
             </Box>
           </Grid>
         ) : null}
@@ -157,14 +162,16 @@ const Dashboard = ({ categories }: iDashboardProps) => {
         {refinedData?.categories?.length > 0 ? (
           <Grid size={{ xs: 4, sm: 4, md: 6 }} ref={secondRowRef}>
             <Box>
-              <Table
-                columns={columns}
-                headerStyles={headerStyles}
-                noDataMsg={COMMON.noData}
-                locale={numberFormat}
-                rows={investmentRows}
-                title={DASHBOARD.table.title}
-              />
+              <ErrorBoundary>
+                <Table
+                  columns={columns}
+                  headerStyles={headerStyles}
+                  noDataMsg={COMMON.noData}
+                  locale={numberFormat}
+                  rows={investmentRows}
+                  title={DASHBOARD.table.title}
+                />
+              </ErrorBoundary>
             </Box>
           </Grid>
         ) : null}

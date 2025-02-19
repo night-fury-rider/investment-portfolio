@@ -29,10 +29,18 @@ export default function Page() {
       if (isDashboardDataValid(extractedData)) {
         setCategories(extractedData.categories);
       }
+    } else {
+      StorageService.set(
+        APP_CONFIG.sessionStorage.appData,
+        JSON.stringify(data)
+      );
     }
   }, []);
 
   const updateData = (data: string) => {
+    if (!data) {
+      return;
+    }
     const newInvestmentData = getParsedObject(data);
 
     if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {

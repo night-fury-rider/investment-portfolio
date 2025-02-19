@@ -10,6 +10,16 @@ const COMMON = {
     dark: "dark",
   },
   noData: "No data is available",
+  actions: {
+    agree: "YES",
+    cancel: "CANCEL",
+    delete: {
+      title: "Delete",
+      confirm: "Are you sure you want to remove this investment?",
+      success: "Record has been removed successfully",
+    },
+    no: "No",
+  },
 };
 
 const DASHBOARD = {

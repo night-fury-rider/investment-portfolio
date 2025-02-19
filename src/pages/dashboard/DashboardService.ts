@@ -38,9 +38,7 @@ const getHighestItemIndex = (barChartData: ISubCategory[]) =>
     0
   );
 
-const isDashboardDataValid = (dashboardData: IBaseData) => {
-  let result;
-
+const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
   /***
    * If data does not have valid
    * - categories
@@ -56,10 +54,10 @@ const isDashboardDataValid = (dashboardData: IBaseData) => {
     !dashboardData?.categories[0].subCategories ||
     !Array.isArray(dashboardData.categories[0].subCategories)
   ) {
-    return result;
+    return false;
   }
 
-  return dashboardData;
+  return true;
 };
 
 const refineEntireData = (categories: ICategory[], attr = "investedValue") => {

@@ -70,7 +70,7 @@ const Header = ({
         <Box className={styles.rightSideIconContainer}>
           {/* Investment Records Icon */}
           {!isInvestmentsPage && (
-            <Tooltip title={HEADER.home.title}>
+            <Tooltip title={HEADER.investments.title}>
               <IconButton
                 color="inherit"
                 component="label"

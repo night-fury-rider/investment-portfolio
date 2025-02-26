@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import Dialog from "$/components/Dialog/Dialog";
 import { COMMON } from "$/constants/strings.constants";
 import { COLORS } from "$/constants/colors.constants";
-import { ICategory, IInvestmentRecord } from "$/dashboard/dashboard.types";
+import { ICategory, IInvestmentRecord } from "global.types";
 import {
   deleteInvestmentRecord,
   getInvestmentColumns,

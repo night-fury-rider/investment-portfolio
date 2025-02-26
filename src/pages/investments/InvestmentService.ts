@@ -7,11 +7,7 @@ import {
   ERRORS,
   INVESTMENT_RECORDS,
 } from "$/constants/strings.constants";
-import {
-  IBaseData,
-  ICategory,
-  IInvestmentRecord,
-} from "$/dashboard/dashboard.types";
+import { IBaseData, ICategory, IInvestmentRecord } from "global.types";
 import {
   isDashboardDataValid,
   refineEntireData,

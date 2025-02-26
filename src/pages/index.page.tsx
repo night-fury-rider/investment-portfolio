@@ -12,12 +12,7 @@ import { ERRORS, HEADER } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
 import { getClonedObject, getParsedObject } from "$/services/UtilService";
 import Dashboard from "$/dashboard/Dashboard";
-import {
-  IBaseData,
-  ICategory,
-  IGoal,
-  INewInvestment,
-} from "$/dashboard/dashboard.types";
+import { IBaseData, ICategory, IGoal, INewInvestment } from "global.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
 import StorageService from "$/services/StorageService";
 

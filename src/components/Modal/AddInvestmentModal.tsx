@@ -16,7 +16,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { DASHBOARD } from "$/constants/strings.constants";
-import { ICategory, IGoal, INewInvestment } from "$/dashboard/dashboard.types";
+import { ICategory, IGoal, INewInvestment } from "global.types";
 
 interface IAddInvestmentModalProps {
   addInvestment: (newInvestment: INewInvestment) => void;

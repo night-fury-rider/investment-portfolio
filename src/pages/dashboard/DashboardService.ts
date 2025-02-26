@@ -1,9 +1,5 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import {
-  IBaseData,
-  ICategory,
-  ISubCategory,
-} from "$/dashboard/dashboard.types";
+import { IBaseData, ICategory, ISubCategory } from "global.types";
 import LoggerService from "$/services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "$/services/UtilService";
 

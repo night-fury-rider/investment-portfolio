@@ -12,7 +12,7 @@ import APP_CONFIG from "$/constants/app.config.constants";
 import { COLORS } from "$/constants/colors.constants";
 import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import styles from "$/dashboard/dashboard.module.css";
-import { ICategory, ISubItem } from "$/dashboard/dashboard.types";
+import { ICategory, ISubItem } from "global.types";
 import {
   getBarChartData,
   getHighestItemIndex,

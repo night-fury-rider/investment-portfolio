@@ -9,7 +9,7 @@ import Header from "$/components/Header/Header";
 import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
 import { ERRORS, INVESTMENT_RECORDS } from "$/constants/strings.constants";
-import { ICategory } from "$/dashboard/dashboard.types";
+import { ICategory } from "global.types";
 import { isDashboardDataValid } from "$/dashboard/DashboardService";
 import InvestmentRecords from "$/investments/InvestmentRecords";
 import { getParsedObject } from "$/services/UtilService";

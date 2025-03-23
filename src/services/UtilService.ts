@@ -6,6 +6,19 @@ import APP_CONFIG from "$/constants/app.config.constants";
 // TODO: Yuvraj Add this in util npm package
 const getClonedObject = <T>(sourceObj: T): T => structuredClone(sourceObj);
 
+// TODO: Yuvraj Add this in util npm package's Date module
+/**
+ * @description Get Date String from the Date object passed
+ * @param dateObj Date object
+ */
+const getDateString = (dateObj: Date): string => {
+  const year = dateObj.getFullYear();
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+  const day = dateObj.getDate().toString().padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
 // TODO: Yuvraj Add this in util npm package
 const getParsedObject = (sourceObj: string) => {
   let result;
@@ -37,4 +50,9 @@ const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
   return Number(resultAmount.toFixed(APP_CONFIG.decimalPlaces));
 };
 
-export { getClonedObject, getParsedObject, getTotalAmountInSelectedUnit };
+export {
+  getClonedObject,
+  getDateString,
+  getParsedObject,
+  getTotalAmountInSelectedUnit,
+};

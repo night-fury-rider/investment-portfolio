@@ -22,9 +22,10 @@
     "paths": {
       "$/components/*": ["components/*"],
       "$/constants/*": ["constants/*"],
-      "$/services/*": ["services/*"],
       "$/dashboard/*": ["pages/dashboard/*"],
       "$/investments/*": ["pages/investments/*"],
+      "$/public/*": ["../public/*"],
+      "$/services/*": ["services/*"],
       "$/settings/*": ["pages/settings/*"]
     }
   },

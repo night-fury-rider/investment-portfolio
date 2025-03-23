@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import data from "../../../public/data/data.json";
+import data from "$/public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
 import ErrorBoundary from "$/components/ErrorBoundary/ErrorBoundary";

@@ -38,9 +38,9 @@
           "shortName": "Axis",
           "records": [
             {
-              "currentValue": 202020,
+              "currentValue": 0,
               "folio": "12345",
-              "investedValue": 202020
+              "investedValue": 0
             }
           ],
           "value": 0
@@ -72,9 +72,9 @@
           "shortName": "BCG",
           "records": [
             {
-              "currentValue": 111571,
+              "currentValue": 0,
               "folio": "Zerodha",
-              "investedValue": 130255
+              "investedValue": 0
             }
           ],
           "symbol": "BCG",

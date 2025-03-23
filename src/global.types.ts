@@ -47,6 +47,7 @@ type INewInvestment = {
   folioName: string;
   goalIndex: number;
   subCategoryIndex: number;
+  transactionDate?: string;
 };
 
 type ISubCategory = {

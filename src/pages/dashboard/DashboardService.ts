@@ -151,7 +151,33 @@ const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
     return false;
   }
 
-  return true;
+  /**
+   * Dashboard data is valid if it contains any valid investment record.
+   */
+  let isValidInvestmentAmount = false;
+  InvestmentEmptyCheck: for (
+    let i = 0;
+    i < dashboardData?.categories?.length;
+    i++
+  ) {
+    const selectedCategory = dashboardData?.categories[i];
+    for (let j = 0; j < selectedCategory?.subCategories?.length; j++) {
+      const selectedSubCategory = selectedCategory?.subCategories[j];
+      for (let k = 0; k < selectedSubCategory?.records?.length; k++) {
+        const selectedRecord = selectedCategory?.subCategories[j]?.records[k];
+        if (
+          (selectedRecord.investedValue && selectedRecord.investedValue > 0) ||
+          (selectedRecord.currentValue && selectedRecord.currentValue > 0)
+        ) {
+          console.log(`It's valid data: ${JSON.stringify(selectedRecord)}`);
+          isValidInvestmentAmount = true;
+          break InvestmentEmptyCheck;
+        }
+      }
+    }
+  }
+
+  return isValidInvestmentAmount;
 };
 
 const refineEntireData = (categories: ICategory[], attr = "investedValue") => {

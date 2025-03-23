@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import data from "../../public/data/data.json";
 import { ibmFont } from "app/fonts";
@@ -17,6 +18,8 @@ import { isDashboardDataValid } from "$/dashboard/DashboardService";
 import StorageService from "$/services/StorageService";
 
 const Page = () => {
+  const router = useRouter();
+
   const [baseData, setBaseData] = useState(data as IBaseData);
   const [goals, setGoals] = useState(baseData.goals as IGoal[]);
   const [categories, setCategories] = useState(
@@ -36,7 +39,11 @@ const Page = () => {
       if (isDashboardDataValid(extractedData)) {
         setGoals(extractedData.goals);
         setCategories(extractedData.categories);
+      } else {
+        router.push(APP_CONFIG.routes.addInvestment);
       }
+    } else {
+      router.push(APP_CONFIG.routes.addInvestment);
     }
     setIsInitialRender(false);
   }, []);

@@ -22,6 +22,7 @@ const APP_CONFIG = {
     },
   ],
   routes: {
+    addInvestment: "add-investment",
     home: "/",
     investments: "/investments",
     settings: "/settings",

@@ -7,7 +7,13 @@ import {
   ERRORS,
   INVESTMENT_RECORDS,
 } from "$/constants/strings.constants";
-import { IBaseData, ICategory, IInvestmentRecord } from "global.types";
+import {
+  IBaseData,
+  ICategory,
+  IGoal,
+  IInvestmentRecord,
+  INewInvestment,
+} from "global.types";
 import {
   isDashboardDataValid,
   refineEntireData,
@@ -138,6 +144,55 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
 };
 
 /**
+ * @description Get New Investment Object
+ * @param categories {ICategories Array} - Categories Array
+ * @param goals  {IGoals Array} - Goals Array
+ * @param amount {string} - Amount to be added
+ * @param category {string} - Category
+ * @param folioName {string} - Folio Name
+ * @param goal {string} - Goal Name
+ * @param subCategory {string} - Sub Category Name
+ * @param transactionDate {string} - Transaction Date
+ * @returns newly created investment object
+ */
+const getNewInvestmentObj = (
+  categories: ICategory[],
+  goals: IGoal[],
+  amount: string,
+  category: string,
+  folioName: string,
+  goal: string,
+  subCategory: string,
+  transactionDate?: string
+): INewInvestment => {
+  let goalIndex = goals.findIndex((goalObj) => goalObj.label === goal);
+  if (goalIndex === -1) {
+    goalIndex = goals.length;
+  }
+  let categoryIndex = categories.findIndex(
+    (categoryObj) => categoryObj.label === category
+  );
+  if (categoryIndex === -1) {
+    categoryIndex = categories.length;
+  }
+
+  let subCategoryIndex = categories[categoryIndex].subCategories.findIndex(
+    (subCategoryObj) => subCategoryObj.label === subCategory
+  );
+  if (subCategoryIndex === -1) {
+    subCategoryIndex = categories[categoryIndex].subCategories.length;
+  }
+  return {
+    amount: Number(amount),
+    categoryIndex,
+    folioName,
+    goalIndex,
+    subCategoryIndex,
+    transactionDate,
+  };
+};
+
+/**
  * @description Persist Investment Data
  * @param investmentData {string} Investment Data to be persisted.
  * @returns investment data object which is persisted.
@@ -202,5 +257,6 @@ export {
   deleteInvestmentRecord,
   extractInvestments,
   getInvestmentColumns,
+  getNewInvestmentObj,
   prepareInvestmentRecords,
 };

@@ -1,6 +1,34 @@
 // This file is intended to serve as the single source of truth for all strings/messages which are visible to user (including error messages)
 // Prefer keeping strings inside appropriate module objects
 
+const ADD_INVESTMENT = {
+  amount: "Amount",
+  category: {
+    inputLabel: "Category",
+    newItemLabel: "New Category",
+    newItemPlaceholder: "Enter a New Category",
+  },
+  createNew: {
+    category: "Create a new Category",
+    goal: "Create a new Goal",
+    subCategory: "Create a new Sub-Category",
+  },
+  date: "Transaction Date",
+  folio: "Folio Name",
+  goal: {
+    inputLabel: "Goal",
+    newItemLabel: "New Goal",
+    newItemPlaceholder: "Enter a New Goal",
+  },
+  subCategory: {
+    inputLabel: "SubCategory",
+    newItemLabel: "New Sub-Category",
+    newItemPlaceholder: "Enter a New Sub-Category",
+  },
+  submitBtnLabel: "Add Investment",
+  successMessage: "Investment added successfully",
+};
+
 const COMMON = {
   errorsMsg: {
     itemNotFound: "Unable to find the item",
@@ -97,4 +125,12 @@ const SETTINGS = {
   },
 };
 
-export { COMMON, DASHBOARD, ERRORS, HEADER, INVESTMENT_RECORDS, SETTINGS };
+export {
+  ADD_INVESTMENT,
+  COMMON,
+  DASHBOARD,
+  ERRORS,
+  HEADER,
+  INVESTMENT_RECORDS,
+  SETTINGS,
+};

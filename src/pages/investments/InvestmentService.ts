@@ -16,6 +16,61 @@ import LoggerService from "$/services/LoggerService";
 import StorageService from "$/services/StorageService";
 import { getParsedObject } from "$/services/UtilService";
 
+const deleteInvestmentRecord = (investmentRecord: IInvestmentRecord): void => {
+  const baseData = extractInvestments();
+
+  if (!baseData) {
+    return;
+  }
+
+  let currentCategory;
+  let currentSubCategory;
+  let currentRecord;
+  let isDataUpdated;
+  for (let i = 0; i < baseData.categories.length; i++) {
+    currentCategory = baseData.categories[i];
+    if (currentCategory.label !== investmentRecord.category) {
+      continue;
+    }
+    for (let j = 0; j < currentCategory.subCategories.length; j++) {
+      currentSubCategory = currentCategory.subCategories[j];
+      if (currentSubCategory.label !== investmentRecord.subCategory) {
+        continue;
+      }
+      for (let k = 0; k < currentSubCategory.records.length; k++) {
+        currentRecord = currentSubCategory.records[k];
+        if (
+          currentRecord.folio === investmentRecord.folio &&
+          currentRecord.goal === investmentRecord.goal
+        ) {
+          currentSubCategory.records.splice(k, 1);
+          isDataUpdated = true;
+          LoggerService.info(COMMON.actions.delete.success);
+          break;
+        }
+      }
+    }
+  }
+  if (isDataUpdated) {
+    persistInvestments(JSON.stringify(baseData));
+  }
+};
+
+/**
+ * @description Extract investments from storage.
+ * @returns extracted data if available else null.
+ */
+const extractInvestments = (): IBaseData | null => {
+  const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
+  if (savedData) {
+    const extractedData = getParsedObject(savedData);
+    if (isDashboardDataValid(extractedData)) {
+      return extractedData;
+    }
+  }
+  return null;
+};
+
 /**
  * @description Function to get Investment columns
  * @param isMobile {boolean}
@@ -81,6 +136,26 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
     },
   ];
 };
+
+/**
+ * @description Persist Investment Data
+ * @param investmentData {string} Investment Data to be persisted.
+ * @returns investment data object which is persisted.
+ */
+const persistInvestments = (investmentData: string): IBaseData | null => {
+  const newInvestmentData = getParsedObject(investmentData);
+
+  if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
+    StorageService.set(
+      APP_CONFIG.sessionStorage.appData,
+      JSON.stringify(newInvestmentData)
+    );
+  } else {
+    LoggerService.error(ERRORS.data.corrupt);
+  }
+  return newInvestmentData;
+};
+
 /**
  *@description Prepare Investment Records
  * @param categories {ICategory[]} Category Array
@@ -121,80 +196,6 @@ const prepareInvestmentRecords = (categories: ICategory[]) => {
   }
 
   return result;
-};
-
-/**
- * @description Persist Investment Data
- * @param investmentData {string} Investment Data to be persisted.
- * @returns investment data object which is persisted.
- */
-const persistInvestments = (investmentData: string): IBaseData | null => {
-  const newInvestmentData = getParsedObject(investmentData);
-
-  if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
-    StorageService.set(
-      APP_CONFIG.sessionStorage.appData,
-      JSON.stringify(newInvestmentData)
-    );
-  } else {
-    LoggerService.error(ERRORS.data.corrupt);
-  }
-  return newInvestmentData;
-};
-
-/**
- * @description Extract investments from storage.
- * @returns extracted data if available else null.
- */
-const extractInvestments = (): IBaseData | null => {
-  const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
-  if (savedData) {
-    const extractedData = getParsedObject(savedData);
-    if (isDashboardDataValid(extractedData)) {
-      return extractedData;
-    }
-  }
-  return null;
-};
-
-const deleteInvestmentRecord = (investmentRecord: IInvestmentRecord): void => {
-  const baseData = extractInvestments();
-
-  if (!baseData) {
-    return;
-  }
-
-  let currentCategory;
-  let currentSubCategory;
-  let currentRecord;
-  let isDataUpdated;
-  for (let i = 0; i < baseData.categories.length; i++) {
-    currentCategory = baseData.categories[i];
-    if (currentCategory.label !== investmentRecord.category) {
-      continue;
-    }
-    for (let j = 0; j < currentCategory.subCategories.length; j++) {
-      currentSubCategory = currentCategory.subCategories[j];
-      if (currentSubCategory.label !== investmentRecord.subCategory) {
-        continue;
-      }
-      for (let k = 0; k < currentSubCategory.records.length; k++) {
-        currentRecord = currentSubCategory.records[k];
-        if (
-          currentRecord.folio === investmentRecord.folio &&
-          currentRecord.goal === investmentRecord.goal
-        ) {
-          currentSubCategory.records.splice(k, 1);
-          isDataUpdated = true;
-          LoggerService.info(COMMON.actions.delete.success);
-          break;
-        }
-      }
-    }
-  }
-  if (isDataUpdated) {
-    persistInvestments(JSON.stringify(baseData));
-  }
 };
 
 export {

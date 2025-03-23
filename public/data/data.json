@@ -21,35 +21,6 @@
           "exitLoad": "0",
           "expenseRatio": 1.87,
           "firstInvestmentDate": "Dec-16",
-          "fundHouse": "birla",
-          "fundManagers": ["Ajay Garg"],
-          "fundSize": 516.53,
-          "id": 0,
-          "label": "ABSL Tax Plan",
-          "launchDate": "02-Jan-2013",
-          "notes": [""],
-          "rating": 4,
-          "returns": [
-            ["1", 40.2],
-            ["3", 5.29],
-            ["5", 11.92],
-            ["Since Inception", 14.89]
-          ],
-          "shortName": "ABSL",
-          "records": [
-            {
-              "currentValue": 180115,
-              "folio": "12345",
-              "investedValue": 100110
-            }
-          ],
-          "value": 0
-        },
-        {
-          "absoluteValue": 0,
-          "exitLoad": "0",
-          "expenseRatio": 1.87,
-          "firstInvestmentDate": "Dec-16",
           "fundHouse": "axis",
           "fundManagers": ["Ajay Garg"],
           "fundSize": 516.53,
@@ -114,147 +85,6 @@
       "label": "Shares",
       "notes": "Value is meant for graphs. total is meant for calculations.",
       "value": 0
-    },
-    {
-      "absoluteValue": 0,
-      "color": "#5cb85c",
-      "expenseRatio": 0,
-      "goal": "retirement",
-      "id": 3,
-      "subCategories": [
-        {
-          "firstInvestmentDate": "111",
-          "fundHouse": "ppf",
-          "id": 0,
-          "label": "PPF 2015-20",
-          "launchDate": "111",
-          "shortName": "PPF 15",
-          "records": [
-            {
-              "currentValue": 258220,
-              "folio": "SBI",
-              "investedValue": 202200
-            }
-          ],
-          "value": 0
-        },
-        {
-          "firstInvestmentDate": "111",
-          "fundHouse": "ppf",
-          "id": 1,
-          "label": "PPF 2021-25",
-          "launchDate": "111",
-          "shortName": "PPF 21",
-          "records": [
-            {
-              "currentValue": 30228,
-              "folio": "SBI",
-              "investedValue": 20220
-            }
-          ],
-          "value": 0
-        }
-      ],
-      "label": "PPF",
-      "notes": [""],
-      "value": 0
-    },
-    {
-      "absoluteValue": 0,
-      "color": "gold",
-      "expenseRatio": 0,
-      "id": 4,
-      "subCategories": [
-        {
-          "exitLoad": "0",
-          "expenseRatio": 0,
-          "firstInvestmentDate": "Nov-21",
-          "fundHouse": "sbi",
-          "fundManagers": ["RBI"],
-          "fundSize": 0,
-          "id": 1,
-          "label": "Sovereign Gold Bond",
-          "launchDate": "Nov-2015",
-          "rating": 4,
-          "returns": [],
-          "shortName": "Sovereign Gold",
-          "records": [
-            {
-              "currentValue": 12345,
-              "folio": "Sovereign Gold Bond",
-              "goal": "retirement",
-              "investedValue": 124761
-            }
-          ],
-          "value": 0
-        }
-      ],
-      "label": "Gold",
-      "notes": [""],
-      "value": 0
-    },
-    {
-      "absoluteValue": 0,
-      "color": "green",
-      "expenseRatio": 0,
-      "goal": "retirement",
-      "id": 5,
-      "subCategories": [
-        {
-          "absoluteValue": 0,
-          "firstInvestmentDate": "111",
-          "fundHouse": "epf",
-          "id": 1,
-          "label": "e-Zest",
-          "launchDate": "111",
-          "shortName": "e-Zest",
-          "records": [
-            {
-              "currentValue": 26367,
-              "folio": "EPF",
-              "investedValue": 22534
-            }
-          ],
-          "value": 0
-        },
-        {
-          "absoluteValue": 0,
-          "firstInvestmentDate": "111",
-          "fundHouse": "epf",
-          "id": 2,
-          "label": "Globant",
-          "launchDate": "111",
-          "shortName": "Globant",
-          "records": [
-            {
-              "currentValue": 70592,
-              "folio": "EPF",
-              "investedValue": 70496
-            }
-          ],
-          "value": 0
-        },
-        {
-          "absoluteValue": 0,
-          "firstInvestmentDate": "111",
-          "fundHouse": "epf",
-          "id": 3,
-          "label": "WU",
-          "launchDate": "111",
-          "shortName": "WU",
-          "records": [
-            {
-              "currentValue": 98205,
-              "folio": "EPF",
-              "investedValue": 97441
-            }
-          ],
-          "value": 0
-        }
-      ],
-      "label": "EPF",
-      "notes": [""],
-      "value": 0
     }
   ],
   "config": {
@@ -272,7 +102,7 @@
     },
     {
       "collection": 0,
-      "id": 1,
+      "id": 2,
       "isOnTrack": true,
       "label": "Retirement",
       "notes": [""],

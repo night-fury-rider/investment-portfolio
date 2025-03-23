@@ -11,7 +11,6 @@ const APP_CONFIG = {
       value: "en",
     },
   ],
-
   numberFormats: [
     {
       title: "Indian Format (en-IN)",

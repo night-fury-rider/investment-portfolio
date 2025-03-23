@@ -65,7 +65,7 @@ type ISubCategory = {
   launchDate?: string;
   notes?: string[];
   rating?: number;
-  returns?: [[string, number]];
+  returns?: (string | number)[][];
   shortName?: string;
 };
 

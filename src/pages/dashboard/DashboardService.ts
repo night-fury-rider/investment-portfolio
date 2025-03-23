@@ -1,19 +1,89 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { IBaseData, ICategory, ISubCategory } from "global.types";
+import { IBaseData, ICategory, IGoal, ISubCategory } from "global.types";
 import LoggerService from "$/services/LoggerService";
 import { getTotalAmountInSelectedUnit } from "$/services/UtilService";
+import { ADD_INVESTMENT } from "$/constants/strings.constants";
 
-const getTotalAmount = (categories: ICategory[]) => {
-  if (!Array.isArray(categories)) {
-    LoggerService.error(`Incorrect Number is passed for getting total amount`);
-    return 0;
-  }
-  const totalAmount = categories.reduce(
-    (acc, currentObj) => acc + (Number(currentObj.value) || 0),
-    0
-  );
+const createCategory = (
+  label: string,
+  absoluteValue = 0,
+  color = "skyblue",
+  expenseRatio = -1,
+  goal = "",
+  id = -1,
+  notes = [""],
+  value = 0
+): ICategory => {
+  return {
+    absoluteValue,
+    color,
+    id,
+    subCategories: [],
+    label,
+    value,
+    expenseRatio,
+    goal,
+    notes,
+  };
+};
 
-  return getTotalAmountInSelectedUnit(totalAmount);
+const createGoal = (
+  label: string,
+  collection = 0,
+  id = -1,
+  targetAmount = 0,
+  isOnTrack = false,
+  notes = [""],
+  targetDate = ""
+): IGoal => {
+  return {
+    label,
+    collection,
+    id,
+    targetAmount,
+    isOnTrack,
+    notes,
+    targetDate,
+  };
+};
+
+const createSubCategory = (
+  label: string,
+  absoluteValue = 0,
+  exitLoad = "-1",
+  expenseRatio = -1,
+  firstInvestmentDate = "",
+  fundManagers = [""],
+  fundHouse = "",
+  fundSize = -1,
+  goal = "",
+  id = -1,
+  launchDate = "",
+  notes = [""],
+  rating = -1,
+  returns = [["-1", -1]],
+  shortName = "",
+  value = 0
+): ISubCategory => {
+  return {
+    label,
+    absoluteValue,
+    id,
+    records: [],
+    value,
+    exitLoad,
+    expenseRatio,
+    firstInvestmentDate,
+    fundHouse,
+    fundManagers,
+    fundSize,
+    goal,
+    launchDate,
+    notes,
+    rating,
+    returns,
+    shortName,
+  };
 };
 
 const getBarChartData = (barChartData: ISubCategory[]) =>
@@ -33,6 +103,34 @@ const getHighestItemIndex = (barChartData: ISubCategory[]) =>
       currentObj.value > barChartData[accumulator].value ? index : accumulator,
     0
   );
+
+const getSubCategories = (
+  categories: ICategory[],
+  selectedCategoryLabel: string
+): ISubCategory[] => {
+  const selectedCategory = categories.find(
+    (categoryObj) => categoryObj?.label === selectedCategoryLabel
+  );
+  let subCategories = [] as ISubCategory[];
+  if (selectedCategory?.subCategories) {
+    subCategories = [...selectedCategory?.subCategories];
+  }
+  subCategories.push(createSubCategory(ADD_INVESTMENT.createNew.subCategory));
+  return subCategories;
+};
+
+const getTotalAmount = (categories: ICategory[]) => {
+  if (!Array.isArray(categories)) {
+    LoggerService.error(`Incorrect Number is passed for getting total amount`);
+    return 0;
+  }
+  const totalAmount = categories.reduce(
+    (acc, currentObj) => acc + (Number(currentObj.value) || 0),
+    0
+  );
+
+  return getTotalAmountInSelectedUnit(totalAmount);
+};
 
 const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
   /***
@@ -125,8 +223,12 @@ const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
 };
 
 export {
+  createCategory,
+  createGoal,
+  createSubCategory,
   getBarChartData,
   getHighestItemIndex,
+  getSubCategories,
   getTotalAmount,
   isDashboardDataValid,
   refineEntireData,

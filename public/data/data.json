@@ -13,7 +13,7 @@
       "absoluteValue": 0,
       "color": "orange",
       "expenseRatio": 0,
-      "goal": "retirement",
+      "goal": "Retirement",
       "id": 1,
       "subCategories": [
         {
@@ -25,7 +25,7 @@
           "fundManagers": ["Ajay Garg"],
           "fundSize": 516.53,
           "id": 0,
-          "label": "Axis Tax Plan",
+          "label": "Axis Mutual Fund",
           "launchDate": "02-Jan-2013",
           "notes": [""],
           "rating": 4,
@@ -57,7 +57,7 @@
       "absoluteValue": 0,
       "color": "violet",
       "expenseRatio": 0,
-      "goal": "retirement",
+      "goal": "Retirement",
       "id": 2,
       "subCategories": [
         {
@@ -83,7 +83,7 @@
         }
       ],
       "label": "Shares",
-      "notes": "Value is meant for graphs. total is meant for calculations.",
+      "notes": "Value is meant for graphs. absoluteValue is meant for calculations.",
       "value": 0
     }
   ],

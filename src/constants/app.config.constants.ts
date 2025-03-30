@@ -31,9 +31,19 @@ const APP_CONFIG = {
     appData: "investmentData",
     language: "language",
     numberFormat: "numberFormat",
+    valueType: "valueType",
   },
   unit: "Lakh",
-  defaultValueType: "investedValue",
+  valueTypes: [
+    {
+      title: "Invested Value",
+      value: "investedValue",
+    },
+    {
+      title: "Current Value",
+      value: "currentValue",
+    },
+  ],
 };
 
 export default APP_CONFIG;

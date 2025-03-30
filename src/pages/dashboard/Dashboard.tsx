@@ -44,6 +44,9 @@ const Dashboard = ({ categories }: iDashboardProps) => {
   const [numberFormat, setNumberFormat] = useState(
     APP_CONFIG?.numberFormats?.[0]?.value
   );
+  const [valueType, setValueType] = useState(
+    APP_CONFIG?.valueTypes?.[0]?.value
+  );
 
   /* Use Effect for one time tasks */
   useEffect(() => {
@@ -53,13 +56,20 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
     }
+
+    const storedValueType = StorageService.get(
+      APP_CONFIG?.sessionStorage?.valueType
+    );
+    if (storedValueType) {
+      setValueType(storedValueType);
+    }
   }, []);
 
   useEffect(() => {
     setSelectedCategoryIndex(0);
     setSelectedItemIndex(0);
-    setRefinedData(refineEntireData(categories));
-  }, [categories]);
+    setRefinedData(refineEntireData(categories, valueType));
+  }, [categories, valueType]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);

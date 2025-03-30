@@ -26,7 +26,7 @@ const ADD_INVESTMENT = {
     newItemPlaceholder: "Enter a New Sub-Category",
   },
   submitBtnLabel: "Add Investment",
-  successMessage: "Investment added successfully",
+  successMessage: "Investment added successfully.",
 };
 
 const COMMON = {
@@ -122,6 +122,11 @@ const SETTINGS = {
     title: "Number Format",
     instruction: "Select Format",
     sampleNumber: "Sample Number (1234567890): ",
+  },
+  successMessage: "Settings updated successfully.",
+  valueType: {
+    title: "Value Type",
+    instruction: "Select Value Type",
   },
 };
 

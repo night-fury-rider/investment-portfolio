@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import data from "$/public/data/data.json";
 import { ibmFont } from "app/fonts";
@@ -25,7 +26,6 @@ import {
 import LoggerService from "$/services/LoggerService";
 import StorageService from "$/services/StorageService";
 import AddInvestment from "pages/add-investment/AddInvestment";
-import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();

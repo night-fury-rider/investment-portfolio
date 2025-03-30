@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   useTheme,
   MenuItem,
@@ -14,24 +13,35 @@ import {
   Theme,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 import { SETTINGS } from "$/constants/strings.constants";
 import APP_CONFIG from "$/constants/app.config.constants";
 import StorageService from "$/services/StorageService";
+import Snackbar from "$/components/Snackbar/Snackbar";
 
 const Settings: React.FC = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   const [numberFormat, setNumberFormat] = useState(
-    APP_CONFIG?.numberFormats[0]?.value
+    APP_CONFIG?.numberFormats?.[0]?.value
   );
-  const [language, setLanguage] = useState(APP_CONFIG?.languages[0]?.value);
+  const [language, setLanguage] = useState(APP_CONFIG?.languages?.[0]?.value);
+  const [valueType, setValueType] = useState(
+    APP_CONFIG?.valueTypes?.[0]?.value
+  );
+
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [isPrimaryButtonDisabled, setisPrimaryButtonDisabled] = useState(true);
+  const [isSettingsSuccessSnackbarOpen, setSettingsSuccessSnackbarOpen] =
+    useState(false);
 
   const [initialSettings, setInitialSettings] = useState({
-    numberFormat: APP_CONFIG?.numberFormats[0]?.value,
-    language: APP_CONFIG?.languages[0]?.value,
+    numberFormat: APP_CONFIG?.numberFormats?.[0]?.value,
+    language: APP_CONFIG?.languages?.[0]?.value,
+    valueType: APP_CONFIG?.valueTypes?.[0]?.value,
   });
 
   /* Use Effect for one time tasks */
@@ -39,20 +49,28 @@ const Settings: React.FC = () => {
     const storedNumberFormat = StorageService.get(
       APP_CONFIG?.sessionStorage?.numberFormat
     );
-    const storedLanguage = StorageService.get(
-      APP_CONFIG?.sessionStorage?.language
-    );
-
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
     }
+
+    const storedLanguage = StorageService.get(
+      APP_CONFIG?.sessionStorage?.language
+    );
     if (storedLanguage) {
       setLanguage(storedLanguage);
     }
 
+    const storedValueType = StorageService.get(
+      APP_CONFIG?.sessionStorage?.valueType
+    );
+    if (storedValueType) {
+      setValueType(storedValueType);
+    }
+
     setInitialSettings({
-      numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats[0]?.value,
-      language: storedLanguage || APP_CONFIG?.languages[0]?.value,
+      numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats?.[0]?.value,
+      language: storedLanguage || APP_CONFIG?.languages?.[0]?.value,
+      valueType: storedValueType || APP_CONFIG?.valueTypes?.[0]?.value,
     });
 
     setIsInitialRender(false);
@@ -68,28 +86,43 @@ const Settings: React.FC = () => {
     setLanguage(event.target.value);
   };
 
+  const handleValueTypeChange = (event: SelectChangeEvent) => {
+    setValueType(event.target.value);
+  };
+
   const handleApplySettings = () => {
     StorageService.set(APP_CONFIG?.sessionStorage?.numberFormat, numberFormat);
     StorageService.set(APP_CONFIG?.sessionStorage?.language, language);
-    setInitialSettings({ numberFormat, language });
+    StorageService.set(APP_CONFIG?.sessionStorage?.valueType, valueType);
+    setInitialSettings({ numberFormat, language, valueType });
     setisPrimaryButtonDisabled(true);
+    setSettingsSuccessSnackbarOpen(true);
   };
 
   useEffect(() => {
     const isChanged =
       numberFormat !== initialSettings.numberFormat ||
-      language !== initialSettings.language;
+      language !== initialSettings.language ||
+      valueType !== initialSettings.valueType;
     setisPrimaryButtonDisabled(!isChanged);
-  }, [numberFormat, language, initialSettings]);
+  }, [numberFormat, language, initialSettings, valueType]);
 
   if (isInitialRender) {
     return null;
   }
 
+  /**
+   * @description Close Settings update success snackbar.
+   */
+  const closeSuccessSnackbar = () => {
+    setSettingsSuccessSnackbarOpen(false);
+    router.push(APP_CONFIG.routes.home);
+  };
+
   return (
     <Grid
       container
-      rowSpacing={{ xs: 5, sm: 5, md: 10, lg: 10 }}
+      rowSpacing={{ xs: 5, sm: 5, md: 5, lg: 5 }}
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       {/* Number Format Selection */}
@@ -114,7 +147,7 @@ const Settings: React.FC = () => {
                 label={SETTINGS.numberFormat.instruction}
                 sx={styles.select}
               >
-                {APP_CONFIG.numberFormats.map((numberFormatObj, index) => (
+                {APP_CONFIG?.numberFormats?.map((numberFormatObj, index) => (
                   <MenuItem
                     value={numberFormatObj.value}
                     key={numberFormatObj.value + "_" + index}
@@ -165,6 +198,42 @@ const Settings: React.FC = () => {
         </Card>
       </Grid>
 
+      {/* Value Type Selection */}
+      <Grid
+        size={{ xs: 4, sm: 8, md: 5 }}
+        sx={{ marginTop: 2 }}
+        offset={{ md: 0.5 }}
+      >
+        <Card variant="outlined" sx={styles.card}>
+          <CardContent sx={styles.cardContent}>
+            <Typography variant="h6" sx={styles.cardTitle}>
+              {SETTINGS.valueType.title}
+            </Typography>
+            <FormControl fullWidth>
+              <InputLabel id="value-type-label">
+                {SETTINGS.valueType.instruction}
+              </InputLabel>
+              <Select
+                labelId="value-type-label"
+                value={valueType}
+                onChange={handleValueTypeChange}
+                label={SETTINGS.valueType.instruction}
+                sx={styles.select}
+              >
+                {APP_CONFIG.valueTypes.map((valueTypeObj, index) => (
+                  <MenuItem
+                    value={valueTypeObj.value}
+                    key={valueTypeObj.value + "_" + index}
+                  >
+                    {valueTypeObj.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </CardContent>
+        </Card>
+      </Grid>
+
       {/* Apply Button */}
       <Grid size={{ xs: 4, sm: 8, md: 5 }} offset={{ md: 3 }}>
         <Box textAlign="center">
@@ -187,6 +256,12 @@ const Settings: React.FC = () => {
           {new Intl.NumberFormat(numberFormat).format(1234567890)}
         </Typography>
       </Grid>
+      <Snackbar
+        message={SETTINGS.successMessage}
+        open={isSettingsSuccessSnackbarOpen}
+        onClose={closeSuccessSnackbar}
+        severity="success"
+      />
     </Grid>
   );
 };

@@ -27,6 +27,7 @@ const ADD_INVESTMENT = {
   },
   submitBtnLabel: "Add Investment",
   successMessage: "Investment added successfully.",
+  title: "Add Investment",
 };
 
 const COMMON = {

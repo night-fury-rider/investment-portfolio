@@ -9,7 +9,7 @@ import ErrorBoundary from "$/components/ErrorBoundary/ErrorBoundary";
 import Header from "$/components/Header/Header";
 import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
-import { ERRORS, INVESTMENT_RECORDS } from "$/constants/strings.constants";
+import { ADD_INVESTMENT, ERRORS } from "$/constants/strings.constants";
 import { IBaseData, ICategory, IGoal, INewInvestment } from "global.types";
 import {
   createCategory,
@@ -163,7 +163,7 @@ export default function Page() {
         <Header
           isInvestmentsPage
           updateData={updateData}
-          title={INVESTMENT_RECORDS.title}
+          title={ADD_INVESTMENT.title}
         />
         <ErrorBoundary>
           <AddInvestment

@@ -39,19 +39,21 @@ const Page = () => {
       const extractedData = getParsedObject(savedData);
       if (isDashboardDataValid(extractedData)) {
         setCategories(extractedData.categories);
+        setIsInitialRender(false);
       } else if (isDashboardDataValid(baseData)) {
         setCategories(baseData.categories);
+        setIsInitialRender(false);
       } else {
         router.push(APP_CONFIG.routes.addInvestment);
       }
     } else {
       if (isDashboardDataValid(baseData)) {
         setCategories(baseData.categories);
+        setIsInitialRender(false);
       } else {
         router.push(APP_CONFIG.routes.addInvestment);
       }
     }
-    setIsInitialRender(false);
   }, []);
 
   const updateData = (data: string) => {

@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid2";
 import React, { useState } from "react";
 
 import { ICategory, IGoal, INewInvestment } from "global.types";
+import Snackbar from "$/components/Snackbar/Snackbar";
 import {
   createCategory,
   createGoal,
@@ -47,6 +48,7 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
   });
 
   const [loading, setLoading] = useState(false);
+  const [openAddSuccessSnackbar, setOpenAddSuccessSnackbar] = useState(false);
 
   const newGoal = createGoal(ADD_INVESTMENT.createNew.goal);
   const newCategory = createCategory(ADD_INVESTMENT.createNew.category);
@@ -133,19 +135,26 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      const newInvestment = getNewInvestmentObj(
-        categories,
-        goals,
-        investment.amount,
-        investment?.customCategory || investment.category,
-        investment.folioName,
-        investment?.customGoal || investment.goal,
-        investment?.customSubCategory || investment.subCategory,
-        investment.transactionDate
-      );
-      addInvestment(newInvestment);
-      alert(ADD_INVESTMENT.successMessage);
+      setOpenAddSuccessSnackbar(true);
     }, 1000);
+  };
+
+  /**
+   * @description Close Add Investment success snackbar.
+   */
+  const closeSuccessSnackbar = () => {
+    const newInvestment = getNewInvestmentObj(
+      categories,
+      goals,
+      investment.amount,
+      investment?.customCategory || investment.category,
+      investment.folioName,
+      investment?.customGoal || investment.goal,
+      investment?.customSubCategory || investment.subCategory,
+      investment.transactionDate
+    );
+    addInvestment(newInvestment);
+    setOpenAddSuccessSnackbar(false);
   };
 
   return (
@@ -314,6 +323,12 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
               </Button>
             </Grid>
           </Grid>
+          <Snackbar
+            message={ADD_INVESTMENT.successMessage}
+            open={openAddSuccessSnackbar}
+            onClose={closeSuccessSnackbar}
+            severity="success"
+          />
         </form>
       </Box>
     </Container>

@@ -66,7 +66,3 @@ npx serve -l 8888 --cors
 ```
 
 Open [http://localhost:8888](http://localhost:8888) with your browser to see the result.
-
-# Developer Notes
-
-- Attribute `value` is meant for displaying data to user. Attribute `absoluteValue` is meant for doing the calculations.

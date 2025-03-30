@@ -54,7 +54,7 @@ const Page = () => {
         router.push(APP_CONFIG.routes.addInvestment);
       }
     }
-  }, []);
+  }, [baseData, router]);
 
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);

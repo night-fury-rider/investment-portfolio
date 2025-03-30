@@ -31,7 +31,9 @@ export default function Page() {
   const router = useRouter();
 
   const [baseData, setBaseData] = useState(data as IBaseData);
-  const [goals, setGoals] = useState(baseData.goals as IGoal[]);
+  const [goals, setGoals] = useState(
+    Array.isArray(baseData.goals) ? (baseData.goals as IGoal[]) : []
+  );
   const [categories, setCategories] = useState(
     baseData.categories as ICategory[]
   );

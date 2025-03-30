@@ -2,8 +2,9 @@
 
 It serves as a digital platform where users can manage and track their investments in various financial assets. The website aims to provide individuals or institutional investors with the tool to monitor and optimize their portfolios based on their financial goals
 
-![Investment Portfolio_2025-02-08](https://github.com/user-attachments/assets/f66625f8-479f-4bfe-971d-6d6c5960f50d)
 
+![Investment Portfolio_2025-03-30](https://github.com/user-attachments/assets/581dd2c6-9d7e-4259-b57f-83eac751ac0a)
+ 
 ---
 
 # Technologies and Libraries Used

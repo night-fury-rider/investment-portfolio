@@ -15,6 +15,7 @@ import {
   createGoal,
   createSubCategory,
   isDashboardDataValid,
+  refineEntireData,
 } from "$/dashboard/DashboardService";
 import {
   generateRandomHexColor,
@@ -56,19 +57,35 @@ export default function Page() {
 
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);
-    if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
-      setCategories(newInvestmentData.categories);
-      setGoals(newInvestmentData.goals);
-      setBaseData(newInvestmentData);
-      StorageService.set(
-        APP_CONFIG.sessionStorage.appData,
-        JSON.stringify(newInvestmentData)
-      );
+
+    if (newInvestmentData) {
+      const refinedNewData = refineEntireData(newInvestmentData?.categories);
+      if (refinedNewData) {
+        newInvestmentData.absoluteValue =
+          refinedNewData?.absoluteValue || newInvestmentData?.absoluteValue;
+        newInvestmentData.categories =
+          refinedNewData?.categories || newInvestmentData?.categories;
+        newInvestmentData.value =
+          refinedNewData?.value || newInvestmentData?.value;
+      }
+
+      if (isDashboardDataValid(newInvestmentData)) {
+        setCategories(newInvestmentData.categories);
+        setGoals(newInvestmentData.goals);
+        setBaseData(newInvestmentData);
+        StorageService.set(
+          APP_CONFIG.sessionStorage.appData,
+          JSON.stringify(newInvestmentData)
+        );
+        router.push(APP_CONFIG.routes.home);
+      } else {
+        LoggerService.error(ERRORS.data.corrupt);
+        setOpenDataErrorSnackbar(true);
+      }
     } else {
       LoggerService.error(ERRORS.data.corrupt);
       setOpenDataErrorSnackbar(true);
     }
-    router.push(APP_CONFIG.routes.home);
   };
 
   const handleCloseSnackbar = () => {

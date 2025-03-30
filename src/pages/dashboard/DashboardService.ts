@@ -221,8 +221,8 @@ const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
   );
 
   return {
-    categories,
     absoluteValue,
+    categories,
     value: Number(value.toFixed(APP_CONFIG.decimalPlaces)),
   };
 };

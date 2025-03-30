@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import data from "../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
+import { IBaseData, ICategory, IGoal, INewInvestment } from "global.types";
 import Header from "$/components/Header/Header";
 import AddInvestmentModal from "$/components/Modal/AddInvestmentModal";
 import Snackbar from "$/components/Snackbar/Snackbar";
@@ -13,8 +14,10 @@ import { ERRORS, HEADER } from "$/constants/strings.constants";
 import LoggerService from "$/services/LoggerService";
 import { getClonedObject, getParsedObject } from "$/services/UtilService";
 import Dashboard from "$/dashboard/Dashboard";
-import { IBaseData, ICategory, IGoal, INewInvestment } from "global.types";
-import { isDashboardDataValid } from "$/dashboard/DashboardService";
+import {
+  isDashboardDataValid,
+  refineEntireData,
+} from "$/dashboard/DashboardService";
 import StorageService from "$/services/StorageService";
 
 const Page = () => {
@@ -50,14 +53,29 @@ const Page = () => {
 
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);
-    if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
-      setCategories(newInvestmentData.categories);
-      setGoals(newInvestmentData.goals);
-      setBaseData(newInvestmentData);
-      StorageService.set(
-        APP_CONFIG.sessionStorage.appData,
-        JSON.stringify(newInvestmentData)
-      );
+    if (newInvestmentData) {
+      const refinedNewData = refineEntireData(newInvestmentData?.categories);
+      if (refinedNewData) {
+        newInvestmentData.absoluteValue =
+          refinedNewData?.absoluteValue || newInvestmentData?.absoluteValue;
+        newInvestmentData.categories =
+          refinedNewData?.categories || newInvestmentData?.categories;
+        newInvestmentData.value =
+          refinedNewData?.value || newInvestmentData?.value;
+      }
+
+      if (isDashboardDataValid(newInvestmentData)) {
+        setCategories(newInvestmentData.categories);
+        setGoals(newInvestmentData.goals);
+        setBaseData(newInvestmentData);
+        StorageService.set(
+          APP_CONFIG.sessionStorage.appData,
+          JSON.stringify(newInvestmentData)
+        );
+      } else {
+        LoggerService.error(ERRORS.data.corrupt);
+        setOpenDataErrorSnackbar(true);
+      }
     } else {
       LoggerService.error(ERRORS.data.corrupt);
       setOpenDataErrorSnackbar(true);

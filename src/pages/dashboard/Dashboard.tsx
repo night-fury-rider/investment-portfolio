@@ -101,12 +101,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     handleScrollToSecondRow();
   };
 
-  const columns = [
-    { id: "folio", label: "Folio", numeric: false },
-    { id: "goal", label: "Goal", numeric: false },
-    { id: "investedValue", label: "Invested Value", numeric: true },
-    { id: "currentValue", label: "Current Value", numeric: true },
-  ];
+  const columns = APP_CONFIG.dashboardTableColumns;
 
   const headerStyles = {
     backgroundColor: COLORS.blue,

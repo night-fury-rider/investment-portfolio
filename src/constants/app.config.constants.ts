@@ -1,6 +1,13 @@
 // This file is intended to serve as the single source of truth for all app level configurations.
 
 const APP_CONFIG = {
+  dashboardTableColumns: [
+    { id: "date", label: "Date", numeric: false },
+    { id: "folio", label: "Folio", numeric: false },
+    { id: "goal", label: "Goal", numeric: false },
+    { id: "investedValue", label: "Invested Value", numeric: true },
+    { id: "currentValue", label: "Current Value", numeric: true },
+  ],
   decimalPlaces: 2,
   font: {
     family: "IBM Plex Serif",

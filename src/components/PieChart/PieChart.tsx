@@ -50,6 +50,7 @@ const PieChart = ({
   return (
     <>
       <ResponsivePie
+        id={"label"}
         data={data}
         margin={margin}
         innerRadius={0.5}

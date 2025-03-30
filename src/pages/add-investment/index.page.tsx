@@ -10,13 +10,25 @@ import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
 import { ERRORS, INVESTMENT_RECORDS } from "$/constants/strings.constants";
 import { IBaseData, ICategory, IGoal, INewInvestment } from "global.types";
-import { isDashboardDataValid } from "$/dashboard/DashboardService";
-import { getClonedObject, getParsedObject } from "$/services/UtilService";
+import {
+  createCategory,
+  createGoal,
+  createSubCategory,
+  isDashboardDataValid,
+} from "$/dashboard/DashboardService";
+import {
+  generateRandomHexColor,
+  getClonedObject,
+  getParsedObject,
+} from "$/services/UtilService";
 import LoggerService from "$/services/LoggerService";
 import StorageService from "$/services/StorageService";
 import AddInvestment from "pages/add-investment/AddInvestment";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const router = useRouter();
+
   const [baseData, setBaseData] = useState(data as IBaseData);
   const [goals, setGoals] = useState(baseData.goals as IGoal[]);
   const [categories, setCategories] = useState(
@@ -30,9 +42,9 @@ export default function Page() {
     const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
     if (savedData) {
       const extractedData = getParsedObject(savedData);
-
       if (isDashboardDataValid(extractedData)) {
         setCategories(extractedData.categories);
+        setGoals(extractedData.goals);
       }
     } else {
       StorageService.set(
@@ -56,6 +68,7 @@ export default function Page() {
       LoggerService.error(ERRORS.data.corrupt);
       setOpenDataErrorSnackbar(true);
     }
+    router.push(APP_CONFIG.routes.home);
   };
 
   const handleCloseSnackbar = () => {
@@ -64,16 +77,58 @@ export default function Page() {
 
   const addInvestment = (newInvestment: INewInvestment) => {
     const tmpCategories = getClonedObject(categories);
+    let categoryIndex = newInvestment?.categoryIndex;
+    const subCategoryIndex = newInvestment?.subCategoryIndex || 0;
+
+    const tmpGoals = getClonedObject(goals);
+
+    // Add Goal
+    if (newInvestment.goalIndex >= goals.length && newInvestment.goalName) {
+      const newGoalId = goals?.length ? goals?.length + 1 : -1;
+      tmpGoals.push(createGoal(newInvestment.goalName, { id: newGoalId }));
+    }
+
+    // Update Category
+    if (tmpCategories?.[categoryIndex]) {
+      tmpCategories[newInvestment.categoryIndex].absoluteValue +=
+        newInvestment.amount;
+      // New Category
+    } else if (newInvestment?.categoryName) {
+      categoryIndex = tmpCategories.length;
+      const categoryColor = generateRandomHexColor();
+      tmpCategories.push(
+        createCategory(newInvestment.categoryName, { color: categoryColor })
+      );
+    }
+
+    // Update Sub-Category
+    if (
+      tmpCategories?.[categoryIndex]?.subCategories?.[
+        newInvestment?.subCategoryIndex
+      ]
+    ) {
+      tmpCategories[categoryIndex].subCategories[
+        newInvestment.subCategoryIndex
+      ].absoluteValue += newInvestment.amount;
+      // New Sub-Category
+    } else if (newInvestment?.subCategoryName) {
+      tmpCategories[categoryIndex].subCategories.push(
+        createSubCategory(newInvestment.subCategoryName)
+      );
+    }
+
     tmpCategories[newInvestment.categoryIndex].subCategories[
-      newInvestment.subCategoryIndex
+      subCategoryIndex
     ].records.push({
       currentValue: newInvestment.amount,
       folio: newInvestment.folioName,
-      goal: goals[newInvestment.goalIndex].label,
+      goal: newInvestment?.goalName,
       investedValue: newInvestment.amount,
     });
     const tmpBaseData = getClonedObject(baseData);
+    tmpBaseData.absoluteValue += newInvestment.amount;
     tmpBaseData.categories = tmpCategories;
+    tmpBaseData.goals = tmpGoals;
     updateData(JSON.stringify(tmpBaseData));
   };
 

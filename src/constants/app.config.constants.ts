@@ -33,6 +33,7 @@ const APP_CONFIG = {
     numberFormat: "numberFormat",
   },
   unit: "Lakh",
+  defaultValueType: "investedValue",
 };
 
 export default APP_CONFIG;

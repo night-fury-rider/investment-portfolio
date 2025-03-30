@@ -6,13 +6,15 @@ import { ADD_INVESTMENT } from "$/constants/strings.constants";
 
 const createCategory = (
   label: string,
-  absoluteValue = 0,
-  color = "skyblue",
-  expenseRatio = -1,
-  goal = "",
-  id = -1,
-  notes = [""],
-  value = 0
+  {
+    absoluteValue = 0,
+    color = "skyblue",
+    expenseRatio = -1,
+    goal = "",
+    id = -1,
+    notes = [""],
+    value = 0,
+  } = {}
 ): ICategory => {
   return {
     absoluteValue,
@@ -29,12 +31,14 @@ const createCategory = (
 
 const createGoal = (
   label: string,
-  collection = 0,
-  id = -1,
-  targetAmount = 0,
-  isOnTrack = false,
-  notes = [""],
-  targetDate = ""
+  {
+    collection = 0,
+    id = -1,
+    targetAmount = 0,
+    isOnTrack = false,
+    notes = [""],
+    targetDate = "",
+  } = {}
 ): IGoal => {
   return {
     label,
@@ -146,38 +150,13 @@ const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
     !dashboardData?.goals ||
     !Array.isArray(dashboardData.goals) ||
     !dashboardData?.categories[0].subCategories ||
-    !Array.isArray(dashboardData.categories[0].subCategories)
+    !Array.isArray(dashboardData.categories[0].subCategories) ||
+    dashboardData?.absoluteValue === 0
   ) {
     return false;
   }
 
-  /**
-   * Dashboard data is valid if it contains any valid investment record.
-   */
-  let isValidInvestmentAmount = false;
-  InvestmentEmptyCheck: for (
-    let i = 0;
-    i < dashboardData?.categories?.length;
-    i++
-  ) {
-    const selectedCategory = dashboardData?.categories[i];
-    for (let j = 0; j < selectedCategory?.subCategories?.length; j++) {
-      const selectedSubCategory = selectedCategory?.subCategories[j];
-      for (let k = 0; k < selectedSubCategory?.records?.length; k++) {
-        const selectedRecord = selectedCategory?.subCategories[j]?.records[k];
-        if (
-          (selectedRecord.investedValue && selectedRecord.investedValue > 0) ||
-          (selectedRecord.currentValue && selectedRecord.currentValue > 0)
-        ) {
-          console.log(`It's valid data: ${JSON.stringify(selectedRecord)}`);
-          isValidInvestmentAmount = true;
-          break InvestmentEmptyCheck;
-        }
-      }
-    }
-  }
-
-  return isValidInvestmentAmount;
+  return true;
 };
 
 const refineEntireData = (categories: ICategory[], attr = "investedValue") => {

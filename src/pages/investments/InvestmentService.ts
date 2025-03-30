@@ -148,7 +148,7 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
  * @param categories {ICategories Array} - Categories Array
  * @param goals  {IGoals Array} - Goals Array
  * @param amount {string} - Amount to be added
- * @param category {string} - Category
+ * @param categoryName {string} - Category Name
  * @param folioName {string} - Folio Name
  * @param goal {string} - Goal Name
  * @param subCategory {string} - Sub Category Name
@@ -159,25 +159,25 @@ const getNewInvestmentObj = (
   categories: ICategory[],
   goals: IGoal[],
   amount: string,
-  category: string,
+  categoryName: string,
   folioName: string,
-  goal: string,
-  subCategory: string,
+  goalName: string,
+  subCategoryName: string,
   transactionDate?: string
 ): INewInvestment => {
-  let goalIndex = goals.findIndex((goalObj) => goalObj.label === goal);
+  let goalIndex = goals.findIndex((goalObj) => goalObj.label === goalName);
   if (goalIndex === -1) {
     goalIndex = goals.length;
   }
   let categoryIndex = categories.findIndex(
-    (categoryObj) => categoryObj.label === category
+    (categoryObj) => categoryObj.label === categoryName
   );
   if (categoryIndex === -1) {
     categoryIndex = categories.length;
   }
 
-  let subCategoryIndex = categories[categoryIndex].subCategories.findIndex(
-    (subCategoryObj) => subCategoryObj.label === subCategory
+  let subCategoryIndex = categories?.[categoryIndex]?.subCategories?.findIndex(
+    (subCategoryObj) => subCategoryObj.label === subCategoryName
   );
   if (subCategoryIndex === -1) {
     subCategoryIndex = categories[categoryIndex].subCategories.length;
@@ -185,9 +185,12 @@ const getNewInvestmentObj = (
   return {
     amount: Number(amount),
     categoryIndex,
+    categoryName,
     folioName,
     goalIndex,
+    goalName,
     subCategoryIndex,
+    subCategoryName,
     transactionDate,
   };
 };

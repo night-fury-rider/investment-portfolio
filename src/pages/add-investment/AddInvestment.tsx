@@ -137,10 +137,10 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
         categories,
         goals,
         investment.amount,
-        investment.category,
+        investment?.customCategory || investment.category,
         investment.folioName,
-        investment.goal,
-        investment.subCategory,
+        investment?.customGoal || investment.goal,
+        investment?.customSubCategory || investment.subCategory,
         investment.transactionDate
       );
       addInvestment(newInvestment);

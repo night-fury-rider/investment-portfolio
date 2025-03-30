@@ -92,6 +92,10 @@ const Page = () => {
     setOpenDataErrorSnackbar(false);
   };
 
+  const handleHeaderAddBtnPress = () => {
+    router.push(APP_CONFIG.routes.addInvestment);
+  };
+
   // To Avoid initial render flickering
   if (isInitialRender) {
     return null;
@@ -117,7 +121,7 @@ const Page = () => {
 
         <Header
           updateData={updateData}
-          handleAddBtnPress={openAddInvestmentModal}
+          handleAddBtnPress={handleHeaderAddBtnPress}
           title={HEADER.title}
         />
         <Dashboard categories={categories} />

@@ -33,6 +33,14 @@ const getParsedObject = (sourceObj: string) => {
   return result;
 };
 
+/**
+ * @description Generates a random hex color code.
+ * @returns {string} A random 6-digit hex color code (e.g., "#a3f5d9").
+ */
+
+const generateRandomHexColor = () =>
+  "#xxxxxx".replace(/x/g, () => ((Math.random() * 16) | 0).toString(16));
+
 const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
   if (isNaN(amount)) {
     LoggerService.error(`Incorrect Number is passed for getting amount`);
@@ -51,6 +59,7 @@ const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
 };
 
 export {
+  generateRandomHexColor,
   getClonedObject,
   getDateString,
   getParsedObject,

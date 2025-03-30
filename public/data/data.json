@@ -36,13 +36,7 @@
             ["Since Inception", 14.89]
           ],
           "shortName": "Axis",
-          "records": [
-            {
-              "currentValue": 0,
-              "folio": "12345",
-              "investedValue": 0
-            }
-          ],
+          "records": [],
           "value": 0
         }
       ],
@@ -70,13 +64,7 @@
           "marketCapInRsCr": 111,
           "promoterOwnership": 111,
           "shortName": "BCG",
-          "records": [
-            {
-              "currentValue": 0,
-              "folio": "Zerodha",
-              "investedValue": 0
-            }
-          ],
+          "records": [],
           "symbol": "BCG",
           "totalDebtInRsCr": 111,
           "value": 0

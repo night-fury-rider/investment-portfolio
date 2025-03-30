@@ -64,10 +64,6 @@ const Page = () => {
     }
   };
 
-  const openAddInvestmentModal = () => {
-    setIsAddInvestmentModalOpen(true);
-  };
-
   const closeAddInvestmentModal = () => {
     setIsAddInvestmentModalOpen(false);
   };

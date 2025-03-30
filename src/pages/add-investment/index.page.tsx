@@ -102,9 +102,9 @@ export default function Page() {
     const tmpGoals = getClonedObject(goals);
 
     // Add Goal
-    if (newInvestment.goalIndex >= goals.length && newInvestment.goalName) {
+    if (newInvestment.goalIndex >= goals.length && newInvestment.goal) {
       const newGoalId = goals?.length ? goals?.length + 1 : -1;
-      tmpGoals.push(createGoal(newInvestment.goalName, { id: newGoalId }));
+      tmpGoals.push(createGoal(newInvestment.goal, { id: newGoalId }));
     }
 
     // Update Category
@@ -112,11 +112,11 @@ export default function Page() {
       tmpCategories[newInvestment.categoryIndex].absoluteValue +=
         newInvestment.amount;
       // New Category
-    } else if (newInvestment?.categoryName) {
+    } else if (newInvestment?.category) {
       categoryIndex = tmpCategories.length;
       const categoryColor = generateRandomHexColor();
       tmpCategories.push(
-        createCategory(newInvestment.categoryName, { color: categoryColor })
+        createCategory(newInvestment.category, { color: categoryColor })
       );
     }
 
@@ -130,9 +130,9 @@ export default function Page() {
         newInvestment.subCategoryIndex
       ].absoluteValue += newInvestment.amount;
       // New Sub-Category
-    } else if (newInvestment?.subCategoryName) {
+    } else if (newInvestment?.subCategory) {
       tmpCategories[categoryIndex].subCategories.push(
-        createSubCategory(newInvestment.subCategoryName)
+        createSubCategory(newInvestment.subCategory)
       );
     }
 
@@ -140,8 +140,9 @@ export default function Page() {
       subCategoryIndex
     ].records.push({
       currentValue: newInvestment.amount,
+      date: newInvestment?.date || new Date().toString(),
       folio: newInvestment.folioName,
-      goal: newInvestment?.goalName,
+      goal: newInvestment?.goal,
       investedValue: newInvestment.amount,
     });
     const tmpBaseData = getClonedObject(baseData);

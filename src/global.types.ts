@@ -39,6 +39,7 @@ type IInvestmentRecord = {
   goal: string;
   investedValue: number;
   subCategory: string;
+  date?: string;
 };
 
 type INewInvestment = {
@@ -47,10 +48,21 @@ type INewInvestment = {
   folioName: string;
   goalIndex: number;
   subCategoryIndex: number;
-  categoryName?: string;
-  goalName?: string;
-  subCategoryName?: string;
-  transactionDate?: string;
+  category?: string;
+  date?: string;
+  goal?: string;
+  subCategory?: string;
+};
+
+type INewInvestmentParam = {
+  categories: ICategory[];
+  date: string;
+  goal: string;
+  goals: IGoal[];
+  amount: string;
+  category: string;
+  folioName: string;
+  subCategory: string;
 };
 
 type ISubCategory = {
@@ -74,9 +86,10 @@ type ISubCategory = {
 };
 
 type ISubItem = {
+  currentValue?: number;
+  date: string;
   folio: string;
   investedValue: number;
-  currentValue?: number;
   goal?: string;
 };
 
@@ -89,6 +102,7 @@ export type {
   IGoal,
   IInvestmentRecord,
   INewInvestment,
+  INewInvestmentParam,
   ISubCategory,
   ISubItem,
   IBaseData,

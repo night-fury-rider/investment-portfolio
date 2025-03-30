@@ -104,6 +104,7 @@ const HEADER = {
 const INVESTMENT_RECORDS = {
   category: "Category",
   currentValue: "Current (₹)",
+  date: "Date",
   folio: "Folio",
   goal: "Goal",
   investedValue: "Invested (₹)",

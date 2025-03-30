@@ -10,9 +10,9 @@ import {
 import {
   IBaseData,
   ICategory,
-  IGoal,
   IInvestmentRecord,
   INewInvestment,
+  INewInvestmentParam,
 } from "global.types";
 import {
   isDashboardDataValid,
@@ -85,6 +85,7 @@ const extractInvestments = (): IBaseData | null => {
 const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
   if (isMobile) {
     return [
+      { field: "date", headerName: INVESTMENT_RECORDS.date, width: 200 },
       { field: "goal", headerName: INVESTMENT_RECORDS.goal, width: 200 },
       {
         field: "category",
@@ -116,6 +117,7 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
     ];
   }
   return [
+    { field: "date", headerName: INVESTMENT_RECORDS.date, flex: 1 },
     { field: "goal", headerName: INVESTMENT_RECORDS.goal, flex: 1 },
     { field: "category", headerName: INVESTMENT_RECORDS.category, flex: 1 },
     {
@@ -155,29 +157,29 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
  * @param transactionDate {string} - Transaction Date
  * @returns newly created investment object
  */
-const getNewInvestmentObj = (
-  categories: ICategory[],
-  goals: IGoal[],
-  amount: string,
-  categoryName: string,
-  folioName: string,
-  goalName: string,
-  subCategoryName: string,
-  transactionDate?: string
-): INewInvestment => {
-  let goalIndex = goals.findIndex((goalObj) => goalObj.label === goalName);
+const getNewInvestmentObj = ({
+  categories,
+  date,
+  goals,
+  amount,
+  category,
+  folioName,
+  goal,
+  subCategory,
+}: INewInvestmentParam): INewInvestment => {
+  let goalIndex = goals.findIndex((goalObj) => goalObj.label === goal);
   if (goalIndex === -1) {
     goalIndex = goals.length;
   }
   let categoryIndex = categories.findIndex(
-    (categoryObj) => categoryObj.label === categoryName
+    (categoryObj) => categoryObj.label === category
   );
   if (categoryIndex === -1) {
     categoryIndex = categories.length;
   }
 
   let subCategoryIndex = categories?.[categoryIndex]?.subCategories?.findIndex(
-    (subCategoryObj) => subCategoryObj.label === subCategoryName
+    (subCategoryObj) => subCategoryObj.label === subCategory
   );
   if (subCategoryIndex === -1) {
     subCategoryIndex = categories[categoryIndex].subCategories.length;
@@ -185,13 +187,13 @@ const getNewInvestmentObj = (
   return {
     amount: Number(amount),
     categoryIndex,
-    categoryName,
+    category,
     folioName,
     goalIndex,
-    goalName,
+    goal,
     subCategoryIndex,
-    subCategoryName,
-    transactionDate,
+    subCategory,
+    date,
   };
 };
 

@@ -143,16 +143,16 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
    * @description Close Add Investment success snackbar.
    */
   const closeSuccessSnackbar = () => {
-    const newInvestment = getNewInvestmentObj(
-      categories,
-      goals,
-      investment.amount,
-      investment?.customCategory || investment.category,
-      investment.folioName,
-      investment?.customGoal || investment.goal,
-      investment?.customSubCategory || investment.subCategory,
-      investment.transactionDate
-    );
+    const newInvestment = getNewInvestmentObj({
+      amount: investment.amount,
+      categories: categories,
+      category: investment?.customCategory || investment.category,
+      date: investment.transactionDate,
+      folioName: investment.folioName,
+      goals: goals,
+      goal: investment?.customGoal || investment.goal,
+      subCategory: investment?.customSubCategory || investment.subCategory,
+    });
     addInvestment(newInvestment);
     setOpenAddSuccessSnackbar(false);
   };

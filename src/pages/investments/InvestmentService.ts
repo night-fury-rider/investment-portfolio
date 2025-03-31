@@ -250,6 +250,7 @@ const prepareInvestmentRecords = (categories: ICategory[]) => {
           id: recordId++,
           category: currentCategory.label,
           currentValue: currentRecord.currentValue || 0,
+          date: currentRecord.date,
           folio: currentRecord.folio,
           goal: currentRecord.goal || "",
           investedValue: currentRecord.investedValue,

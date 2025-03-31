@@ -34,12 +34,12 @@ type IGoal = {
 type IInvestmentRecord = {
   id: number;
   category: string;
+  date: string;
   currentValue: number;
   folio: string;
   goal: string;
   investedValue: number;
   subCategory: string;
-  date?: string;
 };
 
 type INewInvestment = {

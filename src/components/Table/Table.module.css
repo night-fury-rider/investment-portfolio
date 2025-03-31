@@ -1,5 +1,6 @@
 .tableContainer {
   padding: 3;
+  width: "100%";
 }
 
 /* Media queries for mobile devices */

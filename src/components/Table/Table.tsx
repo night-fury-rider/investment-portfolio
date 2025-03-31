@@ -84,7 +84,7 @@ const Table: React.FC<iTableProps> = ({
     isNumeric ? uvNumber.changeCurrencyFormat(Number(value), locale) : value;
 
   return (
-    <Box sx={{ width: "100%" }} className={styles.tableContainer}>
+    <Box className={styles.tableContainer}>
       <TableTitle variant="h4">{title}</TableTitle>
 
       <TableWrapper>

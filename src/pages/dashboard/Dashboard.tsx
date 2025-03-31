@@ -165,7 +165,11 @@ const Dashboard = ({ categories }: iDashboardProps) => {
 
         {/* Investment Table */}
         {refinedData?.categories?.length > 0 ? (
-          <Grid size={{ xs: 4, sm: 4, md: 6 }} ref={secondRowRef}>
+          <Grid
+            size={{ xs: 4, sm: 4, md: 10 }}
+            ref={secondRowRef}
+            offset={{ xs: 0, sm: 0, md: 1 }}
+          >
             <Box>
               <ErrorBoundary>
                 <Table

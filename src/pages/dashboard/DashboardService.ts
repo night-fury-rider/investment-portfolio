@@ -90,11 +90,25 @@ const createSubCategory = (
   };
 };
 
-const getBarChartData = (barChartData: ISubCategory[]) =>
-  barChartData.map((barChartObj) => ({
-    label: barChartObj.label,
-    value: barChartObj.value,
-  }));
+/**
+ * Processes an array of sub-category data to create a bar chart data array.
+ *
+ * @param {ISubCategory[]} barChartData - An array of sub-category data objects.
+ * @returns {Array<{label: string, value: number}>} - An array of objects suitable for a bar chart,
+ * containing label and value properties.
+ */
+const getBarChartData = (barChartData: ISubCategory[]) => {
+  const barChartArr = [];
+  for (let i = 0; i < barChartData.length; i++) {
+    if (barChartData[i].absoluteValue > 0) {
+      barChartArr.push({
+        label: barChartData[i].label,
+        value: barChartData[i].value,
+      });
+    }
+  }
+  return barChartArr;
+};
 
 /**
  * @description Finds the index of the item with the highest value in an array of subCategories.

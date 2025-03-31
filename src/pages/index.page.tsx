@@ -15,6 +15,7 @@ import { getParsedObject } from "$/services/UtilService";
 import Dashboard from "$/dashboard/Dashboard";
 import {
   isDashboardDataValid,
+  isDashboardEmpty,
   refineEntireData,
 } from "$/dashboard/DashboardService";
 import StorageService from "$/services/StorageService";
@@ -37,24 +38,33 @@ const Page = () => {
     // If data is available in storage, retrieve it
     if (savedData) {
       const extractedData = getParsedObject(savedData);
-      if (isDashboardDataValid(extractedData)) {
-        setCategories(extractedData.categories);
-        setIsInitialRender(false);
-      } else if (isDashboardDataValid(baseData)) {
-        setCategories(baseData.categories);
-        setIsInitialRender(false);
-      } else {
+      if (
+        !validateAndSetCategories(extractedData) &&
+        !validateAndSetCategories(baseData)
+      ) {
         router.push(APP_CONFIG.routes.addInvestment);
       }
     } else {
-      if (isDashboardDataValid(baseData)) {
-        setCategories(baseData.categories);
-        setIsInitialRender(false);
-      } else {
+      if (!validateAndSetCategories(baseData)) {
         router.push(APP_CONFIG.routes.addInvestment);
       }
     }
   }, [baseData, router]);
+
+  /**
+   * Validates the provided dashboard data and sets the categories if the data is valid and not empty.
+   *
+   * @param {IBaseData} data - The dashboard data to validate and set.
+   * @returns {boolean} - `true` if the data is valid and categories are set, `false` otherwise.
+   */
+  const validateAndSetCategories = (data: IBaseData) => {
+    if (isDashboardDataValid(data) && !isDashboardEmpty(data)) {
+      setCategories(data.categories);
+      setIsInitialRender(false);
+      return true;
+    }
+    return false;
+  };
 
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);

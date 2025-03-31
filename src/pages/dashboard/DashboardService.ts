@@ -136,28 +136,35 @@ const getTotalAmount = (categories: ICategory[]) => {
   return getTotalAmountInSelectedUnit(totalAmount);
 };
 
+/**
+ * Checks if the provided dashboard data is valid.
+ *
+ * @param {IBaseData} dashboardData - The dashboard data to validate.
+ * @returns {boolean} - `true` if the data is valid, `false` otherwise.
+ */
 const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
-  /***
-   * If data does not have valid
-   * - categories
-   * - goals
-   * - sub-categories
-   */
-
   if (
     !dashboardData?.categories ||
     !Array.isArray(dashboardData.categories) ||
     !dashboardData?.goals ||
     !Array.isArray(dashboardData.goals) ||
     !dashboardData?.categories[0].subCategories ||
-    !Array.isArray(dashboardData.categories[0].subCategories) ||
-    dashboardData?.absoluteValue === 0
+    !Array.isArray(dashboardData.categories[0].subCategories)
   ) {
     return false;
   }
 
   return true;
 };
+
+/**
+ * Checks if the provided dashboard data is considered empty.
+ *
+ * @param {IBaseData} dashboardData - The dashboard data to check for emptiness.
+ * @returns {boolean} - `true` if the data is empty (absoluteValue is 0), `false` otherwise.
+ */
+const isDashboardEmpty = (dashboardData: IBaseData): boolean =>
+  dashboardData?.absoluteValue === 0;
 
 const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
   let categoryTotal = 0;
@@ -236,5 +243,6 @@ export {
   getSubCategories,
   getTotalAmount,
   isDashboardDataValid,
+  isDashboardEmpty,
   refineEntireData,
 };

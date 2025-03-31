@@ -58,6 +58,10 @@ const deleteInvestmentRecord = (investmentRecord: IInvestmentRecord): void => {
     }
   }
   if (isDataUpdated) {
+    const updatedData = refineEntireData(baseData.categories);
+    baseData.absoluteValue = updatedData.absoluteValue;
+    baseData.categories = updatedData.categories;
+    baseData.value = updatedData.value;
     persistInvestments(JSON.stringify(baseData));
   }
 };

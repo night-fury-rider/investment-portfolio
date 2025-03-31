@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import Dialog from "$/components/Dialog/Dialog";
@@ -29,6 +30,8 @@ interface IInvestmentRecordProps {
 const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const router = useRouter();
+
   const [rows, setRows] = useState([] as IInvestmentRecord[]);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(rows[0]);
@@ -99,6 +102,7 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== selectedRow.id));
     deleteInvestmentRecord(selectedRow);
     handleClose();
+    router.push(APP_CONFIG.routes.addInvestment);
   };
 
   return (

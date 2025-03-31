@@ -13,7 +13,7 @@ const ADD_INVESTMENT = {
     goal: "Create a new Goal",
     subCategory: "Create a new Sub-Category",
   },
-  date: "Transaction Date",
+  date: "Date",
   folio: "Folio Name",
   goal: {
     inputLabel: "Goal",

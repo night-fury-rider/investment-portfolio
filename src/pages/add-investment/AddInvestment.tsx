@@ -11,7 +11,12 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import React, { useState } from "react";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
+import React, { useEffect, useState } from "react";
 
 import { ICategory, IGoal, INewInvestment } from "global.types";
 import Snackbar from "$/components/Snackbar/Snackbar";
@@ -21,8 +26,10 @@ import {
   getSubCategories,
 } from "$/dashboard/DashboardService";
 import { ADD_INVESTMENT } from "$/constants/strings.constants";
-import { getDateString } from "$/services/UtilService";
+import { formatDate } from "$/services/UtilService";
 import { getNewInvestmentObj } from "$/investments/InvestmentService";
+import APP_CONFIG from "$/constants/app.config.constants";
+import StorageService from "$/services/StorageService";
 
 interface IAddInvestmentProps {
   addInvestment: (newInvestment: INewInvestment) => void;
@@ -35,16 +42,20 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
   categories,
   goals,
 }) => {
+  const [dateFormat, setDateFormat] = useState(
+    APP_CONFIG?.dateFormats?.[0]?.value
+  );
+
   const [investment, setInvestment] = useState({
     amount: "",
     category: "",
+    date: new Date(),
     customCategory: "",
     customGoal: "",
     customSubCategory: "",
     folioName: "",
     goal: "",
     subCategory: "",
-    transactionDate: getDateString(new Date()),
   });
 
   const [loading, setLoading] = useState(false);
@@ -55,6 +66,18 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
   const goalOptions = [...goals, newGoal];
   const categoryOptions = [...categories, newCategory];
   const subCategoryOptions = getSubCategories(categories, investment.category);
+
+  const styles = getStyles();
+
+  /* Use Effect for one time tasks */
+  useEffect(() => {
+    const storedNumberFormat = StorageService.get(
+      APP_CONFIG?.sessionStorage?.dateFormat
+    );
+    if (storedNumberFormat) {
+      setDateFormat(storedNumberFormat);
+    }
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>
@@ -111,7 +134,6 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
       folioName,
       amount,
       subCategory,
-      transactionDate,
       customGoal,
       customCategory,
       customSubCategory,
@@ -125,8 +147,7 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
         customCategory !== "") &&
       (subCategory !== "" || customSubCategory !== "") &&
       folioName !== "" &&
-      amount !== "" &&
-      transactionDate !== ""
+      amount !== ""
     );
   };
 
@@ -147,7 +168,7 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
       amount: investment.amount,
       categories: categories,
       category: investment?.customCategory || investment.category,
-      date: investment.transactionDate,
+      date: formatDate({ date: investment.date, format: dateFormat }) || "",
       folioName: investment.folioName,
       goals: goals,
       goal: investment?.customGoal || investment.goal,
@@ -155,6 +176,12 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
     });
     addInvestment(newInvestment);
     setOpenAddSuccessSnackbar(false);
+  };
+
+  const updateDate = (newDate: Date | null) => {
+    if (newDate) {
+      setInvestment({ ...investment, date: newDate });
+    }
   };
 
   return (
@@ -290,20 +317,18 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
               />
             </Grid>
 
-            {/* Transaction Date */}
+            {/* Date */}
             <Grid size={{ xs: 12 }}>
-              <TextField
-                label={ADD_INVESTMENT.date}
-                name="transactionDate"
-                type="date"
-                value={investment.transactionDate}
-                onChange={handleInputChange}
-                fullWidth
-                required
-                InputLabelProps={{
-                  shrink: true, // To make the label appear correctly for the date input
-                }}
-              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  onChange={(newValue: Date | null) => updateDate(newValue)}
+                  label={ADD_INVESTMENT.date}
+                  defaultValue={new Date()}
+                  format="dd/MM/yyyy"
+                  value={investment.date}
+                  sx={styles.datePicker}
+                />
+              </LocalizationProvider>
             </Grid>
 
             {/* Submit Button */}
@@ -333,6 +358,14 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
       </Box>
     </Container>
   );
+};
+
+const getStyles = () => {
+  return {
+    datePicker: {
+      width: "100%",
+    },
+  };
 };
 
 export default AddInvestment;

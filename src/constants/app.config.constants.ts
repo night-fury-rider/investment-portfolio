@@ -8,6 +8,12 @@ const APP_CONFIG = {
     { id: "investedValue", label: "Invested Value", numeric: true },
     { id: "currentValue", label: "Current Value", numeric: true },
   ],
+  dateFormats: [
+    {
+      title: "DD-MMM-YYYY",
+      value: "DD-MMM-YYYY",
+    },
+  ],
   decimalPlaces: 2,
   font: {
     family: "IBM Plex Serif",
@@ -36,6 +42,7 @@ const APP_CONFIG = {
   },
   sessionStorage: {
     appData: "investmentData",
+    dateFormat: "dateFormat",
     language: "language",
     numberFormat: "numberFormat",
     valueType: "valueType",

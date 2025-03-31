@@ -78,7 +78,7 @@ const ERRORS = {
     message: "Error caught by ErrorBoundary:",
   },
   data: {
-    corrupt: "The upload data does not meet the required criteria.",
+    corrupt: "The data does not meet the required criteria.",
   },
 };
 

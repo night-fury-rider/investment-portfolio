@@ -128,6 +128,8 @@ const SETTINGS = {
   dateFormat: {
     title: "Date Format",
     instruction: "Select Format",
+    sampleDate: "24-Jul-2024",
+    sampleDateText: "Sample Date (24th July 2024): ",
   },
   successMessage: "Settings updated successfully.",
   valueType: {

@@ -20,6 +20,7 @@ import { SETTINGS } from "$/constants/strings.constants";
 import APP_CONFIG from "$/constants/app.config.constants";
 import StorageService from "$/services/StorageService";
 import Snackbar from "$/components/Snackbar/Snackbar";
+import { formatDate } from "$/services/UtilService";
 
 const Settings: React.FC = () => {
   const theme = useTheme();
@@ -309,11 +310,20 @@ const Settings: React.FC = () => {
         </Box>
       </Grid>
 
-      {/* Sample Number Display */}
+      {/* Sample Displays */}
       <Grid size={{ xs: 4, sm: 8, md: 5 }} offset={{ md: 3 }}>
         <Typography variant="body1" sx={styles.sampleNumber}>
           {SETTINGS.numberFormat.sampleNumber}
           {new Intl.NumberFormat(numberFormat).format(1234567890)}
+        </Typography>
+
+        <Typography variant="body1" sx={styles.sampleNumber}>
+          {SETTINGS.dateFormat.sampleDateText}
+
+          {formatDate({
+            date: SETTINGS.dateFormat.sampleDate,
+            format: dateFormat,
+          })}
         </Typography>
       </Grid>
       <Snackbar

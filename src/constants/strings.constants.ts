@@ -136,6 +136,12 @@ const SETTINGS = {
     title: "Value Type",
     instruction: "Select Value Type",
   },
+  currencyUnit: {
+    title: "Currency Unit",
+    instruction: "Select Currency Unit",
+    sampleAmount: 1234567890,
+    sampleText: "Sample Amount (1234567890): ",
+  },
 };
 
 export {

@@ -1,6 +1,24 @@
 // This file is intended to serve as the single source of truth for all app level configurations.
 
 const APP_CONFIG = {
+  currencyUnits: [
+    {
+      title: "Lakhs",
+      value: 100000,
+    },
+    {
+      title: "Thousands",
+      value: 1000,
+    },
+    {
+      title: "Millions",
+      value: 1000000,
+    },
+    {
+      title: "Crores",
+      value: 10000000,
+    },
+  ],
   dashboardTableColumns: [
     { id: "date", label: "Date", numeric: false },
     { id: "folio", label: "Folio", numeric: false },
@@ -46,12 +64,12 @@ const APP_CONFIG = {
   },
   sessionStorage: {
     appData: "investmentData",
+    storageCurrencyUnit: "currencyUnit",
     storageDateFormat: "dateFormat",
     storageLanguage: "language",
     storageNumberFormat: "numberFormat",
     storageValueType: "valueType",
   },
-  unit: "Lakh",
   valueTypes: [
     {
       title: "Invested Value",

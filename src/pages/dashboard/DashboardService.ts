@@ -191,12 +191,14 @@ const isDashboardEmpty = (dashboardData: IBaseData): boolean =>
 
 type IRefineEntireDataProps = {
   categories: ICategory[];
+  currencyUnit?: number;
   valueType?: IValueType;
   dateFormat?: string;
 };
 
 const refineEntireData = ({
   categories,
+  currencyUnit = APP_CONFIG.currencyUnits[0].value,
   valueType = "investedValue",
   dateFormat = APP_CONFIG.dateFormats[0].value,
 }: IRefineEntireDataProps) => {
@@ -249,18 +251,18 @@ const refineEntireData = ({
       }
       categories[i].subCategories[j].value = getTotalAmountInSelectedUnit(
         subCategoryTotal,
-        APP_CONFIG.unit
+        currencyUnit
       );
       categories[i].subCategories[j].absoluteValue = subCategoryTotal;
     }
     categories[i].value = getTotalAmountInSelectedUnit(
       categoryTotal,
-      APP_CONFIG.unit
+      currencyUnit
     );
     absoluteValue += categoryTotal;
 
     categories[i].absoluteValue = categoryTotal;
-    value += getTotalAmountInSelectedUnit(categoryTotal, APP_CONFIG.unit);
+    value += getTotalAmountInSelectedUnit(categoryTotal, currencyUnit);
   }
   /* Sorted categories based on the their absolute values */
   categories = categories.sort(

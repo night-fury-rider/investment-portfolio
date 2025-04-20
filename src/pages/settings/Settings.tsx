@@ -20,7 +20,10 @@ import { SETTINGS } from "$/constants/strings.constants";
 import APP_CONFIG from "$/constants/app.config.constants";
 import StorageService from "$/services/StorageService";
 import Snackbar from "$/components/Snackbar/Snackbar";
-import { formatDate } from "$/services/UtilService";
+import {
+  formatDate,
+  getTotalAmountInSelectedUnit,
+} from "$/services/UtilService";
 
 const Settings: React.FC = () => {
   const theme = useTheme();
@@ -36,6 +39,9 @@ const Settings: React.FC = () => {
   const [valueType, setValueType] = useState(
     APP_CONFIG?.valueTypes?.[0]?.value
   );
+  const [currencyUnit, setCurrencyUnit] = useState(
+    APP_CONFIG?.currencyUnits?.[0]?.value
+  );
 
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [isPrimaryButtonDisabled, setisPrimaryButtonDisabled] = useState(true);
@@ -47,6 +53,7 @@ const Settings: React.FC = () => {
     dateFormat: APP_CONFIG?.dateFormats?.[0]?.value,
     language: APP_CONFIG?.languages?.[0]?.value,
     valueType: APP_CONFIG?.valueTypes?.[0]?.value,
+    currencyUnit: APP_CONFIG.currencyUnits?.[0]?.value,
   });
 
   /* Use Effect for one time tasks */
@@ -79,10 +86,18 @@ const Settings: React.FC = () => {
       setValueType(storedValueType);
     }
 
+    const storedCurrencyUnit = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageCurrencyUnit
+    );
+    if (storedCurrencyUnit) {
+      setCurrencyUnit(Number(storedCurrencyUnit));
+    }
+
     setInitialSettings({
-      numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats?.[0]?.value,
+      currencyUnit: storedCurrencyUnit || APP_CONFIG?.currencyUnits?.[0]?.value,
       dateFormat: storedDateFormat || APP_CONFIG?.dateFormats?.[0].value,
       language: storedLanguage || APP_CONFIG?.languages?.[0]?.value,
+      numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats?.[0]?.value,
       valueType: storedValueType || APP_CONFIG?.valueTypes?.[0]?.value,
     });
 
@@ -107,6 +122,10 @@ const Settings: React.FC = () => {
     setValueType(event.target.value);
   };
 
+  const handleCurrencyUnitChange = (event: SelectChangeEvent) => {
+    setCurrencyUnit(Number(event.target.value));
+  };
+
   const handleApplySettings = () => {
     StorageService.set(
       APP_CONFIG?.sessionStorage?.storageNumberFormat,
@@ -118,19 +137,38 @@ const Settings: React.FC = () => {
     );
     StorageService.set(APP_CONFIG?.sessionStorage?.storageLanguage, language);
     StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
-    setInitialSettings({ numberFormat, dateFormat, language, valueType });
+    StorageService.set(
+      APP_CONFIG?.sessionStorage?.storageCurrencyUnit,
+      currencyUnit
+    );
+
+    setInitialSettings({
+      currencyUnit,
+      dateFormat,
+      language,
+      numberFormat,
+      valueType,
+    });
     setisPrimaryButtonDisabled(true);
     setSettingsSuccessSnackbarOpen(true);
   };
 
   useEffect(() => {
     const isChanged =
+      currencyUnit !== initialSettings.currencyUnit ||
       numberFormat !== initialSettings.numberFormat ||
       dateFormat !== initialSettings.dateFormat ||
       language !== initialSettings.language ||
       valueType !== initialSettings.valueType;
     setisPrimaryButtonDisabled(!isChanged);
-  }, [numberFormat, dateFormat, language, initialSettings, valueType]);
+  }, [
+    currencyUnit,
+    dateFormat,
+    initialSettings,
+    language,
+    numberFormat,
+    valueType,
+  ]);
 
   if (isInitialRender) {
     return null;
@@ -295,6 +333,42 @@ const Settings: React.FC = () => {
         </Card>
       </Grid>
 
+      {/* Currency Unit Selection */}
+      <Grid
+        size={{ xs: 4, sm: 8, md: 5 }}
+        sx={{ marginTop: 2 }}
+        offset={{ md: 0.5 }}
+      >
+        <Card variant="outlined" sx={styles.card}>
+          <CardContent sx={styles.cardContent}>
+            <Typography variant="h6" sx={styles.cardTitle}>
+              {SETTINGS.currencyUnit.title}
+            </Typography>
+            <FormControl fullWidth>
+              <InputLabel id="currency-unit-label">
+                {SETTINGS.currencyUnit.instruction}
+              </InputLabel>
+              <Select
+                labelId="currency-unit-label"
+                value={`${currencyUnit}`}
+                onChange={handleCurrencyUnitChange}
+                label={SETTINGS.currencyUnit.instruction}
+                sx={styles.select}
+              >
+                {APP_CONFIG.currencyUnits.map((currencyUnitObj, index) => (
+                  <MenuItem
+                    value={currencyUnitObj.value}
+                    key={currencyUnitObj.value + "_" + index}
+                  >
+                    {currencyUnitObj.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </CardContent>
+        </Card>
+      </Grid>
+
       {/* Apply Button */}
       <Grid size={{ xs: 4, sm: 8, md: 5 }} offset={{ md: 3 }}>
         <Box textAlign="center">
@@ -311,19 +385,28 @@ const Settings: React.FC = () => {
       </Grid>
 
       {/* Sample Displays */}
-      <Grid size={{ xs: 4, sm: 8, md: 5 }} offset={{ md: 3 }}>
-        <Typography variant="body1" sx={styles.sampleNumber}>
+      <Grid size={{ xs: 4, sm: 8, md: 5 }} offset={{ md: 4 }}>
+        <Typography variant="body1" sx={styles.sampleContainer}>
           {SETTINGS.numberFormat.sampleNumber}
           {new Intl.NumberFormat(numberFormat).format(1234567890)}
         </Typography>
 
-        <Typography variant="body1" sx={styles.sampleNumber}>
+        <Typography variant="body1" sx={styles.sampleContainer}>
           {SETTINGS.dateFormat.sampleDateText}
 
           {formatDate({
             date: SETTINGS.dateFormat.sampleDate,
             format: dateFormat,
           })}
+        </Typography>
+
+        <Typography variant="body1" sx={styles.sampleContainer}>
+          {SETTINGS.currencyUnit.sampleText}
+
+          {getTotalAmountInSelectedUnit(
+            SETTINGS.currencyUnit.sampleAmount,
+            currencyUnit
+          )}
         </Typography>
       </Grid>
       <Snackbar
@@ -361,8 +444,8 @@ const getStyles = (theme: Theme) => {
       },
       transition: "all 0.3s ease-in-out",
     },
-    sampleNumber: {
-      textAlign: "center",
+    sampleContainer: {
+      textAlign: "left",
       color: theme.palette.text.secondary,
       fontSize: "16px",
     },

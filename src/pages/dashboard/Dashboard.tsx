@@ -51,6 +51,10 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     APP_CONFIG?.valueTypes?.[0]?.value
   );
 
+  const [currencyUnit, setCurrencyUnit] = useState(
+    APP_CONFIG?.currencyUnits?.[0]?.value
+  );
+
   /* Use Effect for one time tasks */
   useEffect(() => {
     const storedNumberFormat = StorageService.get(
@@ -73,6 +77,13 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     if (storedValueType) {
       setValueType(storedValueType);
     }
+
+    const storedCurrencyUnit = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageCurrencyUnit
+    );
+    if (storedCurrencyUnit) {
+      setCurrencyUnit(storedCurrencyUnit);
+    }
   }, []);
 
   useEffect(() => {
@@ -81,11 +92,12 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     setRefinedData(
       refineEntireData({
         categories,
-        valueType: valueType as IValueType,
         dateFormat,
+        currencyUnit,
+        valueType: valueType as IValueType,
       })
     );
-  }, [categories, valueType, dateFormat]);
+  }, [categories, currencyUnit, dateFormat, valueType]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);

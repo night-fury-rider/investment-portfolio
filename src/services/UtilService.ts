@@ -79,21 +79,13 @@ const getParsedObject = (sourceObj: string) => {
 const generateRandomHexColor = () =>
   "#xxxxxx".replace(/x/g, () => ((Math.random() * 16) | 0).toString(16));
 
-const getTotalAmountInSelectedUnit = (amount: number, unit = "Lakh") => {
+const getTotalAmountInSelectedUnit = (amount: number, unit = 100000) => {
   if (isNaN(amount)) {
     LoggerService.error(`Incorrect Number is passed for getting amount`);
     return 0;
   }
-  let resultAmount;
-  switch (unit) {
-    case "Thousand":
-      resultAmount = amount / 1000;
-      break;
-    default:
-      resultAmount = amount / 100000;
-  }
 
-  return Number(resultAmount.toFixed(APP_CONFIG.decimalPlaces));
+  return Number((amount / unit).toFixed(APP_CONFIG.decimalPlaces));
 };
 
 export {

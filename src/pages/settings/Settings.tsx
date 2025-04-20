@@ -54,7 +54,7 @@ const Settings: React.FC = () => {
     }
 
     const storedLanguage = StorageService.get(
-      APP_CONFIG?.sessionStorage?.language
+      APP_CONFIG?.sessionStorage?.storageLanguage
     );
     if (storedLanguage) {
       setLanguage(storedLanguage);
@@ -95,7 +95,7 @@ const Settings: React.FC = () => {
       APP_CONFIG?.sessionStorage?.storageNumberFormat,
       numberFormat
     );
-    StorageService.set(APP_CONFIG?.sessionStorage?.language, language);
+    StorageService.set(APP_CONFIG?.sessionStorage?.storageLanguage, language);
     StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
     setInitialSettings({ numberFormat, language, valueType });
     setisPrimaryButtonDisabled(true);

@@ -28,6 +28,9 @@ const Settings: React.FC = () => {
   const [numberFormat, setNumberFormat] = useState(
     APP_CONFIG?.numberFormats?.[0]?.value
   );
+  const [dateFormat, setDateFormat] = useState(
+    APP_CONFIG?.dateFormats?.[0]?.value
+  );
   const [language, setLanguage] = useState(APP_CONFIG?.languages?.[0]?.value);
   const [valueType, setValueType] = useState(
     APP_CONFIG?.valueTypes?.[0]?.value
@@ -40,6 +43,7 @@ const Settings: React.FC = () => {
 
   const [initialSettings, setInitialSettings] = useState({
     numberFormat: APP_CONFIG?.numberFormats?.[0]?.value,
+    dateFormat: APP_CONFIG?.dateFormats?.[0]?.value,
     language: APP_CONFIG?.languages?.[0]?.value,
     valueType: APP_CONFIG?.valueTypes?.[0]?.value,
   });
@@ -51,6 +55,13 @@ const Settings: React.FC = () => {
     );
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
+    }
+
+    const storedDateFormat = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageDateFormat
+    );
+    if (storedDateFormat) {
+      setDateFormat(storedDateFormat);
     }
 
     const storedLanguage = StorageService.get(
@@ -69,6 +80,7 @@ const Settings: React.FC = () => {
 
     setInitialSettings({
       numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats?.[0]?.value,
+      dateFormat: storedDateFormat || APP_CONFIG?.dateFormats?.[0].value,
       language: storedLanguage || APP_CONFIG?.languages?.[0]?.value,
       valueType: storedValueType || APP_CONFIG?.valueTypes?.[0]?.value,
     });
@@ -80,6 +92,10 @@ const Settings: React.FC = () => {
 
   const handleNumberFormatChange = (event: SelectChangeEvent) => {
     setNumberFormat(event.target.value);
+  };
+
+  const handleDateFormatChange = (event: SelectChangeEvent) => {
+    setDateFormat(event.target.value);
   };
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
@@ -95,9 +111,13 @@ const Settings: React.FC = () => {
       APP_CONFIG?.sessionStorage?.storageNumberFormat,
       numberFormat
     );
+    StorageService.set(
+      APP_CONFIG?.sessionStorage?.storageDateFormat,
+      dateFormat
+    );
     StorageService.set(APP_CONFIG?.sessionStorage?.storageLanguage, language);
     StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
-    setInitialSettings({ numberFormat, language, valueType });
+    setInitialSettings({ numberFormat, dateFormat, language, valueType });
     setisPrimaryButtonDisabled(true);
     setSettingsSuccessSnackbarOpen(true);
   };
@@ -105,10 +125,11 @@ const Settings: React.FC = () => {
   useEffect(() => {
     const isChanged =
       numberFormat !== initialSettings.numberFormat ||
+      dateFormat !== initialSettings.dateFormat ||
       language !== initialSettings.language ||
       valueType !== initialSettings.valueType;
     setisPrimaryButtonDisabled(!isChanged);
-  }, [numberFormat, language, initialSettings, valueType]);
+  }, [numberFormat, dateFormat, language, initialSettings, valueType]);
 
   if (isInitialRender) {
     return null;
@@ -156,6 +177,42 @@ const Settings: React.FC = () => {
                     key={numberFormatObj.value + "_" + index}
                   >
                     {numberFormatObj.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* Date Format Selection */}
+      <Grid
+        size={{ xs: 4, sm: 8, md: 5 }}
+        sx={{ marginTop: 2 }}
+        offset={{ md: 0.5 }}
+      >
+        <Card variant="outlined" sx={styles.card}>
+          <CardContent sx={styles.cardContent}>
+            <Typography variant="h6" sx={styles.cardTitle}>
+              {SETTINGS.dateFormat.title}
+            </Typography>
+            <FormControl fullWidth>
+              <InputLabel id="date-format-label">
+                {SETTINGS.dateFormat.instruction}
+              </InputLabel>
+              <Select
+                labelId="date-format-label"
+                value={dateFormat}
+                onChange={handleDateFormatChange}
+                label={SETTINGS.dateFormat.instruction}
+                sx={styles.select}
+              >
+                {APP_CONFIG?.dateFormats?.map((dateFormatObj, index) => (
+                  <MenuItem
+                    value={dateFormatObj.value}
+                    key={dateFormatObj.value + "_" + index}
+                  >
+                    {dateFormatObj.title}
                   </MenuItem>
                 ))}
               </Select>

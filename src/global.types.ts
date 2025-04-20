@@ -45,11 +45,12 @@ type IInvestmentRecord = {
 type INewInvestment = {
   amount: number;
   categoryIndex: number;
+  date: string;
   folioName: string;
   goalIndex: number;
   subCategoryIndex: number;
   category?: string;
-  date?: string;
+  dateTimestamp?: number;
   goal?: string;
   subCategory?: string;
 };
@@ -57,6 +58,7 @@ type INewInvestment = {
 type INewInvestmentParam = {
   categories: ICategory[];
   date: string;
+  dateTimestamp: number;
   goal: string;
   goals: IGoal[];
   amount: string;
@@ -88,6 +90,7 @@ type ISubCategory = {
 type ISubItem = {
   currentValue?: number;
   date: string;
+  dateTimestamp: number;
   folio: string;
   investedValue: number;
   goal?: string;

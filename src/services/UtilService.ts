@@ -9,8 +9,8 @@ const getClonedObject = <T>(sourceObj: T): T => structuredClone(sourceObj);
 // TODO: Yuvraj Add this in util npm package's Date module
 
 type formatDateParam = {
-  date: Date;
-  format: string;
+  date: Date | number | string;
+  format?: string;
 };
 
 /**

@@ -13,6 +13,10 @@ const APP_CONFIG = {
       title: "DD-MMM-YYYY",
       value: "DD-MMM-YYYY",
     },
+    {
+      title: "YYYY-MM-DD",
+      value: "YYYY-MM-DD",
+    },
   ],
   decimalPlaces: 2,
   font: {
@@ -42,7 +46,7 @@ const APP_CONFIG = {
   },
   sessionStorage: {
     appData: "investmentData",
-    dateFormat: "dateFormat",
+    storageDateFormat: "dateFormat",
     storageLanguage: "language",
     storageNumberFormat: "numberFormat",
     storageValueType: "valueType",

@@ -50,6 +50,7 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
     amount: "",
     category: "",
     date: new Date(),
+    dateTimestamp: Date.now(),
     customCategory: "",
     customGoal: "",
     customSubCategory: "",
@@ -71,11 +72,11 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const storedNumberFormat = StorageService.get(
-      APP_CONFIG?.sessionStorage?.dateFormat
+    const storedDateFormat = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageDateFormat
     );
-    if (storedNumberFormat) {
-      setDateFormat(storedNumberFormat);
+    if (storedDateFormat) {
+      setDateFormat(storedDateFormat);
     }
   }, []);
 
@@ -168,7 +169,10 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
       amount: investment.amount,
       categories: categories,
       category: investment?.customCategory || investment.category,
-      date: formatDate({ date: investment.date, format: dateFormat }) || "",
+      date:
+        formatDate({ date: investment.date, format: dateFormat }) ||
+        new Date().toString(),
+      dateTimestamp: investment.dateTimestamp,
       folioName: investment.folioName,
       goals: goals,
       goal: investment?.customGoal || investment.goal,
@@ -180,7 +184,11 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
 
   const updateDate = (newDate: Date | null) => {
     if (newDate) {
-      setInvestment({ ...investment, date: newDate });
+      setInvestment({
+        ...investment,
+        date: newDate,
+        dateTimestamp: newDate?.valueOf() || Date.now(),
+      });
     }
   };
 

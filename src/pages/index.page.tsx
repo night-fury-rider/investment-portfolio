@@ -69,7 +69,9 @@ const Page = () => {
   const updateData = (data: string) => {
     const newInvestmentData = getParsedObject(data);
     if (newInvestmentData) {
-      const refinedNewData = refineEntireData(newInvestmentData?.categories);
+      const refinedNewData = refineEntireData({
+        categories: newInvestmentData?.categories,
+      });
       if (refinedNewData) {
         newInvestmentData.absoluteValue =
           refinedNewData?.absoluteValue || newInvestmentData?.absoluteValue;

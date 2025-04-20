@@ -125,6 +125,10 @@ const SETTINGS = {
     instruction: "Select Format",
     sampleNumber: "Sample Number (1234567890): ",
   },
+  dateFormat: {
+    title: "Date Format",
+    instruction: "Select Format",
+  },
   successMessage: "Settings updated successfully.",
   valueType: {
     title: "Value Type",

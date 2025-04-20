@@ -1,7 +1,16 @@
 import APP_CONFIG from "$/constants/app.config.constants";
-import { IBaseData, ICategory, IGoal, ISubCategory } from "global.types";
+import {
+  IBaseData,
+  ICategory,
+  IGoal,
+  ISubCategory,
+  IValueType,
+} from "global.types";
 import LoggerService from "$/services/LoggerService";
-import { getTotalAmountInSelectedUnit } from "$/services/UtilService";
+import {
+  formatDate,
+  getTotalAmountInSelectedUnit,
+} from "$/services/UtilService";
 import { ADD_INVESTMENT } from "$/constants/strings.constants";
 
 const createCategory = (
@@ -180,7 +189,17 @@ const isDashboardDataValid = (dashboardData: IBaseData): boolean => {
 const isDashboardEmpty = (dashboardData: IBaseData): boolean =>
   dashboardData?.absoluteValue === 0;
 
-const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
+type IRefineEntireDataProps = {
+  categories: ICategory[];
+  attr?: IValueType;
+  dateFormat?: string;
+};
+
+const refineEntireData = ({
+  categories,
+  attr = "investedValue",
+  dateFormat = APP_CONFIG.dateFormats[0].value,
+}: IRefineEntireDataProps) => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
 
@@ -209,6 +228,13 @@ const refineEntireData = (categories: ICategory[], attr = "investedValue") => {
         if (attr === "investedValue" || attr === "currentValue") {
           categoryTotal += currentRecord?.[attr] || 0;
           subCategoryTotal += currentRecord?.[attr] || 0;
+        }
+        if (currentRecord?.date) {
+          currentRecord.date =
+            formatDate({
+              date: currentRecord.date,
+              format: dateFormat,
+            }) || "";
         }
         // Set Goal to record if not set.
         if (currentRecord && !currentRecord?.goal) {

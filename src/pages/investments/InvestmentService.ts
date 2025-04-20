@@ -58,7 +58,7 @@ const deleteInvestmentRecord = (investmentRecord: IInvestmentRecord): void => {
     }
   }
   if (isDataUpdated) {
-    const updatedData = refineEntireData(baseData.categories);
+    const updatedData = refineEntireData({ categories: baseData.categories });
     baseData.absoluteValue = updatedData.absoluteValue;
     baseData.categories = updatedData.categories;
     baseData.value = updatedData.value;
@@ -151,24 +151,27 @@ const getInvestmentColumns = (isMobile: boolean, locale = "en-IN") => {
 
 /**
  * @description Get New Investment Object
- * @param categories {ICategories Array} - Categories Array
- * @param goals  {IGoals Array} - Goals Array
+ *
  * @param amount {string} - Amount to be added
+ * @param categories {ICategories Array} - Categories Array
  * @param categoryName {string} - Category Name
+ * @param date {string} - Transaction Date
+ * @param dateTimestamp {number} - Transaction timestamp
  * @param folioName {string} - Folio Name
  * @param goal {string} - Goal Name
+ * @param goals  {IGoals Array} - Goals Array
  * @param subCategory {string} - Sub Category Name
- * @param transactionDate {string} - Transaction Date
  * @returns newly created investment object
  */
 const getNewInvestmentObj = ({
-  categories,
-  date,
-  goals,
   amount,
+  categories,
   category,
+  date,
+  dateTimestamp,
   folioName,
   goal,
+  goals,
   subCategory,
 }: INewInvestmentParam): INewInvestment => {
   let goalIndex = goals.findIndex((goalObj) => goalObj.label === goal);
@@ -192,12 +195,13 @@ const getNewInvestmentObj = ({
     amount: Number(amount),
     categoryIndex,
     category,
+    date,
+    dateTimestamp,
     folioName,
     goalIndex,
     goal,
     subCategoryIndex,
     subCategory,
-    date,
   };
 };
 
@@ -226,7 +230,9 @@ const persistInvestments = (investmentData: string): IBaseData | null => {
  * @returns Prepared investment Records.
  */
 const prepareInvestmentRecords = (categories: ICategory[]) => {
-  const refinedCategories = refineEntireData(categories).categories;
+  const refinedCategories = refineEntireData({
+    categories: categories,
+  }).categories;
   const result = [] as IInvestmentRecord[];
 
   let currentCategory;

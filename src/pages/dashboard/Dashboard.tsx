@@ -12,7 +12,7 @@ import APP_CONFIG from "$/constants/app.config.constants";
 import { COLORS } from "$/constants/colors.constants";
 import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import styles from "$/dashboard/dashboard.module.css";
-import { ICategory, ISubItem } from "global.types";
+import { ICategory, ISubItem, IValueType } from "global.types";
 import {
   getBarChartData,
   getHighestItemIndex,
@@ -44,6 +44,9 @@ const Dashboard = ({ categories }: iDashboardProps) => {
   const [numberFormat, setNumberFormat] = useState(
     APP_CONFIG?.numberFormats?.[0]?.value
   );
+  const [dateFormat, setDateFormat] = useState(
+    APP_CONFIG?.dateFormats?.[0]?.value
+  );
   const [valueType, setValueType] = useState(
     APP_CONFIG?.valueTypes?.[0]?.value
   );
@@ -57,6 +60,13 @@ const Dashboard = ({ categories }: iDashboardProps) => {
       setNumberFormat(storedNumberFormat);
     }
 
+    const storedDateFormat = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageDateFormat
+    );
+    if (storedDateFormat) {
+      setDateFormat(storedDateFormat);
+    }
+
     const storedValueType = StorageService.get(
       APP_CONFIG?.sessionStorage?.storageValueType
     );
@@ -68,8 +78,14 @@ const Dashboard = ({ categories }: iDashboardProps) => {
   useEffect(() => {
     setSelectedCategoryIndex(0);
     setSelectedItemIndex(0);
-    setRefinedData(refineEntireData(categories, valueType));
-  }, [categories, valueType]);
+    setRefinedData(
+      refineEntireData({
+        categories,
+        attr: valueType as IValueType,
+        dateFormat,
+      })
+    );
+  }, [categories, valueType, dateFormat]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);
@@ -84,7 +100,13 @@ const Dashboard = ({ categories }: iDashboardProps) => {
         selectedItemIndex
       ]?.records || []
     );
-  }, [refinedData.categories, selectedCategoryIndex, selectedItemIndex]);
+  }, [
+    refinedData.categories,
+    selectedCategoryIndex,
+    selectedItemIndex,
+    dateFormat,
+    valueType,
+  ]);
 
   const handlePieSliceClick = (index: number) => {
     setSelectedCategoryIndex(index);

@@ -61,7 +61,9 @@ export default function Page() {
     const newInvestmentData = getParsedObject(data);
 
     if (newInvestmentData) {
-      const refinedNewData = refineEntireData(newInvestmentData?.categories);
+      const refinedNewData = refineEntireData({
+        categories: newInvestmentData?.categories,
+      });
       if (refinedNewData) {
         newInvestmentData.absoluteValue =
           refinedNewData?.absoluteValue || newInvestmentData?.absoluteValue;
@@ -141,6 +143,7 @@ export default function Page() {
     ].records.push({
       currentValue: newInvestment.amount,
       date: newInvestment?.date || new Date().toString(),
+      dateTimestamp: newInvestment.dateTimestamp || Date.now(),
       folio: newInvestment.folioName,
       goal: newInvestment?.goal,
       investedValue: newInvestment.amount,

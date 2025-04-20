@@ -58,7 +58,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     }
 
     const storedValueType = StorageService.get(
-      APP_CONFIG?.sessionStorage?.valueType
+      APP_CONFIG?.sessionStorage?.storageValueType
     );
     if (storedValueType) {
       setValueType(storedValueType);

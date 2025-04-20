@@ -45,7 +45,7 @@ const APP_CONFIG = {
     dateFormat: "dateFormat",
     language: "language",
     numberFormat: "numberFormat",
-    valueType: "valueType",
+    storageValueType: "valueType",
   },
   unit: "Lakh",
   valueTypes: [

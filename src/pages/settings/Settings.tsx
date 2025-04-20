@@ -61,7 +61,7 @@ const Settings: React.FC = () => {
     }
 
     const storedValueType = StorageService.get(
-      APP_CONFIG?.sessionStorage?.valueType
+      APP_CONFIG?.sessionStorage?.storageValueType
     );
     if (storedValueType) {
       setValueType(storedValueType);
@@ -93,7 +93,7 @@ const Settings: React.FC = () => {
   const handleApplySettings = () => {
     StorageService.set(APP_CONFIG?.sessionStorage?.numberFormat, numberFormat);
     StorageService.set(APP_CONFIG?.sessionStorage?.language, language);
-    StorageService.set(APP_CONFIG?.sessionStorage?.valueType, valueType);
+    StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
     setInitialSettings({ numberFormat, language, valueType });
     setisPrimaryButtonDisabled(true);
     setSettingsSuccessSnackbarOpen(true);

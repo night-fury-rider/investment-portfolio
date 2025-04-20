@@ -126,7 +126,11 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
     setRows((prevRows) => prevRows.filter((row) => row.id !== selectedRow.id));
     deleteInvestmentRecord(selectedRow);
     handleClose();
-    router.push(APP_CONFIG.routes.addInvestment);
+    if (categories.length > 1) {
+      router.push(APP_CONFIG.routes.home);
+    } else {
+      router.push(APP_CONFIG.routes.addInvestment);
+    }
   };
 
   return (

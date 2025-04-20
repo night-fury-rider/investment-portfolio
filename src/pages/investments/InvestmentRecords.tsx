@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import Dialog from "$/components/Dialog/Dialog";
 import { COMMON } from "$/constants/strings.constants";
 import { COLORS } from "$/constants/colors.constants";
-import { ICategory, IInvestmentRecord } from "global.types";
+import { ICategory, IInvestmentRecord, IValueType } from "global.types";
 import {
   deleteInvestmentRecord,
   getInvestmentColumns,
@@ -38,6 +38,12 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
   const [numberFormat, setNumberFormat] = useState(
     APP_CONFIG?.numberFormats?.[0]?.value
   );
+  const [dateFormat, setDateFormat] = useState(
+    APP_CONFIG?.dateFormats?.[0]?.value
+  );
+  const [valueType, setValueType] = useState(
+    APP_CONFIG?.valueTypes?.[0]?.value as IValueType
+  );
 
   /* Use Effect for one time tasks */
   useEffect(() => {
@@ -47,11 +53,29 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
     }
+    const storedDateFormat = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageDateFormat
+    );
+    if (storedDateFormat) {
+      setDateFormat(storedDateFormat);
+    }
+    const storedValueType = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageValueType
+    );
+    if (storedValueType) {
+      setValueType(storedValueType);
+    }
   }, []);
 
   useEffect(() => {
-    setRows(prepareInvestmentRecords(categories));
-  }, [categories]);
+    setRows(
+      prepareInvestmentRecords({
+        categories,
+        valueType,
+        dateFormat,
+      })
+    );
+  }, [categories, dateFormat, valueType]);
 
   const getColumns = () => {
     let allColumns = getInvestmentColumns(

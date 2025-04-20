@@ -13,6 +13,7 @@ import {
   IInvestmentRecord,
   INewInvestment,
   INewInvestmentParam,
+  IValueType,
 } from "global.types";
 import {
   isDashboardDataValid,
@@ -224,14 +225,26 @@ const persistInvestments = (investmentData: string): IBaseData | null => {
   return newInvestmentData;
 };
 
+type IPrepareInvestmentRecordsProps = {
+  categories: ICategory[];
+  valueType?: IValueType;
+  dateFormat?: string;
+};
+
 /**
  *@description Prepare Investment Records
  * @param categories {ICategory[]} Category Array
  * @returns Prepared investment Records.
  */
-const prepareInvestmentRecords = (categories: ICategory[]) => {
+const prepareInvestmentRecords = ({
+  categories,
+  valueType = "investedValue",
+  dateFormat = APP_CONFIG.dateFormats[0].value,
+}: IPrepareInvestmentRecordsProps) => {
   const refinedCategories = refineEntireData({
     categories: categories,
+    attr: valueType,
+    dateFormat,
   }).categories;
   const result = [] as IInvestmentRecord[];
 

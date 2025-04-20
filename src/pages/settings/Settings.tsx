@@ -47,7 +47,7 @@ const Settings: React.FC = () => {
   /* Use Effect for one time tasks */
   useEffect(() => {
     const storedNumberFormat = StorageService.get(
-      APP_CONFIG?.sessionStorage?.numberFormat
+      APP_CONFIG?.sessionStorage?.storageNumberFormat
     );
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
@@ -91,7 +91,10 @@ const Settings: React.FC = () => {
   };
 
   const handleApplySettings = () => {
-    StorageService.set(APP_CONFIG?.sessionStorage?.numberFormat, numberFormat);
+    StorageService.set(
+      APP_CONFIG?.sessionStorage?.storageNumberFormat,
+      numberFormat
+    );
     StorageService.set(APP_CONFIG?.sessionStorage?.language, language);
     StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
     setInitialSettings({ numberFormat, language, valueType });

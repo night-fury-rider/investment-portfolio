@@ -42,7 +42,7 @@ const InvestmentRecords = ({ categories }: IInvestmentRecordProps) => {
   /* Use Effect for one time tasks */
   useEffect(() => {
     const storedNumberFormat = StorageService.get(
-      APP_CONFIG?.sessionStorage?.numberFormat
+      APP_CONFIG?.sessionStorage?.storageNumberFormat
     );
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);

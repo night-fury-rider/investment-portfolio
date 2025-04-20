@@ -42,7 +42,9 @@ export default function Page() {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
+    const savedData = StorageService.get(
+      APP_CONFIG.sessionStorage.storageAppData
+    );
     if (savedData) {
       const extractedData = getParsedObject(savedData);
       if (isDashboardDataValid(extractedData)) {
@@ -51,7 +53,7 @@ export default function Page() {
       }
     } else {
       StorageService.set(
-        APP_CONFIG.sessionStorage.appData,
+        APP_CONFIG.sessionStorage.storageAppData,
         JSON.stringify(data)
       );
     }
@@ -78,7 +80,7 @@ export default function Page() {
         setGoals(newInvestmentData.goals);
         setBaseData(newInvestmentData);
         StorageService.set(
-          APP_CONFIG.sessionStorage.appData,
+          APP_CONFIG.sessionStorage.storageAppData,
           JSON.stringify(newInvestmentData)
         );
         router.push(APP_CONFIG.routes.home);

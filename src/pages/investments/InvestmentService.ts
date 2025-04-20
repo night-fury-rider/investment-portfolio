@@ -72,7 +72,9 @@ const deleteInvestmentRecord = (investmentRecord: IInvestmentRecord): void => {
  * @returns extracted data if available else null.
  */
 const extractInvestments = (): IBaseData | null => {
-  const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
+  const savedData = StorageService.get(
+    APP_CONFIG.sessionStorage.storageAppData
+  );
   if (savedData) {
     const extractedData = getParsedObject(savedData);
     if (isDashboardDataValid(extractedData)) {
@@ -216,7 +218,7 @@ const persistInvestments = (investmentData: string): IBaseData | null => {
 
   if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
     StorageService.set(
-      APP_CONFIG.sessionStorage.appData,
+      APP_CONFIG.sessionStorage.storageAppData,
       JSON.stringify(newInvestmentData)
     );
   } else {

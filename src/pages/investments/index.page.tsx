@@ -22,7 +22,9 @@ export default function Page() {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
+    const savedData = StorageService.get(
+      APP_CONFIG.sessionStorage.storageAppData
+    );
     if (savedData) {
       const extractedData = getParsedObject(savedData);
 
@@ -31,7 +33,7 @@ export default function Page() {
       }
     } else {
       StorageService.set(
-        APP_CONFIG.sessionStorage.appData,
+        APP_CONFIG.sessionStorage.storageAppData,
         JSON.stringify(data)
       );
     }
@@ -46,7 +48,7 @@ export default function Page() {
     if (newInvestmentData && isDashboardDataValid(newInvestmentData)) {
       setCategories(newInvestmentData.categories);
       StorageService.set(
-        APP_CONFIG.sessionStorage.appData,
+        APP_CONFIG.sessionStorage.storageAppData,
         JSON.stringify(newInvestmentData)
       );
     } else {

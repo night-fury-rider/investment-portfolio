@@ -63,7 +63,7 @@ const APP_CONFIG = {
     settings: "/settings",
   },
   sessionStorage: {
-    appData: "investmentData",
+    storageAppData: "investmentData",
     storageCurrencyUnit: "currencyUnit",
     storageDateFormat: "dateFormat",
     storageLanguage: "language",

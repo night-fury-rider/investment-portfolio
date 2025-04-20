@@ -33,7 +33,9 @@ const Page = () => {
 
   /* Use Effect for one time tasks */
   useEffect(() => {
-    const savedData = StorageService.get(APP_CONFIG.sessionStorage.appData);
+    const savedData = StorageService.get(
+      APP_CONFIG.sessionStorage.storageAppData
+    );
 
     // If data is available in storage, retrieve it
     if (savedData) {
@@ -85,7 +87,7 @@ const Page = () => {
         setCategories(newInvestmentData.categories);
         setBaseData(newInvestmentData);
         StorageService.set(
-          APP_CONFIG.sessionStorage.appData,
+          APP_CONFIG.sessionStorage.storageAppData,
           JSON.stringify(newInvestmentData)
         );
       } else {

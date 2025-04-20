@@ -224,7 +224,7 @@ const Settings: React.FC = () => {
       {/* Language Selection */}
       <Grid
         size={{ xs: 4, sm: 8, md: 5 }}
-        sx={{ marginTop: 2 }}
+        sx={{ marginTop: 2, display: "none" }}
         offset={{ md: 1 }}
       >
         <Card variant="outlined" sx={styles.card}>

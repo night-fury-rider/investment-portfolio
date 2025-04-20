@@ -84,6 +84,9 @@ const APP_CONFIG = {
     addInvestment: {
       autoHideDuration: 1 * 1000, // milliseconds
     },
+    settings: {
+      autoHideDuration: 1 * 1000, // milliseconds
+    },
   },
 };
 

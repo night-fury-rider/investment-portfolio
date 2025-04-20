@@ -410,6 +410,7 @@ const Settings: React.FC = () => {
         </Typography>
       </Grid>
       <Snackbar
+        autoHideDuration={APP_CONFIG.snackbar.settings.autoHideDuration}
         message={SETTINGS.successMessage}
         open={isSettingsSuccessSnackbarOpen}
         onClose={closeSuccessSnackbar}

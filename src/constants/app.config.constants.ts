@@ -37,6 +37,9 @@ const APP_CONFIG = {
     },
   ],
   decimalPlaces: 2,
+  download: {
+    fileName: "investment-portfolio.json",
+  },
   font: {
     family: "IBM Plex Serif",
   },

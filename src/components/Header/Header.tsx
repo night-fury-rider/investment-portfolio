@@ -7,6 +7,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { DownloadSharp } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,6 +19,7 @@ import FileUpload from "$/components/FileUpload/FileUpload";
 import { COLORS } from "$/constants/colors.constants";
 import { HEADER } from "$/constants/strings.constants";
 import APP_CONFIG from "$/constants/app.config.constants";
+import { downloadData } from "$/services/UtilService";
 
 interface iHeaderProps {
   handleAddBtnPress?: () => void;
@@ -112,6 +114,22 @@ const Header = ({
               fileUploadCallback={updateData}
               title={HEADER.upload.title}
             />
+          )}
+
+          {/* Download Button */}
+          {isSettingsPage && (
+            <Tooltip title={HEADER.download.title}>
+              <IconButton
+                color="inherit"
+                component="label"
+                sx={{
+                  "&:hover": { backgroundColor: COLORS.whiteLight },
+                }}
+                onClick={downloadData}
+              >
+                <DownloadSharp />
+              </IconButton>
+            </Tooltip>
           )}
 
           {/* Settings Icon */}

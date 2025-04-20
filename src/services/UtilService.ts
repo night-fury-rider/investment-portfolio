@@ -2,6 +2,7 @@
 
 import LoggerService from "./LoggerService";
 import APP_CONFIG from "$/constants/app.config.constants";
+import StorageService from "./StorageService";
 
 // TODO: Yuvraj Add this in util npm package
 const getClonedObject = <T>(sourceObj: T): T => structuredClone(sourceObj);
@@ -88,7 +89,28 @@ const getTotalAmountInSelectedUnit = (amount: number, unit = 100000) => {
   return Number((amount / unit).toFixed(APP_CONFIG.decimalPlaces));
 };
 
+/**
+ * Exports app data from sessionStorage and triggers a download of the data as a JSON file.
+ */
+const downloadData = () => {
+  const data = JSON.parse(
+    StorageService.get(APP_CONFIG.sessionStorage.storageAppData)
+  );
+
+  const jsonString = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = APP_CONFIG.download.fileName;
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
+
 export {
+  downloadData,
   formatDate,
   generateRandomHexColor,
   getClonedObject,

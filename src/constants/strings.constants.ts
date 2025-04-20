@@ -86,6 +86,9 @@ const HEADER = {
   add: {
     title: "Add",
   },
+  download: {
+    title: "Download",
+  },
   home: {
     title: "Home",
   },

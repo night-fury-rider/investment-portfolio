@@ -62,6 +62,11 @@ const APP_CONFIG = {
       value: "currentValue",
     },
   ],
+  snackbar: {
+    addInvestment: {
+      autoHideDuration: 1 * 1000, // milliseconds
+    },
+  },
 };
 
 export default APP_CONFIG;

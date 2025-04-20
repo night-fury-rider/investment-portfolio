@@ -357,6 +357,9 @@ const AddInvestment: React.FC<IAddInvestmentProps> = ({
             </Grid>
           </Grid>
           <Snackbar
+            autoHideDuration={
+              APP_CONFIG.snackbar.addInvestment.autoHideDuration
+            }
             message={ADD_INVESTMENT.successMessage}
             open={openAddSuccessSnackbar}
             onClose={closeSuccessSnackbar}

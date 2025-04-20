@@ -191,13 +191,13 @@ const isDashboardEmpty = (dashboardData: IBaseData): boolean =>
 
 type IRefineEntireDataProps = {
   categories: ICategory[];
-  attr?: IValueType;
+  valueType?: IValueType;
   dateFormat?: string;
 };
 
 const refineEntireData = ({
   categories,
-  attr = "investedValue",
+  valueType = "investedValue",
   dateFormat = APP_CONFIG.dateFormats[0].value,
 }: IRefineEntireDataProps) => {
   let categoryTotal = 0;
@@ -225,9 +225,9 @@ const refineEntireData = ({
       for (let k = 0; k < currentSubCategory?.records?.length; k++) {
         currentRecord = currentSubCategory.records[k];
 
-        if (attr === "investedValue" || attr === "currentValue") {
-          categoryTotal += currentRecord?.[attr] || 0;
-          subCategoryTotal += currentRecord?.[attr] || 0;
+        if (valueType === "investedValue" || valueType === "currentValue") {
+          categoryTotal += currentRecord?.[valueType] || 0;
+          subCategoryTotal += currentRecord?.[valueType] || 0;
         }
         if (currentRecord?.date) {
           currentRecord.date =

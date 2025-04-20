@@ -81,7 +81,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     setRefinedData(
       refineEntireData({
         categories,
-        attr: valueType as IValueType,
+        valueType: valueType as IValueType,
         dateFormat,
       })
     );

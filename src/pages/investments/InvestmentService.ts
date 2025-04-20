@@ -243,7 +243,7 @@ const prepareInvestmentRecords = ({
 }: IPrepareInvestmentRecordsProps) => {
   const refinedCategories = refineEntireData({
     categories: categories,
-    attr: valueType,
+    valueType,
     dateFormat,
   }).categories;
   const result = [] as IInvestmentRecord[];

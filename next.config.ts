@@ -14,14 +14,7 @@ const nextConfig = {
   /* Comment out basePath and assetPrefix for testing build before uploading to server */
   basePath: basePathOnServer,
   assetPrefix: basePathOnServer,
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "/",
-      },
-    ];
-  },
+  trailingSlash: true, // To Fix 404 on refresh
 };
 
 export default nextConfig;

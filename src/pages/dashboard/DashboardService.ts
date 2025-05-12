@@ -4,6 +4,7 @@ import {
   ICategory,
   IGoal,
   ISubCategory,
+  ISubItem,
   IValueType,
 } from "global.types";
 import LoggerService from "$/services/LoggerService";
@@ -254,6 +255,11 @@ const refineEntireData = ({
         currencyUnit
       );
       categories[i].subCategories[j].absoluteValue = subCategoryTotal;
+
+      /* Sorted records based on the their timestamp */
+      currentSubCategory.records = currentSubCategory.records.sort(
+        (a: ISubItem, b: ISubItem) => a?.dateTimestamp - b?.dateTimestamp
+      );
     }
     categories[i].value = getTotalAmountInSelectedUnit(
       categoryTotal,

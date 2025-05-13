@@ -62,11 +62,9 @@ const PieChart = ({
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         arcLinkLabel="label"
         arcLabel={({ data }) => {
-          const totalAmount = totalValue || 0;
           // eslint-disable-next-line
           const { value } = data as any;
-          const percentage = ((value / totalAmount) * 100).toFixed(1);
-          return `${percentage}%`;
+          return value;
         }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsOffset={0}
@@ -102,6 +100,9 @@ const PieChart = ({
         }}
         tooltip={({ datum }) => {
           const { value, color } = datum;
+          const totalAmount = totalValue || 0;
+          const percentage = ((value / totalAmount) * 100).toFixed(1);
+
           return (
             <div className={styles.tooltipContainer}>
               <div
@@ -112,7 +113,7 @@ const PieChart = ({
                 }}
                 className={styles.tooltip}
               >
-                {value}
+                {percentage}%
               </div>
             </div>
           );

@@ -77,7 +77,7 @@ const getParsedObject = (sourceObj: string) => {
  * @returns {string} A random 6-digit hex color code (e.g., "#a3f5d9").
  */
 
-const generateRandomHexColor = () =>
+const generateRandomHexColor = (): string =>
   "#xxxxxx".replace(/x/g, () => ((Math.random() * 16) | 0).toString(16));
 
 const getTotalAmountInSelectedUnit = (amount: number, unit = 100000) => {

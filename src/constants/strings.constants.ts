@@ -116,9 +116,20 @@ const INVESTMENT_RECORDS = {
 };
 
 const SETTINGS = {
-  title: "Settings",
   applySettings: "Apply Settings",
   appVersion: "App Version",
+  currencyUnit: {
+    title: "Currency Unit",
+    instruction: "Select Currency Unit",
+    sampleAmount: 1234567890,
+    sampleText: "Sample Amount (1234567890): ",
+  },
+  dateFormat: {
+    title: "Date Format",
+    instruction: "Select Format",
+    sampleDate: "24-Jul-2024",
+    sampleDateText: "Sample Date (24th July 2024): ",
+  },
   language: {
     title: "Language",
     instruction: "Select Language",
@@ -128,23 +139,16 @@ const SETTINGS = {
     instruction: "Select Format",
     sampleNumber: "Sample Number (1234567890): ",
   },
-  dateFormat: {
-    title: "Date Format",
-    instruction: "Select Format",
-    sampleDate: "24-Jul-2024",
-    sampleDateText: "Sample Date (24th July 2024): ",
-  },
   successMessage: "Settings updated successfully.",
   valueType: {
     title: "Value Type",
     instruction: "Select Value Type",
   },
-  currencyUnit: {
-    title: "Currency Unit",
-    instruction: "Select Currency Unit",
-    sampleAmount: 1234567890,
-    sampleText: "Sample Amount (1234567890): ",
+  viewType: {
+    title: "View Type",
+    instruction: "Select View Type",
   },
+  title: "Settings",
 };
 
 export {

@@ -39,6 +39,7 @@ const Settings: React.FC = () => {
   const [valueType, setValueType] = useState(
     APP_CONFIG?.valueTypes?.[0]?.value
   );
+  const [viewType, setViewType] = useState(APP_CONFIG?.viewTypes?.[0]?.value);
   const [currencyUnit, setCurrencyUnit] = useState(
     APP_CONFIG?.currencyUnits?.[0]?.value
   );
@@ -53,6 +54,8 @@ const Settings: React.FC = () => {
     dateFormat: APP_CONFIG?.dateFormats?.[0]?.value,
     language: APP_CONFIG?.languages?.[0]?.value,
     valueType: APP_CONFIG?.valueTypes?.[0]?.value,
+    viewType: APP_CONFIG?.viewTypes?.[0]?.value,
+
     currencyUnit: APP_CONFIG.currencyUnits?.[0]?.value,
   });
 
@@ -86,6 +89,13 @@ const Settings: React.FC = () => {
       setValueType(storedValueType);
     }
 
+    const storedViewType = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageViewType
+    );
+    if (storedViewType) {
+      setViewType(storedViewType);
+    }
+
     const storedCurrencyUnit = StorageService.get(
       APP_CONFIG?.sessionStorage?.storageCurrencyUnit
     );
@@ -99,6 +109,7 @@ const Settings: React.FC = () => {
       language: storedLanguage || APP_CONFIG?.languages?.[0]?.value,
       numberFormat: storedNumberFormat || APP_CONFIG?.numberFormats?.[0]?.value,
       valueType: storedValueType || APP_CONFIG?.valueTypes?.[0]?.value,
+      viewType: storedViewType || APP_CONFIG?.viewTypes?.[0]?.value,
     });
 
     setIsInitialRender(false);
@@ -121,6 +132,9 @@ const Settings: React.FC = () => {
   const handleValueTypeChange = (event: SelectChangeEvent) => {
     setValueType(event.target.value);
   };
+  const handleViewTypeChange = (event: SelectChangeEvent) => {
+    setViewType(event.target.value);
+  };
 
   const handleCurrencyUnitChange = (event: SelectChangeEvent) => {
     setCurrencyUnit(Number(event.target.value));
@@ -137,6 +151,8 @@ const Settings: React.FC = () => {
     );
     StorageService.set(APP_CONFIG?.sessionStorage?.storageLanguage, language);
     StorageService.set(APP_CONFIG?.sessionStorage?.storageValueType, valueType);
+    StorageService.set(APP_CONFIG?.sessionStorage?.storageViewType, viewType);
+
     StorageService.set(
       APP_CONFIG?.sessionStorage?.storageCurrencyUnit,
       currencyUnit
@@ -148,6 +164,7 @@ const Settings: React.FC = () => {
       language,
       numberFormat,
       valueType,
+      viewType,
     });
     setisPrimaryButtonDisabled(true);
     setSettingsSuccessSnackbarOpen(true);
@@ -159,7 +176,8 @@ const Settings: React.FC = () => {
       numberFormat !== initialSettings.numberFormat ||
       dateFormat !== initialSettings.dateFormat ||
       language !== initialSettings.language ||
-      valueType !== initialSettings.valueType;
+      valueType !== initialSettings.valueType ||
+      viewType !== initialSettings.viewType;
     setisPrimaryButtonDisabled(!isChanged);
   }, [
     currencyUnit,
@@ -168,6 +186,7 @@ const Settings: React.FC = () => {
     language,
     numberFormat,
     valueType,
+    viewType,
   ]);
 
   if (isInitialRender) {
@@ -361,6 +380,42 @@ const Settings: React.FC = () => {
                     key={currencyUnitObj.value + "_" + index}
                   >
                     {currencyUnitObj.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      {/* Category/Goal View Selection */}
+      <Grid
+        size={{ xs: 4, sm: 8, md: 5 }}
+        sx={{ marginTop: 2 }}
+        offset={{ md: 0.5 }}
+      >
+        <Card variant="outlined" sx={styles.card}>
+          <CardContent sx={styles.cardContent}>
+            <Typography variant="h6" sx={styles.cardTitle}>
+              {SETTINGS.viewType.title}
+            </Typography>
+            <FormControl fullWidth>
+              <InputLabel id="view-type-label">
+                {SETTINGS.viewType.instruction}
+              </InputLabel>
+              <Select
+                labelId="view-type-label"
+                value={viewType}
+                onChange={handleViewTypeChange}
+                label={SETTINGS.viewType.instruction}
+                sx={styles.select}
+              >
+                {APP_CONFIG.viewTypes.map((viewTypeObj, index) => (
+                  <MenuItem
+                    value={viewTypeObj.value}
+                    key={viewTypeObj.value + "_" + index}
+                  >
+                    {viewTypeObj.title}
                   </MenuItem>
                 ))}
               </Select>

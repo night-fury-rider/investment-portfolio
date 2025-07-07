@@ -24,6 +24,7 @@ type ICategory = {
 type IGoal = {
   label: string;
   collection?: number;
+  color?: string;
   id?: number;
   targetAmount?: number;
   isOnTrack?: boolean;
@@ -99,6 +100,7 @@ type ISubItem = {
 type IUnit = "Lakh" | "Thousand";
 
 type IValueType = "investedValue" | "currentValue";
+type IViewType = "categories" | "goals";
 
 export type {
   ICategory,
@@ -111,4 +113,5 @@ export type {
   IBaseData,
   IUnit,
   IValueType,
+  IViewType,
 };

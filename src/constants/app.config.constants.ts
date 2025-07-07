@@ -59,6 +59,10 @@ const APP_CONFIG = {
       value: "en-US",
     },
   ],
+  entityTypes: {
+    categories: "categories",
+    goals: "goals",
+  },
   routes: {
     addInvestment: "add-investment",
     home: "/",
@@ -72,6 +76,7 @@ const APP_CONFIG = {
     storageLanguage: "language",
     storageNumberFormat: "numberFormat",
     storageValueType: "valueType",
+    storageViewType: "viewType",
   },
   valueTypes: [
     {
@@ -81,6 +86,16 @@ const APP_CONFIG = {
     {
       title: "Current Value",
       value: "currentValue",
+    },
+  ],
+  viewTypes: [
+    {
+      title: "Category View",
+      value: "categories",
+    },
+    {
+      title: "Goal View",
+      value: "goals",
     },
   ],
   snackbar: {

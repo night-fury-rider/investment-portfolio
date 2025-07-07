@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import data from "../../public/data/data.json";
 import { ibmFont } from "app/fonts";
 import theme from "app/theme";
-import { IBaseData, ICategory } from "global.types";
+import { IBaseData, ICategory, IGoal } from "global.types";
 import Header from "$/components/Header/Header";
 import Snackbar from "$/components/Snackbar/Snackbar";
 import APP_CONFIG from "$/constants/app.config.constants";
@@ -27,6 +27,7 @@ const Page = () => {
   const [categories, setCategories] = useState(
     baseData.categories as ICategory[]
   );
+  const [goals, setGoals] = useState([] as IGoal[]);
   const [openDataErrorSnackbar, setOpenDataErrorSnackbar] = useState(false);
 
   const [isInitialRender, setIsInitialRender] = useState(true);
@@ -62,6 +63,7 @@ const Page = () => {
   const validateAndSetCategories = (data: IBaseData) => {
     if (isDashboardDataValid(data) && !isDashboardEmpty(data)) {
       setCategories(data.categories);
+      setGoals(data.goals);
       setIsInitialRender(false);
       return true;
     }
@@ -73,6 +75,7 @@ const Page = () => {
     if (newInvestmentData) {
       const refinedNewData = refineEntireData({
         categories: newInvestmentData?.categories,
+        goals: newInvestmentData?.goals,
       });
       if (refinedNewData) {
         newInvestmentData.absoluteValue =
@@ -128,7 +131,7 @@ const Page = () => {
           handleAddBtnPress={handleHeaderAddBtnPress}
           title={HEADER.title}
         />
-        <Dashboard categories={categories} />
+        <Dashboard categories={categories} goals={goals} />
       </div>
     </ThemeProvider>
   );

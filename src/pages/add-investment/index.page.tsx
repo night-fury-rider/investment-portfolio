@@ -65,6 +65,7 @@ export default function Page() {
     if (newInvestmentData) {
       const refinedNewData = refineEntireData({
         categories: newInvestmentData?.categories,
+        goals: newInvestmentData?.goals,
       });
       if (refinedNewData) {
         newInvestmentData.absoluteValue =

@@ -12,7 +12,13 @@ import APP_CONFIG from "$/constants/app.config.constants";
 import { COLORS } from "$/constants/colors.constants";
 import { COMMON, DASHBOARD } from "$/constants/strings.constants";
 import styles from "$/dashboard/dashboard.module.css";
-import { ICategory, ISubItem, IValueType } from "global.types";
+import {
+  ICategory,
+  IGoal,
+  ISubItem,
+  IValueType,
+  IViewType,
+} from "global.types";
 import {
   getBarChartData,
   getHighestItemIndex,
@@ -22,9 +28,10 @@ import StorageService from "$/services/StorageService";
 
 interface iDashboardProps {
   categories: ICategory[];
+  goals: IGoal[];
 }
 
-const Dashboard = ({ categories }: iDashboardProps) => {
+const Dashboard = ({ categories, goals }: iDashboardProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const secondRowRef = useRef<HTMLDivElement | null>(null);
@@ -50,6 +57,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
   const [valueType, setValueType] = useState(
     APP_CONFIG?.valueTypes?.[0]?.value
   );
+  const [viewType, setViewType] = useState(APP_CONFIG?.viewTypes?.[0]?.value);
 
   const [currencyUnit, setCurrencyUnit] = useState(
     APP_CONFIG?.currencyUnits?.[0]?.value
@@ -78,6 +86,13 @@ const Dashboard = ({ categories }: iDashboardProps) => {
       setValueType(storedValueType);
     }
 
+    const storedViewType = StorageService.get(
+      APP_CONFIG?.sessionStorage?.storageViewType
+    );
+    if (storedViewType) {
+      setViewType(storedViewType);
+    }
+
     const storedCurrencyUnit = StorageService.get(
       APP_CONFIG?.sessionStorage?.storageCurrencyUnit
     );
@@ -92,12 +107,14 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     setRefinedData(
       refineEntireData({
         categories,
-        dateFormat,
         currencyUnit,
+        goals,
+        dateFormat,
         valueType: valueType as IValueType,
+        viewType: viewType as IViewType,
       })
     );
-  }, [categories, currencyUnit, dateFormat, valueType]);
+  }, [categories, currencyUnit, dateFormat, goals, valueType, viewType]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);
@@ -118,6 +135,7 @@ const Dashboard = ({ categories }: iDashboardProps) => {
     selectedItemIndex,
     dateFormat,
     valueType,
+    viewType,
   ]);
 
   const handlePieSliceClick = (index: number) => {

@@ -6,10 +6,12 @@ import {
   ISubCategory,
   ISubItem,
   IValueType,
+  IViewType,
 } from "global.types";
 import LoggerService from "$/services/LoggerService";
 import {
   formatDate,
+  generateRandomHexColor,
   getTotalAmountInSelectedUnit,
 } from "$/services/UtilService";
 import { ADD_INVESTMENT } from "$/constants/strings.constants";
@@ -121,6 +123,77 @@ const getBarChartData = (barChartData: ISubCategory[]) => {
 };
 
 /**
+ * Transforms a flat list of investment categories into a goal-based category structure.
+ *
+ * Each unique `goal` found in the input categories becomes a top-level `ICategory`,
+ * and all categories associated with that goal are grouped under it as `subCategories`.
+ * The function also merges all nested records from each category's subCategories into
+ * the resulting subCategory’s `records` array.
+ *
+ * If a matching goal is found in the provided `goals` array, its `color`, `id`, and `notes`
+ * are used for the top-level category.
+ *
+ * @param {ICategory[]} categories - The original list of investment categories containing sub-categories and goal associations.
+ * @param {IGoal[]} goals - A list of goals to provide metadata (like color, id, notes) for the top-level categories.
+ *
+ * @returns {ICategory[]} A new category list where each goal is a top-level category,
+ *                        and each associated category is a sub-category with flattened records.
+ *
+ * @example
+ * const result = transformGoalsToCategoryStructure(data.categories, data.goals);
+ */
+
+const transformGoalsToCategoryStructure = (
+  categories: ICategory[],
+  goals: IGoal[]
+): ICategory[] => {
+  const goalInfoMap = new Map<string, IGoal>();
+  goals.forEach((goal) => {
+    goalInfoMap.set(goal.label, goal);
+  });
+
+  const goalMap = new Map<string, ICategory>();
+
+  categories.forEach((category) => {
+    const goalName = category.goal;
+    if (!goalName) {
+      return;
+    }
+
+    if (!goalMap.has(goalName)) {
+      const goalInfo = goalInfoMap.get(goalName);
+      goalMap.set(goalName, {
+        absoluteValue: 0,
+        color: goalInfo?.color || generateRandomHexColor(),
+        id: goalInfo?.id ?? goalMap.size + 1,
+        label: goalName,
+        value: 0,
+        subCategories: [],
+        notes: goalInfo?.notes || [],
+      });
+    }
+
+    const allRecords =
+      category.subCategories?.flatMap((subCat) => subCat.records || []) || [];
+
+    const transformedSubCategory: ISubCategory = {
+      absoluteValue: category.absoluteValue,
+      id: category.id,
+      label: category.label,
+      value: category.value,
+      records: allRecords,
+      notes: category.notes,
+      expenseRatio: category.expenseRatio,
+      goal: goalName,
+    };
+
+    goalMap.get(goalName)?.subCategories.push(transformedSubCategory);
+  });
+
+  return Array.from(goalMap.values());
+};
+
+/**
  * @description Finds the index of the item with the highest value in an array of subCategories.
  * @param {ISubCategory[]} barChartData - An array of objects representing the data for a bar chart.
  * @returns {number} The index of the item with the highest value in the `barChartData` array.
@@ -193,15 +266,19 @@ const isDashboardEmpty = (dashboardData: IBaseData): boolean =>
 type IRefineEntireDataProps = {
   categories: ICategory[];
   currencyUnit?: number;
-  valueType?: IValueType;
   dateFormat?: string;
+  goals?: IGoal[];
+  valueType?: IValueType;
+  viewType?: IViewType;
 };
 
 const refineEntireData = ({
   categories,
   currencyUnit = APP_CONFIG.currencyUnits[0].value,
-  valueType = "investedValue",
   dateFormat = APP_CONFIG.dateFormats[0].value,
+  goals = [],
+  valueType = "investedValue",
+  viewType = APP_CONFIG.entityTypes.categories as IViewType,
 }: IRefineEntireDataProps) => {
   let categoryTotal = 0;
   let subCategoryTotal = 0;
@@ -213,9 +290,18 @@ const refineEntireData = ({
   let currentSubCategory;
   let currentRecord;
 
+  let refinedCategories = categories;
+
+  if (viewType === APP_CONFIG.entityTypes.goals) {
+    refinedCategories = transformGoalsToCategoryStructure(
+      refinedCategories,
+      goals
+    );
+  }
+
   /* Interate through Categories */
-  for (let i = 0; i < categories.length; i++) {
-    currentCategory = categories[i];
+  for (let i = 0; i < refinedCategories.length; i++) {
+    currentCategory = refinedCategories[i];
     categoryTotal = 0;
 
     /* Interate through Sub Categories */
@@ -250,34 +336,32 @@ const refineEntireData = ({
           }
         }
       }
-      categories[i].subCategories[j].value = getTotalAmountInSelectedUnit(
-        subCategoryTotal,
-        currencyUnit
-      );
-      categories[i].subCategories[j].absoluteValue = subCategoryTotal;
+      refinedCategories[i].subCategories[j].value =
+        getTotalAmountInSelectedUnit(subCategoryTotal, currencyUnit);
+      refinedCategories[i].subCategories[j].absoluteValue = subCategoryTotal;
 
       /* Sorted records based on the their timestamp */
       currentSubCategory.records = currentSubCategory.records.sort(
         (a: ISubItem, b: ISubItem) => a?.dateTimestamp - b?.dateTimestamp
       );
     }
-    categories[i].value = getTotalAmountInSelectedUnit(
+    refinedCategories[i].value = getTotalAmountInSelectedUnit(
       categoryTotal,
       currencyUnit
     );
     absoluteValue += categoryTotal;
 
-    categories[i].absoluteValue = categoryTotal;
+    refinedCategories[i].absoluteValue = categoryTotal;
     value += getTotalAmountInSelectedUnit(categoryTotal, currencyUnit);
   }
   /* Sorted categories based on the their absolute values */
-  categories = categories.sort(
+  refinedCategories = refinedCategories.sort(
     (a: ICategory, b: ICategory) => b?.absoluteValue - a?.absoluteValue
   );
 
   return {
     absoluteValue,
-    categories,
+    categories: refinedCategories,
     value: Number(value.toFixed(APP_CONFIG.decimalPlaces)),
   };
 };

@@ -21,14 +21,34 @@ const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleMouseEnter = (
-    event: React.MouseEvent<SVGRectElement, MouseEvent>
-  ) => {
-    document.body.style.cursor = "pointer";
-    event.currentTarget.style.transform = "scale(1.025)";
-    event.currentTarget.style.transformOrigin = "bottom center"; // Scale upwards
-    event.currentTarget.style.transition = "transform 0.3s ease-in-out";
+  const calculateMinHeightThreshold = (data: BarDatum[]): number => {
+    const maxHeight = Math.max(...data.map((d) => Number(d.value)));
+    const minHeight = Math.min(...data.map((d) => Number(d.value)));
+    const range = maxHeight - minHeight;
+    const threshold = range * 0.1; // 1% of the value range
+    return threshold;
   };
+
+  const handleMouseEnter = (
+    event: React.MouseEvent<SVGRectElement, MouseEvent>,
+    barValue: number | null
+  ) => {
+    if (!barValue) {
+      return;
+    }
+    document.body.style.cursor = "pointer";
+
+    const minHeightThreshold = calculateMinHeightThreshold(data);
+
+    if (barValue > minHeightThreshold) {
+      event.currentTarget.style.transform = "scale(1.025)";
+      event.currentTarget.style.transformOrigin = "bottom center";
+      event.currentTarget.style.transition = "transform 0.3s ease-in-out";
+    } else {
+      event.currentTarget.style.transition = "none";
+    }
+  };
+
   const handleMouseLeave = (
     event: React.MouseEvent<SVGRectElement, MouseEvent>
   ) => {
@@ -86,7 +106,7 @@ const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
         onClick={(data) => {
           handleBarClick?.(data?.index || 0);
         }}
-        onMouseEnter={(bar, event) => handleMouseEnter(event)}
+        onMouseEnter={(bar, event) => handleMouseEnter(event, bar.value)}
         onMouseLeave={(bar, event) => handleMouseLeave(event)}
         role="application"
         ariaLabel="Yuvraj Patil Bar Chart"

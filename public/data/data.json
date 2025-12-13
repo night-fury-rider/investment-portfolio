@@ -15,6 +15,11 @@
       "expenseRatio": 0,
       "goal": "Retirement",
       "id": 1,
+      "label": "Mutual Fund",
+      "notes": [
+        "All keys are sorted alphabetically",
+        "Value is meant for graphs. absoluteValue is meant for calculations."
+      ],
       "subCategories": [
         {
           "absoluteValue": 0,
@@ -22,28 +27,39 @@
           "expenseRatio": 1.87,
           "firstInvestmentDate": "Dec-16",
           "fundHouse": "axis",
-          "fundManagers": ["Ajay Garg"],
+          "fundManagers": [
+            "Ajay Garg"
+          ],
           "fundSize": 516.53,
           "id": 0,
           "label": "Axis Mutual Fund",
           "launchDate": "02-Jan-2013",
-          "notes": [""],
+          "notes": [
+            ""
+          ],
           "rating": 4,
+          "records": [],
           "returns": [
-            ["1", 40.2],
-            ["3", 5.29],
-            ["5", 11.92],
-            ["Since Inception", 14.89]
+            [
+              "1",
+              40.2
+            ],
+            [
+              "3",
+              5.29
+            ],
+            [
+              "5",
+              11.92
+            ],
+            [
+              "Since Inception",
+              14.89
+            ]
           ],
           "shortName": "Axis",
-          "records": [],
           "value": 0
         }
-      ],
-      "label": "Mutual Fund",
-      "notes": [
-        "All keys are sorted alphabetically",
-        "Value is meant for graphs. absoluteValue is meant for calculations."
       ],
       "value": 0
     },
@@ -53,6 +69,8 @@
       "expenseRatio": 0,
       "goal": "Retirement",
       "id": 2,
+      "label": "Shares",
+      "notes": "Value is meant for graphs. absoluteValue is meant for calculations.",
       "subCategories": [
         {
           "absoluteValue": 0,
@@ -63,15 +81,13 @@
           "label": "Brightcom",
           "marketCapInRsCr": 111,
           "promoterOwnership": 111,
-          "shortName": "BCG",
           "records": [],
+          "shortName": "BCG",
           "symbol": "BCG",
           "totalDebtInRsCr": 111,
           "value": 0
         }
       ],
-      "label": "Shares",
-      "notes": "Value is meant for graphs. absoluteValue is meant for calculations.",
       "value": 0
     }
   ],
@@ -84,7 +100,9 @@
       "id": 1,
       "isOnTrack": true,
       "label": "Graduation",
-      "notes": [""],
+      "notes": [
+        ""
+      ],
       "targetAmount": 2000000,
       "targetDate": "Jun-2030"
     },
@@ -93,7 +111,9 @@
       "id": 2,
       "isOnTrack": true,
       "label": "Retirement",
-      "notes": [""],
+      "notes": [
+        ""
+      ],
       "targetAmount": 2000000,
       "targetDate": "Jun-2030"
     }

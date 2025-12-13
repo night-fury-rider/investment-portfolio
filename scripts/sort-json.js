@@ -1,7 +1,10 @@
 const fs = require("fs");
+const path = require("path");
 
-const sourceFilePath = "../public/data.json";
-const destinationFilePath = "../public/data.json";
+const DATA_FILE_PATH = path.join(process.cwd(), "public", "data", "data.json");
+
+const sourceFilePath = DATA_FILE_PATH;
+const destinationFilePath = DATA_FILE_PATH;
 
 const sortObject = (obj) => {
   if (Array.isArray(obj)) {

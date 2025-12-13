@@ -79,15 +79,6 @@ npm run build
 
 It will create Static Export Build under `build` folder.
 
-## Run Application In Prod Mode
-
-```bash
-npm run start
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-Make sure to create the deployment build before running this command.
-
 ## Test Deployment Build
 
 Run following command in Terminal in `build` folder.

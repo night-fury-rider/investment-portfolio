@@ -1,15 +1,16 @@
 {
-  "name": "investment-portfolio",
-  "version": "1.1.0",
-  "private": true,
-  "description": "This is a website to analyze our Investment Portfolio.",
   "author": "Yuvraj Patil",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "refineData": "cd scripts && node sortJson.js"
+  "description": "This is a website to analyze our Investment Portfolio.",
+  "devDependencies": {
+    "@eslint/eslintrc": "3",
+    "@types/node": "20",
+    "@types/react": "19",
+    "@types/react-dom": "19",
+    "eslint": "9.39.2",
+    "eslint-config-next": "16.0.10",
+    "postcss": "8",
+    "tailwindcss": "3.4.1",
+    "typescript": "5"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -23,19 +24,18 @@
     "@nivo/pie": "0.88.0",
     "@uv-tech/util": "1.0.11",
     "date-fns": "2.30.0",
-    "next": "15.1.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "next": "16.0.10",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
-  "devDependencies": {
-    "@eslint/eslintrc": "3",
-    "@types/node": "20",
-    "@types/react": "19",
-    "@types/react-dom": "19",
-    "eslint": "9",
-    "eslint-config-next": "15.1.3",
-    "postcss": "8",
-    "tailwindcss": "3.4.1",
-    "typescript": "5"
-  }
+  "name": "investment-portfolio",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run refineData && next build && sh scripts/create-build-zip.sh",
+    "start": "next start",
+    "lint": "next lint",
+    "refineData": "node scripts/sort-json.js"
+  },
+  "version": "1.1.0"
 }

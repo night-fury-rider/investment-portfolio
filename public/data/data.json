@@ -27,35 +27,36 @@
           "expenseRatio": 1.87,
           "firstInvestmentDate": "Dec-16",
           "fundHouse": "axis",
-          "fundManagers": [
-            "Ajay Garg"
-          ],
+          "fundManagers": ["Ajay Garg"],
           "fundSize": 516.53,
+          "goal": "Home",
           "id": 0,
           "label": "Axis Mutual Fund",
           "launchDate": "02-Jan-2013",
-          "notes": [
-            ""
-          ],
+          "notes": [""],
           "rating": 4,
-          "records": [],
+          "records": [
+            {
+              "currentValue": 231100,
+              "date": "17-Feb-2025",
+              "dateTimestamp": 1745155200000,
+              "folio": "Axis Nifty 100 Index Fund",
+              "goal": "Graduation",
+              "investedValue": 200000
+            },
+            {
+              "currentValue": 231100,
+              "date": "17-Feb-2024",
+              "dateTimestamp": 1745155200000,
+              "folio": "Axis Nifty 50 Index Fund",
+              "investedValue": 300000
+            }
+          ],
           "returns": [
-            [
-              "1",
-              40.2
-            ],
-            [
-              "3",
-              5.29
-            ],
-            [
-              "5",
-              11.92
-            ],
-            [
-              "Since Inception",
-              14.89
-            ]
+            ["1", 40.2],
+            ["3", 5.29],
+            ["5", 11.92],
+            ["Since Inception", 14.89]
           ],
           "shortName": "Axis",
           "value": 0
@@ -81,7 +82,15 @@
           "label": "Brightcom",
           "marketCapInRsCr": 111,
           "promoterOwnership": 111,
-          "records": [],
+          "records": [
+            {
+              "currentValue": 20445,
+              "date": "27-Jan-2026",
+              "dateTimestamp": 1769534041683,
+              "folio": "Brightcom 2026",
+              "investedValue": 20111
+            }
+          ],
           "shortName": "BCG",
           "symbol": "BCG",
           "totalDebtInRsCr": 111,
@@ -97,23 +106,31 @@
   "goals": [
     {
       "collection": 0,
+      "color": "#FF52B5",
       "id": 1,
       "isOnTrack": true,
       "label": "Graduation",
-      "notes": [
-        ""
-      ],
+      "notes": [""],
       "targetAmount": 2000000,
       "targetDate": "Jun-2030"
     },
     {
       "collection": 0,
+      "color": "#9F51B5",
       "id": 2,
       "isOnTrack": true,
       "label": "Retirement",
-      "notes": [
-        ""
-      ],
+      "notes": [""],
+      "targetAmount": 2000000,
+      "targetDate": "Jun-2030"
+    },
+    {
+      "collection": 0,
+      "color": "#3251B5",
+      "id": 3,
+      "isOnTrack": true,
+      "label": "Home",
+      "notes": [""],
       "targetAmount": 2000000,
       "targetDate": "Jun-2030"
     }

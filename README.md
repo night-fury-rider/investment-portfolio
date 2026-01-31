@@ -1,6 +1,7 @@
 # Investment Portfolio
 
-It serves as a digital platform where users can manage and track their investments in various financial assets. The website aims to provide individuals or institutional investors with the tool to monitor and optimize their portfolios based on their financial goals
+Investment Portfolio is a digital platform that allows users to manage, track, and visualize investments across multiple financial assets.
+It helps individual and institutional investors monitor performance and optimize portfolios based on their financial goals.
 
 ![Investment Portfolio_2025-03-30](https://github.com/user-attachments/assets/581dd2c6-9d7e-4259-b57f-83eac751ac0a)
 
@@ -38,7 +39,7 @@ It serves as a digital platform where users can manage and track their investmen
 
 ---
 
-# Technologies and Libraries Used
+## 🧰 Technologies and Libraries Used
 
 | Library                                                     | Version |
 | ----------------------------------------------------------- | ------- |
@@ -50,20 +51,20 @@ It serves as a digital platform where users can manage and track their investmen
 
 ---
 
-# Getting Started
+## 🚀 Getting Started
 
-## Prerequisite
+### Prerequisite
 
 - Node 20+
 - npm 10+
 
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 npm i
 ```
 
-## Run Application In Dev Mode
+### Run Application In Dev Mode
 
 ```bash
 npm run dev
@@ -71,7 +72,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Prepare Deployment Build
+### Prepare Deployment Build
 
 ```bash
 npm run build
@@ -79,7 +80,7 @@ npm run build
 
 It will create Static Export Build under `build` folder.
 
-## Test Deployment Build
+### Test Deployment Build
 
 Run following command in Terminal in `build` folder.
 
@@ -88,3 +89,53 @@ npx serve -l 7777 --cors
 ```
 
 Open [http://localhost:7777](http://localhost:7777) with your browser to see the result.
+
+## Developer Wiki
+
+## Terminologies
+
+1. `value` field - It is meant for graphs
+2. `absoluteValue` field - It is meant for calculations.
+
+# 📘 Developer Wiki
+
+This section documents internal conventions, terminologies, and developer-facing guidelines used in the **Investment Portfolio** project.
+
+---
+
+## Terminologies
+
+### `value`
+
+- Used for **graph rendering only**
+- Consumed by charting libraries (Pie, Bar, etc.)
+- Can be transformed based on:
+  - Selected currency unit
+  - Number formatting
+  - View type (Invested / Current)
+- **Must not** be used for calculations
+
+---
+
+### `absoluteValue`
+
+- Used for **all calculations and business logic**
+- Represents the **raw, unformatted numeric value**
+- Used in:
+  - Totals
+  - Percentages
+  - Comparisons
+  - Aggregations
+- Acts as the **single source of truth** for financial data
+- **Must not** be mutated during UI transformations
+
+---
+
+## Guidelines
+
+- Always derive `value` from `absoluteValue`
+- Perform calculations only on `absoluteValue`
+- Apply formatting at the presentation layer
+- Keep data transformation logic explicit and documented
+
+---

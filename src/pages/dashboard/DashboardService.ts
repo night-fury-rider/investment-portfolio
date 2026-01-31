@@ -155,7 +155,7 @@ const transformGoalsToCategoryStructure = (
   const goalMap = new Map<string, ICategory>();
 
   categories.forEach((category) => {
-    const goalName = category.goal;
+    let goalName = category.goal;
     if (!goalName) {
       return;
     }
@@ -173,10 +173,54 @@ const transformGoalsToCategoryStructure = (
       });
     }
 
-    const allRecords =
-      category.subCategories?.flatMap((subCat) => subCat.records || []) || [];
+    let transformedSubCategory: ISubCategory;
+    let sameGoalSubCategories: ISubCategory[] = [];
+    let differentGoalSubCategories: ISubCategory[] = [];
+    let hasDifferentGoal;
 
-    const transformedSubCategory: ISubCategory = {
+    for (let subCategory of category.subCategories) {
+      if (subCategory.goal && subCategory.goal !== category.goal) {
+        hasDifferentGoal = true;
+        transformedSubCategory = {
+          absoluteValue: subCategory.absoluteValue,
+          id: subCategory.id,
+          label: subCategory.label,
+          value: subCategory.value,
+          records: subCategory.records,
+          notes: subCategory.notes,
+          expenseRatio: subCategory.expenseRatio,
+          goal: subCategory.goal,
+        };
+        differentGoalSubCategories.push(transformedSubCategory);
+      } else {
+        transformedSubCategory = {
+          absoluteValue: category.absoluteValue,
+          id: category.id,
+          label: category.label,
+          value: subCategory.value,
+          records: subCategory.records,
+          notes: category.notes,
+          expenseRatio: category.expenseRatio,
+          goal: goalName,
+        };
+        sameGoalSubCategories.push(transformedSubCategory);
+      }
+    }
+
+    if (hasDifferentGoal) {
+      for (let differentGoalSubCategory of differentGoalSubCategories) {
+        if (differentGoalSubCategory.goal) {
+          goalMap
+            .get(differentGoalSubCategory.goal)
+            ?.subCategories.push(differentGoalSubCategory);
+        }
+      }
+    }
+
+    const allRecords =
+      sameGoalSubCategories?.flatMap((subCat) => subCat.records || []) || [];
+
+    transformedSubCategory = {
       absoluteValue: category.absoluteValue,
       id: category.id,
       label: category.label,

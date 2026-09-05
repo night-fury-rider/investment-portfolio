@@ -9,7 +9,7 @@ import { COLORS } from "$/constants/colors.constants";
 
 const ResponsiveBar = dynamic(
   () => import("@nivo/bar").then((m) => m.ResponsiveBar),
-  { ssr: false }
+  { ssr: false },
 );
 
 interface iBarChartProps {
@@ -31,7 +31,7 @@ const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
 
   const handleMouseEnter = (
     event: React.MouseEvent<SVGRectElement, MouseEvent>,
-    barValue: number | null
+    barValue: number | null,
   ) => {
     if (!barValue) {
       return;
@@ -50,7 +50,7 @@ const BarChart = ({ data, handleBarClick }: iBarChartProps) => {
   };
 
   const handleMouseLeave = (
-    event: React.MouseEvent<SVGRectElement, MouseEvent>
+    event: React.MouseEvent<SVGRectElement, MouseEvent>,
   ) => {
     document.body.style.cursor = "default";
     event.currentTarget.style.transform = "scale(1)";

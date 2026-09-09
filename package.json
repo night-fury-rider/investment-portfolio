@@ -31,7 +31,7 @@
   "name": "investment-portfolio",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "npm run refineData && next build && sh scripts/create-build-zip.sh",
     "start": "next start",
     "lint": "next lint",

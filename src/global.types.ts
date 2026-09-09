@@ -74,6 +74,8 @@ type ISubCategory = {
   label: string;
   records: ISubItem[];
   value: number;
+  currentExchangeRate?: number;
+  currentUnitPrice?: number;
   exitLoad?: string;
   expenseRatio?: number;
   firstInvestmentDate?: string;
@@ -93,8 +95,11 @@ type ISubItem = {
   date: string;
   dateTimestamp: number;
   folio: string;
+  investedExchangeRate?: number;
+  investedUnitPrice?: number;
   investedValue: number;
   goal?: string;
+  units?: number;
 };
 
 type IUnit = "Lakh" | "Thousand";

@@ -75,6 +75,8 @@
       "subCategories": [
         {
           "absoluteValue": 0,
+          "currentExchangeRate": 94,
+          "currentUnitPrice": 50,
           "companyFoundedYear": 111,
           "firstInvestmentDate": "111",
           "givesDividend": false,
@@ -88,7 +90,8 @@
               "date": "27-Jan-2026",
               "dateTimestamp": 1769534041683,
               "folio": "Brightcom 2026",
-              "investedValue": 20111
+              "investedValue": 20111,
+              "units": 2
             }
           ],
           "shortName": "BCG",

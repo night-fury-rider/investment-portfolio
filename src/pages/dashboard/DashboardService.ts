@@ -26,7 +26,7 @@ const createCategory = (
     id = -1,
     notes = [""],
     value = 0,
-  } = {}
+  } = {},
 ): ICategory => {
   return {
     absoluteValue,
@@ -50,7 +50,7 @@ const createGoal = (
     isOnTrack = false,
     notes = [""],
     targetDate = "",
-  } = {}
+  } = {},
 ): IGoal => {
   return {
     label,
@@ -79,7 +79,7 @@ const createSubCategory = (
   rating = -1,
   returns = [["-1", -1]],
   shortName = "",
-  value = 0
+  value = 0,
 ): ISubCategory => {
   return {
     label,
@@ -145,7 +145,7 @@ const getBarChartData = (barChartData: ISubCategory[]) => {
 
 const transformGoalsToCategoryStructure = (
   categories: ICategory[],
-  goals: IGoal[]
+  goals: IGoal[],
 ): ICategory[] => {
   const goalInfoMap = new Map<string, IGoal>();
   goals.forEach((goal) => {
@@ -246,15 +246,15 @@ const getHighestItemIndex = (barChartData: ISubCategory[]) =>
   barChartData.reduce(
     (accumulator, currentObj, index) =>
       currentObj.value > barChartData[accumulator].value ? index : accumulator,
-    0
+    0,
   );
 
 const getSubCategories = (
   categories: ICategory[],
-  selectedCategoryLabel: string
+  selectedCategoryLabel: string,
 ): ISubCategory[] => {
   const selectedCategory = categories.find(
-    (categoryObj) => categoryObj?.label === selectedCategoryLabel
+    (categoryObj) => categoryObj?.label === selectedCategoryLabel,
   );
   let subCategories = [] as ISubCategory[];
   if (selectedCategory?.subCategories) {
@@ -271,7 +271,7 @@ const getTotalAmount = (categories: ICategory[]) => {
   }
   const totalAmount = categories.reduce(
     (acc, currentObj) => acc + (Number(currentObj.value) || 0),
-    0
+    0,
   );
 
   return getTotalAmountInSelectedUnit(totalAmount);
@@ -339,7 +339,7 @@ const refineEntireData = ({
   if (viewType === APP_CONFIG.entityTypes.goals) {
     refinedCategories = transformGoalsToCategoryStructure(
       refinedCategories,
-      goals
+      goals,
     );
   }
 
@@ -357,6 +357,40 @@ const refineEntireData = ({
       /* Interate through Records */
       for (let k = 0; k < currentSubCategory?.records?.length; k++) {
         currentRecord = currentSubCategory.records[k];
+
+        // Derive invested value from units
+        if (typeof currentRecord.units === "number") {
+          const exchangeRate =
+            typeof currentRecord.investedExchangeRate === "number"
+              ? currentRecord.investedExchangeRate
+              : currentSubCategory.currentExchangeRate || 1;
+
+          const unitPrice =
+            typeof currentRecord.investedUnitPrice === "number"
+              ? currentRecord.investedUnitPrice
+              : currentSubCategory.currentUnitPrice;
+
+          if (typeof unitPrice === "number") {
+            currentRecord.investedValue =
+              currentRecord.units * unitPrice * exchangeRate;
+          }
+        }
+
+        // Derive current value from units
+        if (
+          typeof currentRecord.units === "number" &&
+          typeof currentSubCategory.currentUnitPrice === "number"
+        ) {
+          const exchangeRate =
+            currentSubCategory.currentExchangeRate != null
+              ? currentSubCategory.currentExchangeRate
+              : 1;
+
+          currentRecord.currentValue =
+            currentRecord.units *
+            currentSubCategory.currentUnitPrice *
+            exchangeRate;
+        }
 
         if (valueType === "investedValue" || valueType === "currentValue") {
           categoryTotal += currentRecord?.[valueType] || 0;
@@ -386,12 +420,12 @@ const refineEntireData = ({
 
       /* Sorted records based on the their timestamp */
       currentSubCategory.records = currentSubCategory.records.sort(
-        (a: ISubItem, b: ISubItem) => a?.dateTimestamp - b?.dateTimestamp
+        (a: ISubItem, b: ISubItem) => a?.dateTimestamp - b?.dateTimestamp,
       );
     }
     refinedCategories[i].value = getTotalAmountInSelectedUnit(
       categoryTotal,
-      currencyUnit
+      currencyUnit,
     );
     absoluteValue += categoryTotal;
 
@@ -400,7 +434,7 @@ const refineEntireData = ({
   }
   /* Sorted categories based on the their absolute values */
   refinedCategories = refinedCategories.sort(
-    (a: ICategory, b: ICategory) => b?.absoluteValue - a?.absoluteValue
+    (a: ICategory, b: ICategory) => b?.absoluteValue - a?.absoluteValue,
   );
 
   return {

@@ -44,57 +44,57 @@ const Dashboard = ({ categories, goals }: iDashboardProps) => {
   const [barChartData, setBarChartData] = useState([] as BarDatum[]);
   const [investmentRows, setInvestmentRows] = useState([] as ISubItem[]);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(
-    0 as number
+    0 as number,
   );
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
   const [numberFormat, setNumberFormat] = useState(
-    APP_CONFIG?.numberFormats?.[0]?.value
+    APP_CONFIG?.numberFormats?.[0]?.value,
   );
   const [dateFormat, setDateFormat] = useState(
-    APP_CONFIG?.dateFormats?.[0]?.value
+    APP_CONFIG?.dateFormats?.[0]?.value,
   );
   const [valueType, setValueType] = useState(
-    APP_CONFIG?.valueTypes?.[0]?.value
+    APP_CONFIG?.valueTypes?.[0]?.value,
   );
   const [viewType, setViewType] = useState(APP_CONFIG?.viewTypes?.[0]?.value);
 
   const [currencyUnit, setCurrencyUnit] = useState(
-    APP_CONFIG?.currencyUnits?.[0]?.value
+    APP_CONFIG?.currencyUnits?.[0]?.value,
   );
 
   /* Use Effect for one time tasks */
   useEffect(() => {
     const storedNumberFormat = StorageService.get(
-      APP_CONFIG?.sessionStorage?.storageNumberFormat
+      APP_CONFIG?.sessionStorage?.storageNumberFormat,
     );
     if (storedNumberFormat) {
       setNumberFormat(storedNumberFormat);
     }
 
     const storedDateFormat = StorageService.get(
-      APP_CONFIG?.sessionStorage?.storageDateFormat
+      APP_CONFIG?.sessionStorage?.storageDateFormat,
     );
     if (storedDateFormat) {
       setDateFormat(storedDateFormat);
     }
 
     const storedValueType = StorageService.get(
-      APP_CONFIG?.sessionStorage?.storageValueType
+      APP_CONFIG?.sessionStorage?.storageValueType,
     );
     if (storedValueType) {
       setValueType(storedValueType);
     }
 
     const storedViewType = StorageService.get(
-      APP_CONFIG?.sessionStorage?.storageViewType
+      APP_CONFIG?.sessionStorage?.storageViewType,
     );
     if (storedViewType) {
       setViewType(storedViewType);
     }
 
     const storedCurrencyUnit = StorageService.get(
-      APP_CONFIG?.sessionStorage?.storageCurrencyUnit
+      APP_CONFIG?.sessionStorage?.storageCurrencyUnit,
     );
     if (storedCurrencyUnit) {
       setCurrencyUnit(storedCurrencyUnit);
@@ -112,14 +112,14 @@ const Dashboard = ({ categories, goals }: iDashboardProps) => {
         dateFormat,
         valueType: valueType as IValueType,
         viewType: viewType as IViewType,
-      })
+      }),
     );
   }, [categories, currencyUnit, dateFormat, goals, valueType, viewType]);
 
   useEffect(() => {
     setTotalValue(refinedData.value);
     setBarChartData(
-      getBarChartData(refinedData.categories[0]?.subCategories || [])
+      getBarChartData(refinedData.categories[0]?.subCategories || []),
     );
   }, [refinedData]);
 
@@ -127,7 +127,7 @@ const Dashboard = ({ categories, goals }: iDashboardProps) => {
     setInvestmentRows(
       refinedData.categories?.[selectedCategoryIndex]?.subCategories?.[
         selectedItemIndex
-      ]?.records || []
+      ]?.records || [],
     );
   }, [
     refinedData.categories,
@@ -141,10 +141,10 @@ const Dashboard = ({ categories, goals }: iDashboardProps) => {
   const handlePieSliceClick = (index: number) => {
     setSelectedCategoryIndex(index);
     setSelectedItemIndex(
-      getHighestItemIndex(refinedData.categories[index]?.subCategories)
+      getHighestItemIndex(refinedData.categories[index]?.subCategories),
     );
     setBarChartData(
-      getBarChartData(refinedData.categories[index]?.subCategories || [])
+      getBarChartData(refinedData.categories[index]?.subCategories || []),
     );
   };
 
